@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10251f">
+  <meta name="description" content="My Car – управление на автомобили, гориво, разходи и обслужване.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+  <title>My Car</title>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="My Car home"><span class="brand-mark">M</span><span>My Car</span></a>
+    <button id="languageToggle" class="language-button" type="button" aria-label="Change language">EN</button>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <div>
+        <p class="eyebrow" data-i18n="eyebrow">ТВОЯТ АВТОМОБИЛЕН ПОМОЩНИК</p>
+        <h1 data-i18n="heading">Всичко за автомобила. На едно място.</h1>
+        <p class="subtitle" data-i18n="subtitle">Следи автомобилите си, разходите и предстоящото обслужване лесно.</p>
+      </div>
+      <div class="hero-icon" aria-hidden="true">🚘</div>
+    </section>
+    <section class="section-heading">
+      <div><p class="eyebrow" data-i18n="garage">ГАРАЖ</p><h2 data-i18n="yourCars">Твоите автомобили</h2></div>
+      <span id="carCount" class="count">0 / 3</span>
+    </section>
+    <section id="carList" class="car-list" aria-live="polite"></section>
+    <button id="addCarButton" class="add-button" type="button"><span>＋</span><span data-i18n="addCar">Добави автомобил</span></button>
+    <p id="limitNote" class="note" data-i18n="limitNote">Основната версия позволява до 3 автомобила.</p>
+    <section id="carFormSection" class="form-card" hidden>
+      <div class="form-title"><h2 data-i18n="newCar">Нов автомобил</h2><button id="closeForm" class="icon-button" type="button" aria-label="Close">×</button></div>
+      <form id="carForm">
+        <label><span data-i18n="make">Марка</span><input name="make" required maxlength="40" autocomplete="off" placeholder="напр. Toyota"></label>
+        <label><span data-i18n="model">Модел</span><input name="model" required maxlength="40" autocomplete="off" placeholder="напр. Corolla"></label>
+        <div class="form-row">
+          <label><span data-i18n="registration">Регистрационен номер</span><input name="registration" required maxlength="20" autocomplete="off" placeholder="CB1234AB"></label>
+          <label><span data-i18n="year">Година</span><input name="year" type="number" min="1900" max="2100" inputmode="numeric" placeholder="2020"></label>
+        </div>
+        <button class="primary-button" type="submit" data-i18n="saveCar">Запази автомобила</button>
+      </form>
+    </section>
+    <footer><span>My Car</span><span data-i18n="footer">Твоят автомобилен дневник</span></footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
