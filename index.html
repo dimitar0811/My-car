@@ -31,7 +31,7 @@
     <button id="addCarButton" class="add-button" type="button"><span>＋</span><span data-i18n="addCar">Добави автомобил</span></button>
     <p id="limitNote" class="note" data-i18n="limitNote">Основната версия позволява до 3 автомобила.</p>
     <section id="carFormSection" class="form-card" hidden>
-      <div class="form-title"><h2 data-i18n="newCar">Нов автомобил</h2><button id="closeForm" class="icon-button" type="button" aria-label="Close">×</button></div>
+      <div class="form-title"><h2 id="carFormTitle" data-i18n="newCar">Нов автомобил</h2><button id="closeForm" class="icon-button" type="button" aria-label="Close">×</button></div>
       <form id="carForm">
         <label><span data-i18n="make">Марка</span><input name="make" required maxlength="40" autocomplete="off" placeholder="напр. Toyota"></label>
         <label><span data-i18n="model">Модел</span><input name="model" required maxlength="40" autocomplete="off" placeholder="напр. Corolla"></label>
@@ -39,7 +39,7 @@
           <label><span data-i18n="registration">Регистрационен номер</span><input name="registration" required maxlength="20" autocomplete="off" placeholder="CB1234AB"></label>
           <label><span data-i18n="year">Година</span><input name="year" type="number" min="1900" max="2100" inputmode="numeric" placeholder="2020"></label>
         </div>
-        <button class="primary-button" type="submit" data-i18n="saveCar">Запази автомобила</button>
+        <button id="carFormSubmit" class="primary-button" type="submit" data-i18n="saveCar">Запази автомобила</button>
       </form>
     </section>
     <footer><span>My Car</span><span data-i18n="footer">Твоят автомобилен дневник</span></footer>
