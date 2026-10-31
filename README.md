@@ -5,7 +5,7 @@
 ## Product goals
 
 - Responsive experience for Android, iPhone, tablets and desktop.
-- Six interface languages in the current prototype: Bulgarian, English, Spanish, German, Portuguese and Russian. The localization structure is designed for adding more languages.
+- The localization system is extensible and is not limited to a fixed number of languages. Six complete language packs are currently included: Bulgarian, English, Spanish, German, Portuguese and Russian. Other languages need their own translation pack before they can be offered as fully translated.
 - A useful basic version without a subscription and without advertisements.
 - Local-first data storage, with optional cloud services in a future subscription.
 - Clear, reliable information and user confirmation before saving data extracted from documents.
@@ -31,7 +31,7 @@
 17. SOS and roadside assistance: quick access to 112, roadside assistance, location sharing, insurer and emergency contact details. Calls and location sharing require explicit user confirmation; nothing is triggered automatically.
 18. Export, backup, restore and transfer of vehicle data when changing phones.
 19. Optional cloud backup and synchronisation, subject to a validated technical and privacy design.
-20. Multilingual interface with Bulgarian, English, Spanish, German, Portuguese and Russian in the current prototype, designed for further language additions.
+20. Extensible multilingual interface; six complete translations are currently included, with no fixed architectural limit on adding further language packs.
 
 ## Mandatory quality requirements
 
@@ -53,11 +53,11 @@
 The repository currently contains an early responsive Progressive Web App (PWA) prototype, without a third-party framework or runtime dependency.
 
 Implemented in the current starter build:
-- Six-language localization framework with Bulgarian, English, Spanish, German, Portuguese and Russian.
+- Extensible localization framework; six translated language packs are currently included (Bulgarian, English, Spanish, German, Portuguese and Russian).
 - Automatic initial language detection from the browser/device language and saved manual language choice.
 - Localized garage, vehicle profile, vehicle form and fuel-log interface; additional languages can be added to the translation dictionary.
 - Responsive app shell.
-- Language selector for Bulgarian, English, Spanish, German, Portuguese and Russian.
+- Language selector generated from available translation packs, not a hard-coded list in HTML.
 - Automatic initial language selection based on the device language, with English fallback; manual language selection is saved locally.
 - Localized vehicle-garage interface, vehicle profile and fuel log.
 - Add, edit and delete vehicle profiles.
@@ -94,7 +94,7 @@ Not implemented yet:
 - [ ] Add detailed technical profiles.
 - [ ] Implement data export/import and safe backup/restore.
 - [x] Add fuel log, odometer readings and full-tank interval L/100 km calculations.
-- [x] Add six-language selector, device-language detection and localized core vehicle/fuel screens.
+- [x] Add extensible language-pack selector, device-language detection and localized core vehicle/fuel screens.
 - [ ] Add trip recording and trip-cost calculations.
 - [ ] Add expenses, maintenance and service history.
 - [ ] Add reminders, notifications and calendar.
