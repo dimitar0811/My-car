@@ -5,7 +5,7 @@
 ## Product goals
 
 - Responsive experience for Android, iPhone, tablets and desktop.
-- Bulgarian and English interface from the first release, with room for more languages.
+- Six interface languages in the current prototype: Bulgarian, English, Spanish, German, Portuguese and Russian. The localization structure is designed for adding more languages.
 - A useful basic version without a subscription and without advertisements.
 - Local-first data storage, with optional cloud services in a future subscription.
 - Clear, reliable information and user confirmation before saving data extracted from documents.
@@ -31,7 +31,7 @@
 17. SOS and roadside assistance: quick access to 112, roadside assistance, location sharing, insurer and emergency contact details. Calls and location sharing require explicit user confirmation; nothing is triggered automatically.
 18. Export, backup, restore and transfer of vehicle data when changing phones.
 19. Optional cloud backup and synchronisation, subject to a validated technical and privacy design.
-20. Multilingual interface, initially Bulgarian and English.
+20. Multilingual interface with Bulgarian, English, Spanish, German, Portuguese and Russian in the current prototype, designed for further language additions.
 
 ## Mandatory quality requirements
 
@@ -53,8 +53,13 @@
 The repository currently contains an early responsive Progressive Web App (PWA) prototype, without a third-party framework or runtime dependency.
 
 Implemented in the current starter build:
+- Six-language localization framework with Bulgarian, English, Spanish, German, Portuguese and Russian.
+- Automatic initial language detection from the browser/device language and saved manual language choice.
+- Localized garage, vehicle profile, vehicle form and fuel-log interface; additional languages can be added to the translation dictionary.
 - Responsive app shell.
-- Bulgarian and English language toggle.
+- Language selector for Bulgarian, English, Spanish, German, Portuguese and Russian.
+- Automatic initial language selection based on the device language, with English fallback; manual language selection is saved locally.
+- Localized vehicle-garage interface, vehicle profile and fuel log.
 - Add, edit and delete vehicle profiles.
 - Open a vehicle profile by selecting its vehicle card.
 - Show saved vehicle details and edit them while preserving existing records.
@@ -89,6 +94,7 @@ Not implemented yet:
 - [ ] Add detailed technical profiles.
 - [ ] Implement data export/import and safe backup/restore.
 - [x] Add fuel log, odometer readings and full-tank interval L/100 km calculations.
+- [x] Add six-language selector, device-language detection and localized core vehicle/fuel screens.
 - [ ] Add trip recording and trip-cost calculations.
 - [ ] Add expenses, maintenance and service history.
 - [ ] Add reminders, notifications and calendar.
