@@ -14,11 +14,23 @@ function saveVehicles(){localStorage.setItem(STORAGE_KEY,JSON.stringify(vehicles
 function escapeHtml(value){return String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));}
 function showGarage(){selectedVehicleId=null;$("#carProfileSection").hidden=true;$("#garageSection").hidden=false;}
 function openProfile(id){const car=vehicles.find(item=>item.id===id);if(!car)return;selectedVehicleId=id;$("#garageSection").hidden=true;$("#carFormSection").hidden=true;$("#carProfileSection").hidden=false;renderProfile(car);window.scrollTo({top:0,behavior:"smooth"});}
+function formatMoney(value){return new Intl.NumberFormat(language==="bg"?"bg-BG":"en-GB",{style:"currency",currency:"EUR"}).format(value);}
+function fuelStats(car){
+ const log=[...(car.fuelLog||[])].sort((a,b)=>a.odometer-b.odometer);let previous=null,litres=0,stats={};
+ for(const entry of log){litres+=Number(entry.litres)||0;if(entry.fullTank){if(previous){const km=Number(entry.odometer)-Number(previous.odometer);if(km>0)stats[entry.id]=litres/km*100;}previous=entry;litres=0;}}
+ return stats;
+}
+function renderFuel(car){
+ const log=[...(car.fuelLog||[])].sort((a,b)=>b.date.localeCompare(a.date)),stats=fuelStats(car);
+ $("#fuelHistory").innerHTML=log.length?log.map(entry=>'<article class="fuel-entry"><div><strong>'+escapeHtml(entry.date)+' · '+escapeHtml(entry.fuelType)+'</strong><small>'+escapeHtml(entry.odometer)+' km'+(entry.fullTank?' · '+(language==="bg"?"Пълен резервоар":"Full tank"):"")+'</small></div><div class="fuel-entry-values"><strong>'+escapeHtml(entry.litres)+' L</strong><span>'+formatMoney(Number(entry.total)||0)+'</span></div>'+(stats[entry.id]?'<p class="fuel-consumption">'+(language==="bg"?"Разход":"Consumption")+': '+stats[entry.id].toFixed(2)+' L/100 km</p>':"")+'</article>').join(""):'<p class="empty-fuel">'+(language==="bg"?"Все още няма записани зареждания.":"No fuel entries yet.")+'</p>';
+ const values=Object.values(stats);$("#averageConsumption").textContent=values.length?(values.reduce((sum,value)=>sum+value,0)/values.length).toFixed(2)+" L/100 km":t("notSet");
+}
 function renderProfile(car){
   $("#profileTitle").textContent=(car.make+" "+car.model).trim();
   $("#profileRegistration").textContent=car.registration||"";
   const fields=[["year",car.year],["engine",car.engine],["fuel",car.fuel],["power",car.power],["transmission",car.transmission],["vin",car.vin],["mileage",car.mileage],["color",car.color]];
   $("#profileDetails").innerHTML=fields.map(([key,value])=>`<div class="detail-item"><span>${t(key)}</span><strong>${escapeHtml(value||t("notSet"))}</strong></div>`).join("");
+  renderFuel(car);
 }
 function render(){
   document.documentElement.lang=language;
@@ -43,6 +55,19 @@ $("#addCarButton").addEventListener("click",openForm);
 $("#closeForm").addEventListener("click",closeForm);
 $("#backToGarage").addEventListener("click",showGarage);
 $("#profileEdit").addEventListener("click",()=>{if(selectedVehicleId)editVehicle(selectedVehicleId);});
+$("#fuelDate").value=new Date().toISOString().slice(0,10);
+function calculateFuelTotal(){const litres=Number($("#fuelLitres").value),price=Number($("#fuelPrice").value);$("#fuelTotal").value=litres>0&&price>0?(litres*price).toFixed(2):"";}
+$("#fuelLitres").addEventListener("input",calculateFuelTotal);$("#fuelPrice").addEventListener("input",calculateFuelTotal);
+$("#fuelForm").addEventListener("submit",event=>{
+ event.preventDefault();const car=vehicles.find(item=>item.id===selectedVehicleId);if(!car)return;
+ const litres=Number($("#fuelLitres").value),price=Number($("#fuelPrice").value),odometer=Number($("#fuelOdometer").value);
+ if(!(litres>0&&price>0&&odometer>=0)){alert(language==="bg"?"Провери въведените данни.":"Check the entered values.");return;}
+ car.fuelLog=Array.isArray(car.fuelLog)?car.fuelLog:[];
+ const max=Math.max(-1,...car.fuelLog.map(item=>Number(item.odometer)));
+ if(odometer<max){alert(language==="bg"?"Пробегът не може да е по-малък от последния запис.":"Mileage cannot be lower than the latest entry.");return;}
+ car.fuelLog.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),date:$("#fuelDate").value,fuelType:$("#fuelType").value,litres,pricePerLitre:price,total:Number((litres*price).toFixed(2)),odometer,fullTank:$("#fuelFullTank").checked});
+ saveVehicles();$("#fuelForm").reset();$("#fuelDate").value=new Date().toISOString().slice(0,10);$("#fuelTotal").value="";renderProfile(car);
+});
 $("#carForm").addEventListener("submit",event=>{
   event.preventDefault();
   const form=new FormData(event.currentTarget);
