@@ -61,6 +61,8 @@ Implemented in the current starter build:
 - Open a vehicle profile by selecting its vehicle card.
 - Show saved vehicle details: make, model, registration, year, engine, fuel, power, transmission, VIN, mileage and colour.
 - Edit the vehicle's technical details from its profile while preserving existing vehicle records.
+- Record fuel fills per vehicle with date, fuel type, litres, unit price, calculated total, odometer and full-tank flag.
+- View fuel history and calculate L/100 km from full-tank-to-full-tank intervals, including intervening partial fills.
 - Validate an entered vehicle year (1900–2100) before saving.
 - Up to 3 vehicles in the basic local prototype.
 - Browser localStorage for the vehicle list.
@@ -68,7 +70,7 @@ Implemented in the current starter build:
 
 Not implemented yet:
 - Vehicle editing and full technical profiles.
-- Fuel, trips, expenses, maintenance and service history.
+- Trips, expenses, maintenance and service history.
 - Documents, OCR and PDF reports.
 - Reminders, notifications and calendar.
 - Vehicle comparison and fuel-price features.
@@ -89,7 +91,8 @@ Not implemented yet:
 - [x] Add vehicle editing and basic year validation.
 - [ ] Add detailed technical profiles.
 - [ ] Implement data export/import and safe backup/restore.
-- [ ] Add fuel log, odometer history, trips and L/100 km calculations.
+- [x] Add fuel log, odometer readings and full-tank interval L/100 km calculations.
+- [ ] Add trip recording and trip-cost calculations.
 - [ ] Add expenses, maintenance and service history.
 - [ ] Add reminders, notifications and calendar.
 - [ ] Add documents, OCR with confirmation and PDF reports.
