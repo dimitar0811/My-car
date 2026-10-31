@@ -15,30 +15,30 @@
     <button id="languageToggle" class="language-button" type="button" aria-label="Change language">EN</button>
   </header>
   <main class="container">
-    <section class="hero">
-      <div>
-        <p class="eyebrow" data-i18n="eyebrow">ТВОЯТ АВТОМОБИЛЕН ПОМОЩНИК</p>
-        <h1 data-i18n="heading">Всичко за автомобила. На едно място.</h1>
-        <p class="subtitle" data-i18n="subtitle">Следи автомобилите си, разходите и предстоящото обслужване лесно.</p>
-      </div>
-      <div class="hero-icon" aria-hidden="true">🚘</div>
+    <section class="hero"><div><p class="eyebrow" data-i18n="eyebrow">ТВОЯТ АВТОМОБИЛЕН ПОМОЩНИК</p><h1 data-i18n="heading">Всичко за автомобила. На едно място.</h1><p class="subtitle" data-i18n="subtitle">Следи автомобилите си, разходите и предстоящото обслужване лесно.</p></div><div class="hero-icon" aria-hidden="true">🚘</div></section>
+    <section id="garageSection">
+      <section class="section-heading"><div><p class="eyebrow" data-i18n="garage">ГАРАЖ</p><h2 data-i18n="yourCars">Твоите автомобили</h2></div><span id="carCount" class="count">0 / 3</span></section>
+      <section id="carList" class="car-list" aria-live="polite"></section>
+      <button id="addCarButton" class="add-button" type="button"><span>＋</span><span data-i18n="addCar">Добави автомобил</span></button>
+      <p id="limitNote" class="note" data-i18n="limitNote">Основната версия позволява до 3 автомобила.</p>
     </section>
-    <section class="section-heading">
-      <div><p class="eyebrow" data-i18n="garage">ГАРАЖ</p><h2 data-i18n="yourCars">Твоите автомобили</h2></div>
-      <span id="carCount" class="count">0 / 3</span>
+    <section id="carProfileSection" class="form-card profile-card" hidden>
+      <button id="backToGarage" class="back-button" type="button" data-i18n="back">← Обратно към гаража</button>
+      <p class="eyebrow" data-i18n="profile">ПРОФИЛ НА АВТОМОБИЛА</p>
+      <h2 id="profileTitle"></h2><span id="profileRegistration" class="car-registration"></span>
+      <div id="profileDetails" class="profile-grid"></div>
+      <button id="profileEdit" class="primary-button" type="button" data-i18n="edit">Редактирай</button>
     </section>
-    <section id="carList" class="car-list" aria-live="polite"></section>
-    <button id="addCarButton" class="add-button" type="button"><span>＋</span><span data-i18n="addCar">Добави автомобил</span></button>
-    <p id="limitNote" class="note" data-i18n="limitNote">Основната версия позволява до 3 автомобила.</p>
     <section id="carFormSection" class="form-card" hidden>
       <div class="form-title"><h2 id="carFormTitle" data-i18n="newCar">Нов автомобил</h2><button id="closeForm" class="icon-button" type="button" aria-label="Close">×</button></div>
       <form id="carForm">
-        <label><span data-i18n="make">Марка</span><input name="make" required maxlength="40" autocomplete="off" placeholder="напр. Toyota"></label>
-        <label><span data-i18n="model">Модел</span><input name="model" required maxlength="40" autocomplete="off" placeholder="напр. Corolla"></label>
-        <div class="form-row">
-          <label><span data-i18n="registration">Регистрационен номер</span><input name="registration" required maxlength="20" autocomplete="off" placeholder="CB1234AB"></label>
-          <label><span data-i18n="year">Година</span><input name="year" type="number" min="1900" max="2100" inputmode="numeric" placeholder="2020"></label>
-        </div>
+        <div class="form-row"><label><span data-i18n="make">Марка</span><input name="make" required maxlength="40" autocomplete="off" placeholder="напр. Toyota"></label><label><span data-i18n="model">Модел</span><input name="model" required maxlength="40" autocomplete="off" placeholder="напр. Corolla"></label></div>
+        <div class="form-row"><label><span data-i18n="registration">Регистрационен номер</span><input name="registration" required maxlength="20" autocomplete="off" placeholder="CB1234AB"></label><label><span data-i18n="year">Година</span><input name="year" type="number" min="1900" max="2100" inputmode="numeric" placeholder="2020"></label></div>
+        <p class="form-subheading">Допълнителни технически данни</p>
+        <div class="form-row"><label><span data-i18n="engine">Двигател</span><input name="engine" maxlength="60" placeholder="напр. 1.6 бензин"></label><label><span data-i18n="fuel">Гориво</span><select name="fuel"><option value="">—</option><option>Бензин</option><option>Дизел</option><option>LPG</option><option>CNG</option><option>Хибрид</option><option>Електрически</option><option>Petrol</option><option>Diesel</option><option>Hybrid</option><option>Electric</option></select></label></div>
+        <div class="form-row"><label><span data-i18n="power">Мощност</span><input name="power" maxlength="30" placeholder="напр. 110 kW / 150 hp"></label><label><span data-i18n="transmission">Скоростна кутия</span><select name="transmission"><option value="">—</option><option>Ръчна</option><option>Автоматична</option><option>Manual</option><option>Automatic</option></select></label></div>
+        <div class="form-row"><label><span data-i18n="vin">VIN номер</span><input name="vin" maxlength="17" autocomplete="off" placeholder="17 символа"></label><label><span data-i18n="mileage">Пробег (км)</span><input name="mileage" type="number" min="0" inputmode="numeric" placeholder="напр. 125000"></label></div>
+        <label><span data-i18n="color">Цвят</span><input name="color" maxlength="40"></label>
         <button id="carFormSubmit" class="primary-button" type="submit" data-i18n="saveCar">Запази автомобила</button>
       </form>
     </section>
