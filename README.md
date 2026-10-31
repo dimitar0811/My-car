@@ -57,7 +57,8 @@ The repository currently contains an early responsive Progressive Web App (PWA) 
 Implemented in the current starter build:
 - Responsive app shell.
 - Bulgarian and English language toggle.
-- Add and delete vehicle profiles.
+- Add, edit and delete vehicle profiles.
+- Validate an entered vehicle year (1900–2100) before saving.
 - Up to 3 vehicles in the basic local prototype.
 - Browser localStorage for the vehicle list.
 - Basic offline app-shell caching through a service worker.
@@ -82,7 +83,8 @@ Not implemented yet:
 - [x] Add bilingual interface and local vehicle list prototype.
 - [ ] Validate the current app on Android, iPhone, tablet and desktop.
 - [ ] Design a reliable data model and local persistence layer.
-- [ ] Add vehicle editing and detailed technical profiles.
+- [x] Add vehicle editing and basic year validation.
+- [ ] Add detailed technical profiles.
 - [ ] Implement data export/import and safe backup/restore.
 - [ ] Add fuel log, odometer history, trips and L/100 km calculations.
 - [ ] Add expenses, maintenance and service history.
