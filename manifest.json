@@ -1,0 +1,11 @@
+{
+  "name": "My Car",
+  "short_name": "My Car",
+  "description": "Manage your vehicles, fuel, expenses and maintenance.",
+  "lang": "bg",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f7f5",
+  "theme_color": "#10251f"
+}
