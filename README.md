@@ -35,8 +35,6 @@
 
 ## Mandatory quality requirements
 
-These are core product requirements, not optional paid features:
-
 - **Security and privacy:** protect VINs, documents and personal data; collect and share only what is needed.
 - **Offline operation:** allow users to enter and view their data without internet, then synchronise safely when connectivity returns.
 - **Automatic saving:** prevent loss of entered information when the app is closed or the device changes.
@@ -59,17 +57,16 @@ Implemented in the current starter build:
 - Bulgarian and English language toggle.
 - Add, edit and delete vehicle profiles.
 - Open a vehicle profile by selecting its vehicle card.
-- Show saved vehicle details: make, model, registration, year, engine, fuel, power, transmission, VIN, mileage and colour.
-- Edit the vehicle's technical details from its profile while preserving existing vehicle records.
+- Show saved vehicle details and edit them while preserving existing records.
 - Record fuel fills per vehicle with date, fuel type, litres, unit price, calculated total, odometer and full-tank flag.
 - View fuel history and calculate L/100 km from full-tank-to-full-tank intervals, including intervening partial fills.
 - Validate an entered vehicle year (1900–2100) before saving.
 - Up to 3 vehicles in the basic local prototype.
 - Browser localStorage for the vehicle list.
 - Basic offline app-shell caching through a service worker.
+- **My Car app icon:** branded SVG icon referenced by the web page and PWA manifest, and included in the offline app cache.
 
 Not implemented yet:
-- Vehicle editing and full technical profiles.
 - Trips, expenses, maintenance and service history.
 - Documents, OCR and PDF reports.
 - Reminders, notifications and calendar.
