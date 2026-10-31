@@ -58,6 +58,9 @@ Implemented in the current starter build:
 - Responsive app shell.
 - Bulgarian and English language toggle.
 - Add, edit and delete vehicle profiles.
+- Open a vehicle profile by selecting its vehicle card.
+- Show saved vehicle details: make, model, registration, year, engine, fuel, power, transmission, VIN, mileage and colour.
+- Edit the vehicle's technical details from its profile while preserving existing vehicle records.
 - Validate an entered vehicle year (1900–2100) before saving.
 - Up to 3 vehicles in the basic local prototype.
 - Browser localStorage for the vehicle list.
