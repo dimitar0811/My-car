@@ -43,7 +43,7 @@ $("#carForm").addEventListener("submit",event=>{
   const form=new FormData(event.currentTarget);
   const make=String(form.get("make")||"").trim(),model=String(form.get("model")||"").trim(),registration=String(form.get("registration")||"").trim(),year=String(form.get("year")||"").trim();
   if(!make||!model||!registration)return;
-  if(year && (!/^\\d{4}$/.test(year) || Number(year)<1900 || Number(year)>2100)){alert(language==="bg"?"Въведи валидна година между 1900 и 2100.":"Enter a valid year between 1900 and 2100.");return;}
+  if(year && (!/^\d{4}$/.test(year) || Number(year)<1900 || Number(year)>2100)){alert(language==="bg"?"Въведи валидна година между 1900 и 2100.":"Enter a valid year between 1900 and 2100.");return;}
   if(editingVehicleId){
     const index=vehicles.findIndex(car=>car.id===editingVehicleId);if(index<0)return;
     vehicles[index]={...vehicles[index],make,model,registration,year};
