@@ -60,10 +60,11 @@ Implemented in the current starter build:
 - Language selector generated from available translation packs, not a hard-coded list in HTML.
 - Automatic initial language selection based on the device language, with English fallback; manual language selection is saved locally.
 - Localized vehicle-garage interface, vehicle profile and fuel log.
-- Add, edit and delete vehicle profiles.
+- Add, edit and delete vehicle profiles; repaired a JavaScript syntax error that prevented the app scripts and the Add Vehicle button from running.
 - Open a vehicle profile by selecting its vehicle card.
 - Show saved vehicle details and edit them while preserving existing records.
-- Record fuel fills per vehicle with date, fuel type, litres, unit price, calculated total, odometer and full-tank flag.\n- Record vehicle expenses by date and category (repairs, maintenance, parts, tyres, insurance, taxes and other), with optional description and odometer; view the total and delete individual entries.
+- Record fuel fills per vehicle with date, fuel type, litres, unit price, calculated total, odometer and full-tank flag.
+- Record vehicle expenses by date and category (repairs, maintenance, parts, tyres, insurance, taxes and other), with optional description and odometer; view the total and delete individual entries.
 - View fuel history and calculate L/100 km from full-tank-to-full-tank intervals, including intervening partial fills.
 - Validate an entered vehicle year (1900–2100) before saving.
 - Up to 3 vehicles in the basic local prototype.
@@ -96,7 +97,8 @@ Not implemented yet:
 - [x] Add fuel log, odometer readings and full-tank interval L/100 km calculations.
 - [x] Add extensible language-pack selector, device-language detection and localized core vehicle/fuel screens.
 - [ ] Add trip recording and trip-cost calculations.
-- [x] Add a basic per-vehicle expense log with categories, total and deletion.\n- [ ] Expand expenses into maintenance and service history.
+- [x] Add a basic per-vehicle expense log with categories, total and deletion.
+- [ ] Expand expenses into maintenance and service history.
 - [ ] Add reminders, notifications and calendar.
 - [ ] Add documents, OCR with confirmation and PDF reports.
 - [ ] Add vehicle comparison and fuel-price tracking.
