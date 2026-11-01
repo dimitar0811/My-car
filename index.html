@@ -38,6 +38,17 @@
 <label class="check-label"><input id="fuelFullTank" type="checkbox"> <span data-i18n="fullTank">Зареждане до пълен резервоар</span></label>
 <button class="primary-button" type="submit" data-i18n="saveFuel">Запиши зареждането</button></form>
 <h3 class="history-title" data-i18n="fuelHistory">История на зарежданията</h3><div id="fuelHistory" class="fuel-history"></div></section>
+    
+<section class="expense-section">
+  <div class="expense-heading"><div><p class="eyebrow" data-i18n="expenseLog">РАЗХОДИ</p><h3 data-i18n="expenseHeading">Разходи по автомобила</h3></div><div class="expense-total"><small data-i18n="totalExpenses">Общо разходи</small><strong id="expenseTotal">€0.00</strong></div></div>
+  <form id="expenseForm" class="expense-form">
+    <div class="form-row"><label><span data-i18n="expenseDate">Дата</span><input id="expenseDate" type="date" required></label><label><span data-i18n="expenseCategory">Категория</span><select id="expenseCategory" required><option value="repair" data-i18n="repair">Ремонт</option><option value="maintenance" data-i18n="maintenance">Обслужване</option><option value="parts" data-i18n="parts">Части</option><option value="tyres" data-i18n="tyres">Гуми</option><option value="insurance" data-i18n="insurance">Застраховка</option><option value="taxes" data-i18n="taxes">Данъци и такси</option><option value="other" data-i18n="other">Други</option></select></label></div>
+    <label><span data-i18n="expenseDescription">Описание</span><input id="expenseDescription" type="text" maxlength="120" placeholder="напр. Смяна на масло"></label>
+    <div class="form-row"><label><span data-i18n="expenseAmount">Сума (€)</span><input id="expenseAmount" type="number" min="0.01" step="0.01" required inputmode="decimal"></label><label><span data-i18n="expenseOdometer">Пробег (км)</span><input id="expenseOdometer" type="number" min="0" step="1" inputmode="numeric"></label></div>
+    <button class="primary-button" type="submit" data-i18n="saveExpense">Запиши разхода</button>
+  </form>
+  <h3 class="history-title" data-i18n="expenseHistory">История на разходите</h3><div id="expenseHistory" class="expense-history"></div>
+</section>
     </section>
     <section id="carFormSection" class="form-card" hidden>
       <div class="form-title"><h2 id="carFormTitle" data-i18n="newCar">Нов автомобил</h2><button id="closeForm" class="icon-button" type="button" aria-label="Close">×</button></div>
