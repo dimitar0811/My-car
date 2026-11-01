@@ -72,7 +72,8 @@ $("#addCarButton").addEventListener("click",openForm);
 $("#closeForm").addEventListener("click",closeForm);
 $("#backToGarage").addEventListener("click",showGarage);
 $("#profileEdit").addEventListener("click",()=>{if(selectedVehicleId)editVehicle(selectedVehicleId);});
-$("#fuelDate").value=new Date().toISOString().slice(0,10);\n$("#expenseDate").value=new Date().toISOString().slice(0,10);
+$("#fuelDate").value=new Date().toISOString().slice(0,10);
+$("#expenseDate").value=new Date().toISOString().slice(0,10);
 function calculateFuelTotal(){const litres=Number($("#fuelLitres").value),price=Number($("#fuelPrice").value);$("#fuelTotal").value=litres>0&&price>0?(litres*price).toFixed(2):"";}
 $("#fuelLitres").addEventListener("input",calculateFuelTotal);$("#fuelPrice").addEventListener("input",calculateFuelTotal);
 $("#fuelForm").addEventListener("submit",event=>{
