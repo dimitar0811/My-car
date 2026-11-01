@@ -63,7 +63,7 @@ Implemented in the current starter build:
 - Add, edit and delete vehicle profiles.
 - Open a vehicle profile by selecting its vehicle card.
 - Show saved vehicle details and edit them while preserving existing records.
-- Record fuel fills per vehicle with date, fuel type, litres, unit price, calculated total, odometer and full-tank flag.
+- Record fuel fills per vehicle with date, fuel type, litres, unit price, calculated total, odometer and full-tank flag.\n- Record vehicle expenses by date and category (repairs, maintenance, parts, tyres, insurance, taxes and other), with optional description and odometer; view the total and delete individual entries.
 - View fuel history and calculate L/100 km from full-tank-to-full-tank intervals, including intervening partial fills.
 - Validate an entered vehicle year (1900–2100) before saving.
 - Up to 3 vehicles in the basic local prototype.
@@ -96,7 +96,7 @@ Not implemented yet:
 - [x] Add fuel log, odometer readings and full-tank interval L/100 km calculations.
 - [x] Add extensible language-pack selector, device-language detection and localized core vehicle/fuel screens.
 - [ ] Add trip recording and trip-cost calculations.
-- [ ] Add expenses, maintenance and service history.
+- [x] Add a basic per-vehicle expense log with categories, total and deletion.\n- [ ] Expand expenses into maintenance and service history.
 - [ ] Add reminders, notifications and calendar.
 - [ ] Add documents, OCR with confirmation and PDF reports.
 - [ ] Add vehicle comparison and fuel-price tracking.
@@ -113,7 +113,7 @@ Open `index.html` in a local development server or deploy the repository with Gi
 
 ## Development notes
 
-Update this README whenever application functionality, technical decisions, limitations or release status changes. Keep the implemented status separate from planned features; never describe a planned feature as available before it is built and tested.
+Update this README whenever application functionality, technical decisions, limitations or release status changes. The expense log is an initial local prototype and is not yet a substitute for a full accounting or service-record system. Keep the implemented status separate from planned features; never describe a planned feature as available before it is built and tested.
 
 ## License
 
