@@ -120,3 +120,28 @@ Update this README whenever application functionality, technical decisions, limi
 ## License
 
 All rights reserved. This repository is private and the application is a proprietary product. No permission to copy, distribute or commercially use the code is granted without written permission from the owner.
+
+
+## Test data and verification
+
+A separate demonstration mode is available at `?demo=1`. It loads three fictional sample vehicles (Toyota Corolla petrol, Volkswagen Passat diesel and Dacia Duster LPG), with technical profiles, multiple fuel fills, full/partial tank records and expense entries covering all seven expense categories. Demo changes are stored under a separate localStorage key (`my-car-demo-vehicles-v1`) and do not overwrite the user's normal vehicle list. Use the “Изход от тестовия режим” link to return to the regular app.
+
+### Verified by code review
+- Vehicle creation is limited to three records; edit preserves existing fuel and expense arrays; delete removes the selected vehicle.
+- Fuel total is calculated from litres × unit price and the form rejects non-positive litres/prices and decreasing odometer values.
+- Full-tank consumption uses the litres accumulated between consecutive full-tank entries, including intervening partial fills.
+- Expense records are stored per vehicle; totals are summed from numeric amounts; category labels are localized; individual records can be deleted.
+- **Fixed:** opening a vehicle profile now renders both fuel history and expense history, including the total expense amount.
+- Demo mode uses a separate storage key, so the sample records are isolated from normal user data.
+
+### Manual regression checklist
+1. Open each of the three demo vehicles and check profile fields, fuel history, average consumption, expense descriptions and totals.
+2. Add a fuel entry; confirm the calculated total, saved history row and updated consumption after a full-tank interval.
+3. Try zero/negative litres or price and a lower odometer; confirm validation blocks invalid entries.
+4. Add one expense in each category and verify its amount appears in the history and total.
+5. Delete one expense and verify both the row and total update.
+6. Edit a vehicle and confirm its fuel and expense history remains intact.
+7. Refresh the demo page and confirm all demo records remain.
+8. Exit demo mode and confirm the normal vehicle list is unchanged.
+
+**Testing limitation:** code-path and data-model checks are documented here; real-device browser interaction still needs to be completed on the target Android/iPhone/desktop browsers. Demo data is fictional and intended only for inspection.
