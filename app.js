@@ -1,4 +1,6 @@
 const STORAGE_KEY = "my-car-vehicles-v1";
+const DEMO_STORAGE_KEY = "my-car-demo-vehicles-v1";
+const DEMO_MODE = new URLSearchParams(location.search).get("demo") === "1";
 const translations = {
   bg: {eyebrow:"ТВОЯТ АВТОМОБИЛЕН ПОМОЩНИК",heading:"Всичко за автомобила. На едно място.",subtitle:"Следи автомобилите си, разходите и предстоящото обслужване лесно.",garage:"ГАРАЖ",yourCars:"Твоите автомобили",addCar:"Добави автомобил",limitNote:"Основната версия позволява до 3 автомобила.",newCar:"Нов автомобил",editCar:"Редактирай автомобил",make:"Марка",model:"Модел",registration:"Регистрационен номер",year:"Година",saveCar:"Запази автомобила",updateCar:"Запази промените",edit:"Редактирай",footer:"Твоят автомобилен дневник",empty:"Все още нямаш добавени автомобили. Започни, като добавиш първия си автомобил.",remove:"Изтрий автомобила",confirmDelete:"Сигурен ли си, че искаш да изтриеш този автомобил?",car:"Автомобил",limitReached:"Достигна лимита от 3 автомобила.",unknownYear:"Годината не е посочена.",back:"← Обратно към гаража",profile:"Профил на автомобила",engine:"Двигател",fuel:"Гориво",power:"Мощност",transmission:"Скоростна кутия",vin:"VIN номер",mileage:"Пробег (км)",color:"Цвят",notSet:"Не е посочено",saveDetails:"Запази данните",fuelLog:"ДНЕВНИК НА ГОРИВОТО",fuelHeading:"Гориво",average:"Среден разход",date:"Дата",fuelType:"Вид гориво",litres:"Литри",pricePerLitre:"Цена за литър (€)",totalAmount:"Обща сума (€)",odometer:"Пробег (км)",fullTank:"Зареждане до пълен резервоар",saveFuel:"Запиши зареждането",fuelHistory:"История на зарежданията",petrol:"Бензин",diesel:"Дизел",lpg:"Пропан-бутан (LPG)",cng:"Метан (CNG)",electricity:"Електричество",additionalData:"Допълнителни технически данни",fuelConsumption:"Разход",tapProfile:"Натисни за профил →",invalidData:"Провери въведените данни.",mileageError:"Пробегът не може да е по-малък от последния запис.",validYear:"Въведи валидна година между 1900 и 2100.",automatic:"Автоматично",emptyFuel:"Все още няма записи за зареждане.",expenseLog:"ДНЕВНИК НА РАЗХОДИТЕ",expenseHeading:"Разходи по автомобила",totalExpenses:"Общо разходи",expenseDate:"Дата",expenseCategory:"Категория",repair:"Ремонт",maintenance:"Обслужване",parts:"Части",tyres:"Гуми",insurance:"Застраховка",taxes:"Данъци и такси",other:"Други",expenseDescription:"Описание",expenseAmount:"Сума (€)",expenseOdometer:"Пробег (км)",saveExpense:"Запиши разхода",expenseHistory:"История на разходите",emptyExpenses:"Все още няма записани разходи.",deleteExpense:"Изтрий разхода",confirmDeleteExpense:"Сигурен ли си, че искаш да изтриеш този разход?"},
   en: {eyebrow:"YOUR CAR COMPANION",heading:"Everything about your car. In one place.",subtitle:"Easily track your vehicles, expenses and upcoming maintenance.",garage:"GARAGE",yourCars:"Your vehicles",addCar:"Add a vehicle",limitNote:"The basic version supports up to 3 vehicles.",newCar:"New vehicle",editCar:"Edit vehicle",make:"Make",model:"Model",registration:"Registration number",year:"Year",saveCar:"Save vehicle",updateCar:"Save changes",edit:"Edit",footer:"Your vehicle logbook",empty:"You have not added any vehicles yet. Start by adding your first car.",remove:"Delete vehicle",confirmDelete:"Are you sure you want to delete this vehicle?",car:"Vehicle",limitReached:"You have reached the 3-vehicle limit.",unknownYear:"Year not provided.",back:"← Back to garage",profile:"Vehicle profile",engine:"Engine",fuel:"Fuel type",power:"Power",transmission:"Transmission",vin:"VIN",mileage:"Mileage (km)",color:"Colour",notSet:"Not provided",saveDetails:"Save details",fuelLog:"FUEL LOG",fuelHeading:"Fuel",average:"Average consumption",date:"Date",fuelType:"Fuel type",litres:"Litres",pricePerLitre:"Price per litre (€)",totalAmount:"Total amount (€)",odometer:"Odometer (km)",fullTank:"Full tank",saveFuel:"Save fuel entry",fuelHistory:"Fuel history",petrol:"Petrol",diesel:"Diesel",lpg:"LPG",cng:"CNG",electricity:"Electricity",additionalData:"Additional technical details",fuelConsumption:"Consumption",tapProfile:"Tap to view profile →",invalidData:"Check the entered values.",mileageError:"Mileage cannot be lower than the latest entry.",validYear:"Enter a valid year between 1900 and 2100.",automatic:"Automatic",emptyFuel:"No fuel entries yet.",expenseLog:"EXPENSE LOG",expenseHeading:"Vehicle expenses",totalExpenses:"Total expenses",expenseDate:"Date",expenseCategory:"Category",repair:"Repair",maintenance:"Maintenance",parts:"Parts",tyres:"Tyres",insurance:"Insurance",taxes:"Taxes and fees",other:"Other",expenseDescription:"Description",expenseAmount:"Amount (€)",expenseOdometer:"Odometer (km)",saveExpense:"Save expense",expenseHistory:"Expense history",emptyExpenses:"No expenses recorded yet.",deleteExpense:"Delete expense",confirmDeleteExpense:"Are you sure you want to delete this expense?"},
@@ -18,8 +20,52 @@ function t(key){return translations[language]?.[key] || translations.en[key] || 
 function locale(){return ({bg:"bg-BG",en:"en-GB",es:"es-ES",de:"de-DE",pt:"pt-PT",ru:"ru-RU"})[language]||"en-GB";}
 function renderLanguageOptions(){const select=$("#languageSelect");select.innerHTML=Object.keys(translations).map(code=>'<option value="'+escapeHtml(code)+'">'+escapeHtml(languageNames[code]||code.toUpperCase())+'</option>').join("");select.value=language;}
 function renderFuelOptions(){const select=$("#fuelType"),current=select.value;const types=[["petrol","petrol"],["diesel","diesel"],["lpg","lpg"],["cng","cng"],["electricity","electricity"]];select.innerHTML=types.map(([value,key])=>`<option value="${value}">${t(key)}</option>`).join("");select.value=types.some(([value])=>value===current)?current:"petrol";}
-function loadVehicles(){try{const data=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");return Array.isArray(data)?data:[];}catch{return [];}}
-function saveVehicles(){localStorage.setItem(STORAGE_KEY,JSON.stringify(vehicles));}
+function createDemoVehicles(){
+ return [
+  {id:"demo-toyota",make:"Toyota",model:"Corolla 1.6",registration:"CB 1234 AB",year:"2018",engine:"1.6 бензин",fuel:"Бензин",power:"97 kW / 132 hp",transmission:"Ръчна",vin:"DEMO0000000000001",mileage:"125500",color:"Сребрист",
+   fuelLog:[
+    {id:"toy-f1",date:"2026-10-03",fuelType:"petrol",litres:40,pricePerLitre:1.32,total:52.8,odometer:124000,fullTank:true},
+    {id:"toy-f2",date:"2026-10-12",fuelType:"petrol",litres:20,pricePerLitre:1.34,total:26.8,odometer:124250,fullTank:false},
+    {id:"toy-f3",date:"2026-10-22",fuelType:"petrol",litres:25,pricePerLitre:1.35,total:33.75,odometer:124500,fullTank:true},
+    {id:"toy-f4",date:"2026-10-30",fuelType:"petrol",litres:32,pricePerLitre:1.36,total:43.52,odometer:124920,fullTank:true}
+   ],
+   expenses:[
+    {id:"toy-e1",date:"2026-10-05",category:"maintenance",description:"Смяна на масло и маслен филтър",amount:95,odometer:"124050"},
+    {id:"toy-e2",date:"2026-10-14",category:"parts",description:"Въздушен и купе филтър",amount:38.5,odometer:"124280"},
+    {id:"toy-e3",date:"2026-10-25",category:"insurance",description:"Гражданска отговорност – вноска",amount:72,odometer:"124650"}
+   ]},
+  {id:"demo-vw",make:"Volkswagen",model:"Passat 2.0 TDI",registration:"CA 5678 KT",year:"2020",engine:"2.0 дизел",fuel:"Дизел",power:"110 kW / 150 hp",transmission:"Автоматична DSG",vin:"DEMO0000000000002",mileage:"98500",color:"Тъмносин",
+   fuelLog:[
+    {id:"vw-f1",date:"2026-10-02",fuelType:"diesel",litres:50,pricePerLitre:1.38,total:69,odometer:97000,fullTank:true},
+    {id:"vw-f2",date:"2026-10-11",fuelType:"diesel",litres:18,pricePerLitre:1.4,total:25.2,odometer:97300,fullTank:false},
+    {id:"vw-f3",date:"2026-10-20",fuelType:"diesel",litres:27,pricePerLitre:1.41,total:38.07,odometer:97600,fullTank:true},
+    {id:"vw-f4",date:"2026-10-29",fuelType:"diesel",litres:42,pricePerLitre:1.42,total:59.64,odometer:98150,fullTank:true}
+   ],
+   expenses:[
+    {id:"vw-e1",date:"2026-10-06",category:"repair",description:"Смяна на предни спирачни накладки",amount:145,odometer:"97120"},
+    {id:"vw-e2",date:"2026-10-16",category:"tyres",description:"Два нови зимни гуми",amount:210,odometer:"97420"},
+    {id:"vw-e3",date:"2026-10-27",category:"taxes",description:"Годишен данък МПС",amount:86.4,odometer:"98000"}
+   ]},
+  {id:"demo-dacia",make:"Dacia",model:"Duster 1.6 LPG",registration:"PB 9012 MH",year:"2019",engine:"1.6 бензин / LPG",fuel:"LPG",power:"84 kW / 114 hp",transmission:"Ръчна",vin:"DEMO0000000000003",mileage:"76400",color:"Бял",
+   fuelLog:[
+    {id:"dac-f1",date:"2026-10-04",fuelType:"lpg",litres:38,pricePerLitre:0.68,total:25.84,odometer:75000,fullTank:true},
+    {id:"dac-f2",date:"2026-10-13",fuelType:"lpg",litres:20,pricePerLitre:0.69,total:13.8,odometer:75300,fullTank:false},
+    {id:"dac-f3",date:"2026-10-23",fuelType:"lpg",litres:22,pricePerLitre:0.7,total:15.4,odometer:75600,fullTank:true},
+    {id:"dac-f4",date:"2026-10-31",fuelType:"lpg",litres:35,pricePerLitre:0.71,total:24.85,odometer:76200,fullTank:true}
+   ],
+   expenses:[
+    {id:"dac-e1",date:"2026-10-08",category:"other",description:"Автомивка и почистване на салона",amount:24,odometer:"75120"},
+    {id:"dac-e2",date:"2026-10-18",category:"maintenance",description:"Реглаж на преден мост",amount:42,odometer:"75480"}
+   ]}
+ ];
+}
+function loadVehicles(){
+ const key=DEMO_MODE?DEMO_STORAGE_KEY:STORAGE_KEY;
+ try{const saved=JSON.parse(localStorage.getItem(key)||"null");if(Array.isArray(saved))return saved;}catch{}
+ if(DEMO_MODE){const samples=createDemoVehicles();localStorage.setItem(DEMO_STORAGE_KEY,JSON.stringify(samples));return samples;}
+ try{const data=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");return Array.isArray(data)?data:[];}catch{return [];}
+}
+function saveVehicles(){localStorage.setItem(DEMO_MODE?DEMO_STORAGE_KEY:STORAGE_KEY,JSON.stringify(vehicles));}
 function escapeHtml(value){return String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));}
 function showGarage(){selectedVehicleId=null;$("#carProfileSection").hidden=true;$("#garageSection").hidden=false;}
 function openProfile(id){const car=vehicles.find(item=>item.id===id);if(!car)return;selectedVehicleId=id;$("#garageSection").hidden=true;$("#carFormSection").hidden=true;$("#carProfileSection").hidden=false;renderProfile(car);window.scrollTo({top:0,behavior:"smooth"});}
@@ -48,11 +94,13 @@ function renderProfile(car){
   const fields=[["year",car.year],["engine",car.engine],["fuel",car.fuel],["power",car.power],["transmission",car.transmission],["vin",car.vin],["mileage",car.mileage],["color",car.color]];
   $("#profileDetails").innerHTML=fields.map(([key,value])=>`<div class="detail-item"><span>${t(key)}</span><strong>${escapeHtml(value||t("notSet"))}</strong></div>`).join("");
   renderFuel(car);
+  renderExpenses(car);
 }
 function render(){
   document.documentElement.lang=language;
   document.querySelectorAll("[data-i18n]").forEach(el=>{el.textContent=t(el.dataset.i18n);});
   renderLanguageOptions();renderFuelOptions();
+  const demoNotice=$("#demoNotice");if(demoNotice)demoNotice.hidden=!DEMO_MODE;
   $("#carCount").textContent=vehicles.length+" / 3";
   $("#carList").innerHTML=vehicles.length?vehicles.map(car=>`<article class="car-card" data-open-profile="${escapeHtml(car.id)}" tabindex="0" role="button" aria-label="${t("profile")}: ${escapeHtml(car.make)} ${escapeHtml(car.model)}"><div class="car-card-top"><div class="car-symbol" aria-hidden="true">🚗</div><div class="car-actions"><button class="edit-button" type="button" data-edit="${escapeHtml(car.id)}" aria-label="${t("edit")}" title="${t("edit")}">✎</button><button class="delete-button" type="button" data-delete="${escapeHtml(car.id)}" aria-label="${t("remove")}" title="${t("remove")}">×</button></div></div><h3>${escapeHtml(car.make)} ${escapeHtml(car.model)}</h3><p class="car-meta">${car.year?escapeHtml(car.year):t("unknownYear")}</p><span class="car-registration">${escapeHtml((car.registration||"").toUpperCase())}</span><p class="card-hint">${t("tapProfile")}</p></article>`).join(""):`<div class="empty-state">${t("empty")}</div>`;
   $("#addCarButton").disabled=vehicles.length>=3;
