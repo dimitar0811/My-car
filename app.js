@@ -150,7 +150,6 @@ function render(){
   document.querySelectorAll("[data-i18n]").forEach(el=>{el.textContent=t(el.dataset.i18n);});
   renderLanguageOptions();renderFuelOptions();
   const demoNotice=$("#demoNotice");if(demoNotice)demoNotice.hidden=!DEMO_MODE;
-  $("#navHomeLabel")?.replaceChildren(document.createTextNode(t("navHome")));
   $("#carCount").textContent=vehicles.length+" / 3";
   $("#carList").innerHTML=vehicles.length?vehicles.map(car=>`<article class="car-card" data-open-profile="${escapeHtml(car.id)}" tabindex="0" role="button" aria-label="${t("profile")}: ${escapeHtml(car.make)} ${escapeHtml(car.model)}"><div class="car-card-top"><div class="car-symbol" aria-hidden="true">🚗</div><div class="car-actions"><button class="edit-button" type="button" data-edit="${escapeHtml(car.id)}" aria-label="${t("edit")}" title="${t("edit")}">✎</button><button class="delete-button" type="button" data-delete="${escapeHtml(car.id)}" aria-label="${t("remove")}" title="${t("remove")}">×</button></div></div><h3>${escapeHtml(car.make)} ${escapeHtml(car.model)}</h3><p class="car-meta">${car.year?escapeHtml(car.year):t("unknownYear")}</p><span class="car-registration">${escapeHtml((car.registration||"").toUpperCase())}</span><p class="card-hint">${t("tapProfile")}</p></article>`).join(""):`<div class="empty-state">${t("empty")}</div>`;
   $("#addCarButton").disabled=vehicles.length>=3;
