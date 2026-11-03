@@ -172,3 +172,19 @@ A separate demonstration mode is available at `?demo=1`. It loads three fictiona
 8. Exit demo mode and confirm the normal vehicle list is unchanged.
 
 **Testing limitation:** code-path and data-model checks are documented here; real-device browser interaction still needs to be completed on the target Android/iPhone/desktop browsers. Demo data is fictional and intended only for inspection.
+
+
+## First navigation and dashboard increment
+
+Implemented on the `feature/smart-assistant-foundation` branch:
+- Added four working primary views: Home, Vehicles, History and Profile.
+- Home shows the first saved vehicle, vehicle count and the total of recorded expenses, with working shortcuts to the vehicle list and add-vehicle form.
+- History combines the existing per-vehicle fuel and expense records in date order; it does not create duplicate records or change their storage format.
+- Profile currently explains the existing language selector and clearly labels other settings as planned, rather than displaying non-functional controls.
+- The existing garage, vehicle profile, fuel log, expense log, six language packs and demo-mode storage remain in place.
+- Updated the service-worker cache version so deployed clients can receive the new shell files.
+
+### Verification status
+- Reviewed the changes for preservation of existing element IDs and event handlers.
+- Updated the README and cache version.
+- This increment has not yet been tested through real browser interaction on an Android/iPhone device. Please use the demo mode for the first visual and interaction check once a preview is available.
