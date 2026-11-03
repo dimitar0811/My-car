@@ -125,7 +125,7 @@ Not implemented yet:
 - [x] Add extensible language-pack selector, device-language detection and localized core vehicle/fuel screens.
 - [ ] Add trip recording and trip-cost calculations.
 - [x] Add a basic per-vehicle expense log with categories, total and deletion.
-- [ ] Expand expenses into maintenance and service history.
+- [x] Add an initial per-vehicle service history with user-entered next-service date/mileage; advanced maintenance planning remains pending.
 - [ ] Add reminders, notifications and calendar.
 - [ ] Add documents, OCR with confirmation and PDF reports.
 - [ ] Add vehicle comparison and fuel-price tracking.
@@ -195,3 +195,21 @@ Implemented on the `feature/smart-assistant-foundation` branch:
 - JavaScript syntax was checked successfully after the navigation/dashboard increment.
 - GitHub Pages workflow currently targets pushes to `main`; the feature branch is not automatically published by that workflow. No production branch or Pages deployment settings were changed.
 - A preview URL has not yet been verified. Real-device interaction testing remains pending.
+
+
+
+## Service history and user-defined maintenance reminder increment
+
+Implemented on the `ma-car-preview` branch:
+- Added a per-vehicle service history for completed maintenance, including date, service type, odometer, description/parts and cost.
+- Added optional next-service date and mileage fields. These are entered by the user from the vehicle service book or applicable manufacturer guidance; the app does not invent universal service intervals.
+- Added a maintenance summary on the vehicle profile and Home screen. It flags a due point only when the entered date has arrived or the vehicle's recorded mileage has reached the entered threshold.
+- Service costs are included in the overall expense total and appear in the combined History view; service entries remain separate from ordinary expense entries to avoid duplicate records.
+- Added delete controls for individual service records and kept records attached to their vehicle when its profile is edited.
+- Added service labels for all six included languages and bumped the service-worker cache to `my-car-shell-v12`.
+
+### Verification status
+- Code-path review confirms service records are saved inside each vehicle record in the existing local storage model.
+- The app does not suggest or calculate manufacturer intervals. Users must enter next due date/mileage from reliable vehicle-specific guidance.
+- Manual Android interaction test is still required: save a service record, check it in the profile and History, verify the total, edit the vehicle, reload the page, and delete the record.
+- This is an initial service-history and user-entered reminder foundation, not yet the complete intelligent maintenance planner.
