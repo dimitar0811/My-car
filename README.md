@@ -188,3 +188,10 @@ Implemented on the `feature/smart-assistant-foundation` branch:
 - Reviewed the changes for preservation of existing element IDs and event handlers.
 - Updated the README and cache version.
 - This increment has not yet been tested through real browser interaction on an Android/iPhone device. Please use the demo mode for the first visual and interaction check once a preview is available.
+
+## Preview preparation check (2026-11-03)
+- Reviewed the dashboard, view switching, vehicle profile, language selector, fuel and expense handlers on the feature branch.
+- Removed an obsolete optional navigation-label selector that referenced an element not present in the HTML. The visible navigation labels are already rendered through the active navigation buttons.
+- JavaScript syntax was checked successfully after the navigation/dashboard increment.
+- GitHub Pages workflow currently targets pushes to `main`; the feature branch is not automatically published by that workflow. No production branch or Pages deployment settings were changed.
+- A preview URL has not yet been verified. Real-device interaction testing remains pending.
