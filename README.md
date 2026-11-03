@@ -10,6 +10,33 @@
 - Local-first data storage, with optional cloud services in a future subscription.
 - Clear, reliable information and user confirmation before saving data extracted from documents.
 
+## Product direction and user experience
+
+The primary product direction is a **complete intelligent car assistant**, not only a fuel or expense logbook. The app should help an everyday driver understand what needs attention, why it matters and what action to take next.
+
+### Core assistant responsibilities
+1. **Reminders:** show upcoming maintenance, document expirations and other due actions.
+2. **Explanations:** explain why a service task is recommended and what it normally includes.
+3. **History:** keep a clear record of completed services, repairs, parts, fuel and expenses.
+4. **Maintenance plan:** estimate future tasks using the exact vehicle/engine profile, odometer, dates, recorded service history and reliable manufacturer guidance where available.
+5. **Practical advice:** provide contextual suggestions while clearly separating confirmed vehicle data, sourced recommendations and uncertain estimates. The assistant must not claim to diagnose faults without diagnostic evidence.
+
+### Main navigation
+The intended primary navigation has four clear areas:
+- **Home:** selected vehicle, important upcoming actions, warnings and a direct entry to the assistant.
+- **Vehicles:** add and manage the user's vehicles.
+- **History:** service, repair, fuel and expense records.
+- **Profile:** language, currency, units, notifications, documents and data backup/transfer.
+
+The assistant should be immediately accessible from Home rather than adding another crowded permanent navigation item. Keep the interface simple, with few clear actions and progressive disclosure of details.
+
+### Implementation principles
+- Preserve the existing vehicle, fuel, expense, localization and demo-mode behavior while adding new capabilities.
+- Build in small, testable increments; do not replace the working app shell in one unverified change.
+- Do not invent manufacturer service intervals. Identify the source and vehicle applicability of maintenance guidance; label estimates as estimates.
+- Do not show unimplemented controls as working features.
+- Update this README after each meaningful implementation and verification step.
+
 ## Approved feature scope
 
 1. Manage multiple vehicles.
