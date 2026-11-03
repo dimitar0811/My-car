@@ -213,3 +213,15 @@ Implemented on the `ma-car-preview` branch:
 - The app does not suggest or calculate manufacturer intervals. Users must enter next due date/mileage from reliable vehicle-specific guidance.
 - Manual Android interaction test is still required: save a service record, check it in the profile and History, verify the total, edit the vehicle, reload the page, and delete the record.
 - This is an initial service-history and user-entered reminder foundation, not yet the complete intelligent maintenance planner.
+
+
+## Smart assistant foundation increment (2026-11-03)
+- Added a Home assistant panel that surfaces next-service points explicitly entered by the user in the vehicle's service log.
+- Displays date and/or odometer targets, marks a target as due only when the entered date has arrived or the saved vehicle mileage reaches the entered target, and links directly to the relevant vehicle profile.
+- The panel supports the six current interface languages.
+- Clearly states that these saved plans are user-entered and are not independently verified manufacturer recommendations. No AI diagnosis or generic service interval is presented as fact.
+- Updated the service-worker cache version for the new Home interface.
+
+### Verification status
+- Source-level review only; device/browser interaction remains to be tested in the preview.
+- Regression test: add a future date/mileage in the service log, confirm it appears on Home; test a past date or reached mileage and confirm due status; tap Open vehicle; change language and confirm the panel is translated; verify existing vehicle, fuel, expense and service records remain intact.
