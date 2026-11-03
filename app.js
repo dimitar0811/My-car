@@ -114,14 +114,32 @@ function renderHome(){
   const total=vehicles.reduce((sum,item)=>sum+(item.expenses||[]).reduce((part,entry)=>part+(Number(entry.amount)||0),0)+(item.serviceLog||[]).reduce((part,entry)=>part+(Number(entry.cost)||0),0),0);
   stats.innerHTML='<div class="home-stat"><small>'+t("homeCarCount")+'</small><strong>'+vehicles.length+' / 3</strong></div><div class="home-stat"><small>'+t("homeExpenseTotal")+'</small><strong>'+formatMoney(total)+'</strong></div>';
   $("#homeVehiclesButton").textContent=t("homeVehicles");$("#homeAddCarButton").textContent=t("homeAdd");
-  const planned=vehicles.flatMap(car=>(car.serviceLog||[]).filter(item=>item.nextDueDate||item.nextDueOdometer).map(item=>({car,item}))).sort((a,b)=>(a.item.nextDueDate||"9999-12-31").localeCompare(b.item.nextDueDate||"9999-12-31"))[0];
-  if(planned){
-    const dueDate=planned.item.nextDueDate?new Date(planned.item.nextDueDate+"T00:00:00").toLocaleDateString(locale()):"";
-    const dueKm=planned.item.nextDueOdometer?Number(planned.item.nextDueOdometer).toLocaleString(locale())+" km":"";
-    const due=(planned.item.nextDueDate&&planned.item.nextDueDate<=new Date().toISOString().slice(0,10))||(planned.item.nextDueOdometer&&Number(planned.car.mileage)>=Number(planned.item.nextDueOdometer));
-    $("#homeNote").textContent=st("assistant")+": "+planned.car.make+" "+planned.car.model+" — "+[dueDate,dueKm].filter(Boolean).join(" / ")+" · "+(due?st("due"):st("planned"));
-  }else{$("#homeNote").textContent=st("noPlan");}
+  renderAssistantPanel();
 }
+const assistantUi={
+ bg:{title:"Интелигентен помощник",intro:"Показвам плановете за обслужване, които си въвел. Сроковете не са автоматично проверени по производителя.",noPlan:"Няма записан следващ срок. Добави дата или километри от сервизната книжка в профила на автомобила.",due:"Срокът е достигнат според въведените данни",planned:"Предстоящо според записания план",basis:"Основа: твоят записан сервизен план",open:"Отвори автомобила",empty:"Добави автомобил и запис за следваща поддръжка, за да виждаш напомняния тук."},
+ en:{title:"Smart assistant",intro:"I show maintenance plans you entered. Due points have not been independently verified against manufacturer guidance.",noPlan:"No next due point is saved. Add a date or mileage from the service book in the vehicle profile.",due:"Due based on the information entered",planned:"Upcoming in the saved plan",basis:"Based on your saved service plan",open:"Open vehicle",empty:"Add a vehicle and a next-maintenance record to see reminders here."},
+ es:{title:"Asistente inteligente",intro:"Muestro los planes de mantenimiento que has introducido. No se han verificado de forma independiente con el fabricante.",noPlan:"No hay un próximo plazo guardado. Añade una fecha o kilometraje del libro de mantenimiento en el perfil del vehículo.",due:"Vencido según los datos introducidos",planned:"Próximo según el plan guardado",basis:"Basado en tu plan de servicio guardado",open:"Abrir vehículo",empty:"Añade un vehículo y un próximo mantenimiento para ver recordatorios aquí."},
+ de:{title:"Intelligenter Assistent",intro:"Ich zeige die von dir eingetragenen Wartungspläne. Die Fälligkeiten wurden nicht unabhängig anhand der Herstellerangaben geprüft.",noPlan:"Kein nächster Termin gespeichert. Trage Datum oder Kilometerstand aus dem Serviceheft im Fahrzeugprofil ein.",due:"Laut eingegebenen Daten fällig",planned:"Dem gespeicherten Plan zufolge bevorstehend",basis:"Grundlage: dein gespeicherter Serviceplan",open:"Fahrzeug öffnen",empty:"Füge ein Fahrzeug und einen nächsten Wartungstermin hinzu, um hier Erinnerungen zu sehen."},
+ pt:{title:"Assistente inteligente",intro:"Mostro os planos de manutenção que introduziste. Os prazos não foram verificados independentemente com o fabricante.",noPlan:"Não existe um próximo prazo guardado. Adiciona uma data ou quilometragem do livro de manutenção no perfil do veículo.",due:"Prazo atingido segundo os dados introduzidos",planned:"Próximo segundo o plano guardado",basis:"Baseado no teu plano de serviço guardado",open:"Abrir veículo",empty:"Adiciona um veículo e a próxima manutenção para veres lembretes aqui."},
+ ru:{title:"Умный помощник",intro:"Показываю планы обслуживания, которые ты ввёл. Сроки независимо не проверялись по данным производителя.",noPlan:"Следующий срок не сохранён. Добавь дату или пробег из сервисной книжки в профиле автомобиля.",due:"Срок наступил согласно введённым данным",planned:"Предстоит по сохранённому плану",basis:"Основа: сохранённый тобой план обслуживания",open:"Открыть автомобиль",empty:"Добавь автомобиль и следующий срок обслуживания, чтобы видеть напоминания здесь."}
+};
+function assistantText(key){return assistantUi[language]?.[key]||assistantUi.en[key]||key;}
+function renderAssistantPanel(){
+ const panel=$("#assistantPanel");if(!panel)return;
+ const today=new Date().toISOString().slice(0,10);
+ const items=vehicles.flatMap(car=>(car.serviceLog||[]).filter(record=>record.nextDueDate||record.nextDueOdometer).map(record=>{
+  const date=record.nextDueDate||"",nextKm=record.nextDueOdometer!==""&&record.nextDueOdometer!=null?Number(record.nextDueOdometer):null;
+  const dateDue=!!date&&date<=today,kmDue=nextKm!==null&&Number.isFinite(Number(car.mileage))&&car.mileage!==""&&Number(car.mileage)>=nextKm;
+  return {car,record,date,nextKm,due:dateDue||kmDue};
+ })).sort((a,b)=>Number(b.due)-Number(a.due)||(a.date||"9999-12-31").localeCompare(b.date||"9999-12-31"));
+ const cards=items.slice(0,5).map(({car,record,date,nextKm,due})=>{
+  const when=[date?new Date(date+"T00:00:00").toLocaleDateString(locale()):"",nextKm!==null?nextKm.toLocaleString(locale())+" km":""].filter(Boolean).join(" · ");
+  return '<article class="assistant-item"><div class="assistant-item-main"><strong>'+escapeHtml(car.make+" "+car.model)+' · '+escapeHtml(st(record.type)||st("other"))+'</strong><p>'+escapeHtml(when)+'</p><small>'+escapeHtml(assistantText(due?"due":"planned"))+'</small><small>'+escapeHtml(assistantText("basis"))+'</small></div><button type="button" class="secondary-button assistant-open" data-assistant-car="'+escapeHtml(car.id)+'">'+escapeHtml(assistantText("open"))+'</button></article>';
+ }).join("");
+ panel.innerHTML='<div class="assistant-panel-heading"><div><p class="eyebrow">MA-CAR</p><h3>'+escapeHtml(assistantText("title"))+'</h3></div></div><p class="assistant-intro">'+escapeHtml(assistantText("intro"))+'</p>'+(cards||'<p class="assistant-empty">'+escapeHtml(vehicles.length?assistantText("noPlan"):assistantText("empty"))+'</p>');
+}
+
 function renderHistory(){
   const target=$("#historyContent");if(!target)return;
   const entries=[];
@@ -223,6 +241,7 @@ function closeForm(){editingVehicleId=null;$("#carFormSection").hidden=true;$("#
 document.querySelectorAll(".nav-button").forEach(button=>button.addEventListener("click",()=>showView(button.dataset.view)));
 $("#homeVehiclesButton").addEventListener("click",()=>showView("vehicles"));
 $("#homeAddCarButton").addEventListener("click",openForm);
+$("#assistantPanel").addEventListener("click",event=>{const button=event.target.closest("[data-assistant-car]");if(button)openProfile(button.dataset.assistantCar);});
 $("#languageSelect").addEventListener("change",event=>{language=event.target.value;localStorage.setItem("my-car-language",language);render();if(selectedVehicleId){const car=vehicles.find(item=>item.id===selectedVehicleId);if(car)renderProfile(car);}});
 $("#addCarButton").addEventListener("click",openForm);
 $("#closeForm").addEventListener("click",closeForm);
