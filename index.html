@@ -58,6 +58,23 @@
       <h2 id="profileTitle"></h2><span id="profileRegistration" class="car-registration"></span>
       <div id="profileDetails" class="profile-grid"></div>
       <button id="profileEdit" class="primary-button" type="button" data-i18n="edit">Редактирай</button>
+
+<section class="service-section">
+  <div class="service-heading"><div><p class="eyebrow">SERVICE LOG</p><h3 id="serviceSectionTitle">Поддръжка и сервиз</h3></div></div>
+  <p id="serviceIntro" class="service-intro">Записвай извършеното обслужване и следващия срок според сервизната книжка или указанията на производителя.</p>
+  <div id="servicePlanSummary" class="service-plan-summary"></div>
+  <form id="serviceForm" class="service-form">
+    <div class="form-row"><label><span data-service-text="date">Дата</span><input id="serviceDate" type="date" required></label><label><span data-service-text="type">Дейност</span><select id="serviceType" required></select></label></div>
+    <div class="form-row"><label><span data-service-text="odometer">Пробег при обслужване (км)</span><input id="serviceOdometer" type="number" min="0" step="1" required inputmode="numeric"></label><label><span data-service-text="cost">Цена (€)</span><input id="serviceCost" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0.00"></label></div>
+    <label><span data-service-text="description">Описание / използвани части</span><input id="serviceDescription" type="text" maxlength="180" placeholder="напр. масло 5W-30 и маслен филтър"></label>
+    <p class="service-subheading" data-service-text="nextService">Следващо обслужване (по сервизната книжка)</p>
+    <div class="form-row"><label><span data-service-text="nextDate">Следваща дата</span><input id="serviceNextDate" type="date"></label><label><span data-service-text="nextKm">Следващ пробег (км)</span><input id="serviceNextOdometer" type="number" min="0" step="1" inputmode="numeric"></label></div>
+    <button class="primary-button" type="submit" data-service-text="save">Запиши обслужването</button>
+  </form>
+  <h3 id="serviceHistoryTitle" class="history-title">История на обслужването</h3>
+  <div id="serviceHistory" class="service-history"></div>
+</section>
+
 <section class="fuel-section"><div class="fuel-heading"><div><p class="eyebrow" data-i18n="fuelLog">FUEL LOG</p><h3 data-i18n="fuelHeading">Гориво</h3></div><div class="consumption-box"><small data-i18n="average">Среден разход</small><strong id="averageConsumption">—</strong></div></div>
 <form id="fuelForm" class="fuel-form">
 <div class="form-row"><label><span data-i18n="date">Дата</span><input id="fuelDate" type="date" required></label><label><span data-i18n="fuelType">Вид гориво</span><select id="fuelType" required></select></label></div>
