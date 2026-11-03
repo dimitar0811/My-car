@@ -127,6 +127,7 @@ const assistantUi={
 function assistantText(key){return assistantUi[language]?.[key]||assistantUi.en[key]||key;}
 function renderAssistantPanel(){
  const panel=$("#assistantPanel");if(!panel)return;
+ const oldNote=$("#homeNote");if(oldNote)oldNote.hidden=true;
  const today=new Date().toISOString().slice(0,10);
  const items=vehicles.flatMap(car=>(car.serviceLog||[]).filter(record=>record.nextDueDate||record.nextDueOdometer).map(record=>{
   const date=record.nextDueDate||"",nextKm=record.nextDueOdometer!==""&&record.nextDueOdometer!=null?Number(record.nextDueOdometer):null;
