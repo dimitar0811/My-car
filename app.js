@@ -10,13 +10,23 @@ const translations = {
   ru: {eyebrow:"ТВОЙ АВТОМОБИЛЬНЫЙ ПОМОЩНИК",heading:"Всё об автомобиле. В одном месте.",subtitle:"Легко следи за автомобилями, расходами и обслуживанием.",garage:"ГАРАЖ",yourCars:"Твои автомобили",addCar:"Добавить автомобиль",limitNote:"Базовая версия поддерживает до 3 автомобилей.",newCar:"Новый автомобиль",editCar:"Редактировать автомобиль",make:"Марка",model:"Модель",registration:"Регистрационный номер",year:"Год",saveCar:"Сохранить автомобиль",updateCar:"Сохранить изменения",edit:"Изменить",footer:"Твой автомобильный журнал",empty:"Пока нет автомобилей. Добавь свой первый автомобиль.",remove:"Удалить автомобиль",confirmDelete:"Ты действительно хочешь удалить этот автомобиль?",car:"Автомобиль",limitReached:"Достигнут лимит в 3 автомобиля.",unknownYear:"Год не указан.",back:"← Назад в гараж",profile:"Профиль автомобиля",engine:"Двигатель",fuel:"Топливо",power:"Мощность",transmission:"Коробка передач",vin:"VIN-номер",mileage:"Пробег (км)",color:"Цвет",notSet:"Не указано",saveDetails:"Сохранить данные",fuelLog:"УЧЁТ ТОПЛИВА",fuelHeading:"Топливо",average:"Средний расход",date:"Дата",fuelType:"Тип топлива",litres:"Литры",pricePerLitre:"Цена за литр (€)",totalAmount:"Общая сумма (€)",odometer:"Пробег (км)",fullTank:"Полный бак",saveFuel:"Сохранить заправку",fuelHistory:"История заправок",petrol:"Бензин",diesel:"Дизель",lpg:"Сжиженный газ (LPG)",cng:"Метан (CNG)",electricity:"Электричество",additionalData:"Дополнительные технические данные",fuelConsumption:"Расход",tapProfile:"Нажми, чтобы открыть профиль →",invalidData:"Проверь введённые данные.",mileageError:"Пробег не может быть меньше последней записи.",validYear:"Введи корректный год от 1900 до 2100.",automatic:"Автоматически",emptyFuel:"Записей о заправках пока нет.",expenseLog:"УЧЁТ РАСХОДОВ",expenseHeading:"Расходы на автомобиль",totalExpenses:"Общие расходы",expenseDate:"Дата",expenseCategory:"Категория",repair:"Ремонт",maintenance:"Обслуживание",parts:"Запчасти",tyres:"Шины",insurance:"Страхование",taxes:"Налоги и сборы",other:"Другое",expenseDescription:"Описание",expenseAmount:"Сумма (€)",expenseOdometer:"Пробег (км)",saveExpense:"Сохранить расход",expenseHistory:"История расходов",emptyExpenses:"Расходы пока не записаны.",deleteExpense:"Удалить расход",confirmDeleteExpense:"Вы действительно хотите удалить этот расход?"}
 
 };
+
+const uiText = {
+  bg:{navHome:"Начало",navVehicles:"Автомобили",navHistory:"История",navProfile:"Профил",homeTitle:"Твоят автомобилен помощник",homeEmpty:"Все още нямаш добавен автомобил.",homeCarCount:"Автомобили",homeExpenseTotal:"Записани разходи",homeVehicles:"Моите автомобили",homeAdd:"＋ Добави автомобил",homeNote:"Интелигентните напомняния и планът за поддръжка ще се добавят в следващите етапи.",historyTitle:"История",historyIntro:"Всички записани зареждания и разходи за твоите автомобили.",historyEmpty:"Все още няма записи за гориво или разходи.",historyFuel:"ЗАРЕЖДАНЕ",historyExpense:"РАЗХОД",appProfile:"Профил на приложението",languageSetting:"Език на приложението",languageHelp:"Използвай избора за език в горната част на екрана. Ma-car поддържа шест езика.",futureSettings:"Предстоящи настройки",futureHelp:"В следващите етапи ще добавим валута, мерни единици, известия и архивиране."},
+  en:{navHome:"Home",navVehicles:"Vehicles",navHistory:"History",navProfile:"Profile",homeTitle:"Your car assistant",homeEmpty:"You have not added a vehicle yet.",homeCarCount:"Vehicles",homeExpenseTotal:"Recorded expenses",homeVehicles:"My vehicles",homeAdd:"＋ Add vehicle",homeNote:"Smart reminders and the maintenance plan will be added in upcoming stages.",historyTitle:"History",historyIntro:"All recorded fuel fills and expenses for your vehicles.",historyEmpty:"There are no fuel or expense records yet.",historyFuel:"FUEL",historyExpense:"EXPENSE",appProfile:"App profile",languageSetting:"App language",languageHelp:"Use the language selector at the top of the screen. Ma-car currently supports six languages.",futureSettings:"Upcoming settings",futureHelp:"Currency, units, notifications and backup will be added in upcoming stages."},
+  es:{navHome:"Inicio",navVehicles:"Vehículos",navHistory:"Historial",navProfile:"Perfil",homeTitle:"Tu asistente para el coche",homeEmpty:"Todavía no has añadido ningún vehículo.",homeCarCount:"Vehículos",homeExpenseTotal:"Gastos registrados",homeVehicles:"Mis vehículos",homeAdd:"＋ Añadir vehículo",homeNote:"Los recordatorios inteligentes y el plan de mantenimiento se añadirán próximamente.",historyTitle:"Historial",historyIntro:"Todos los repostajes y gastos registrados de tus vehículos.",historyEmpty:"Todavía no hay registros de combustible ni gastos.",historyFuel:"REPOSTAJE",historyExpense:"GASTO",appProfile:"Perfil de la aplicación",languageSetting:"Idioma de la aplicación",languageHelp:"Usa el selector de idioma en la parte superior. Ma-car admite actualmente seis idiomas.",futureSettings:"Próximos ajustes",futureHelp:"La moneda, las unidades, las notificaciones y las copias de seguridad se añadirán próximamente."},
+  de:{navHome:"Start",navVehicles:"Fahrzeuge",navHistory:"Verlauf",navProfile:"Profil",homeTitle:"Dein Auto-Assistent",homeEmpty:"Du hast noch kein Fahrzeug hinzugefügt.",homeCarCount:"Fahrzeuge",homeExpenseTotal:"Erfasste Kosten",homeVehicles:"Meine Fahrzeuge",homeAdd:"＋ Fahrzeug hinzufügen",homeNote:"Intelligente Erinnerungen und der Wartungsplan werden in späteren Schritten ergänzt.",historyTitle:"Verlauf",historyIntro:"Alle erfassten Tankvorgänge und Kosten deiner Fahrzeuge.",historyEmpty:"Noch keine Tank- oder Kosteneinträge vorhanden.",historyFuel:"TANKVORGANG",historyExpense:"AUSGABE",appProfile:"App-Profil",languageSetting:"App-Sprache",languageHelp:"Verwende die Sprachauswahl oben auf dem Bildschirm. Ma-car unterstützt derzeit sechs Sprachen.",futureSettings:"Weitere Einstellungen",futureHelp:"Währung, Einheiten, Benachrichtigungen und Datensicherung folgen in späteren Schritten."},
+  pt:{navHome:"Início",navVehicles:"Veículos",navHistory:"Histórico",navProfile:"Perfil",homeTitle:"O teu assistente automóvel",homeEmpty:"Ainda não adicionaste nenhum veículo.",homeCarCount:"Veículos",homeExpenseTotal:"Despesas registadas",homeVehicles:"Os meus veículos",homeAdd:"＋ Adicionar veículo",homeNote:"Os lembretes inteligentes e o plano de manutenção serão adicionados nas próximas etapas.",historyTitle:"Histórico",historyIntro:"Todos os abastecimentos e despesas registados dos teus veículos.",historyEmpty:"Ainda não existem registos de combustível ou despesas.",historyFuel:"ABASTECIMENTO",historyExpense:"DESPESA",appProfile:"Perfil da aplicação",languageSetting:"Idioma da aplicação",languageHelp:"Utiliza o seletor de idioma no topo do ecrã. Ma-car suporta atualmente seis idiomas.",futureSettings:"Próximas definições",futureHelp:"Moeda, unidades, notificações e cópias de segurança serão adicionadas mais tarde."},
+  ru:{navHome:"Главная",navVehicles:"Автомобили",navHistory:"История",navProfile:"Профиль",homeTitle:"Твой автомобильный помощник",homeEmpty:"Ты ещё не добавил автомобиль.",homeCarCount:"Автомобили",homeExpenseTotal:"Записанные расходы",homeVehicles:"Мои автомобили",homeAdd:"＋ Добавить автомобиль",homeNote:"Умные напоминания и план обслуживания будут добавлены на следующих этапах.",historyTitle:"История",historyIntro:"Все записи о заправках и расходах твоих автомобилей.",historyEmpty:"Записей о топливе и расходах пока нет.",historyFuel:"ЗАПРАВКА",historyExpense:"РАСХОД",appProfile:"Профиль приложения",languageSetting:"Язык приложения",languageHelp:"Используй выбор языка в верхней части экрана. Сейчас Ma-car поддерживает шесть языков.",futureSettings:"Будущие настройки",futureHelp:"Валюта, единицы измерения, уведомления и резервное копирование будут добавлены позже."}
+};
+
 const languageNames = {bg:"🇧🇬 Български",en:"🇬🇧 English",es:"🇪🇸 Español",de:"🇩🇪 Deutsch",pt:"🇵🇹 Português",ru:"🇷🇺 Русский"};
 let language = localStorage.getItem("my-car-language") || (translations[navigator.language?.toLowerCase()] ? navigator.language.toLowerCase() : (translations[navigator.language?.slice(0,2)] ? navigator.language.slice(0,2) : "en"));
 let vehicles = loadVehicles();
 let editingVehicleId = null;
 let selectedVehicleId = null;
 const $ = (selector) => document.querySelector(selector);
-function t(key){return translations[language]?.[key] || translations.en[key] || key;}
+function t(key){return translations[language]?.[key] || uiText[language]?.[key] || translations.en[key] || uiText.en[key] || key;}
 function locale(){return ({bg:"bg-BG",en:"en-GB",es:"es-ES",de:"de-DE",pt:"pt-PT",ru:"ru-RU"})[language]||"en-GB";}
 function renderLanguageOptions(){const select=$("#languageSelect");select.innerHTML=Object.keys(translations).map(code=>'<option value="'+escapeHtml(code)+'">'+escapeHtml(languageNames[code]||code.toUpperCase())+'</option>').join("");select.value=language;}
 function renderFuelOptions(){const select=$("#fuelType"),current=select.value;const types=[["petrol","petrol"],["diesel","diesel"],["lpg","lpg"],["cng","cng"],["electricity","electricity"]];select.innerHTML=types.map(([value,key])=>`<option value="${value}">${t(key)}</option>`).join("");select.value=types.some(([value])=>value===current)?current:"petrol";}
@@ -67,8 +77,47 @@ function loadVehicles(){
 }
 function saveVehicles(){localStorage.setItem(DEMO_MODE?DEMO_STORAGE_KEY:STORAGE_KEY,JSON.stringify(vehicles));}
 function escapeHtml(value){return String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));}
-function showGarage(){selectedVehicleId=null;$("#carProfileSection").hidden=true;$("#garageSection").hidden=false;}
-function openProfile(id){const car=vehicles.find(item=>item.id===id);if(!car)return;selectedVehicleId=id;$("#garageSection").hidden=true;$("#carFormSection").hidden=true;$("#carProfileSection").hidden=false;renderProfile(car);window.scrollTo({top:0,behavior:"smooth"});}
+
+let currentView = "home";
+function showView(view){
+  currentView=view;
+  ["homeSection","garageSection","historySection","appProfileSection","carProfileSection","carFormSection"].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.hidden=true;
+  });
+  const target=document.getElementById(view==="vehicles"?"garageSection":view==="history"?"historySection":view==="profile"?"appProfileSection":"homeSection");
+  if(target)target.hidden=false;
+  document.querySelectorAll(".nav-button").forEach(button=>{
+    const active=button.dataset.view===view;button.classList.toggle("active",active);
+    if(active)button.setAttribute("aria-current","page");else button.removeAttribute("aria-current");
+  });
+  if(view==="home")renderHome();
+  if(view==="history")renderHistory();
+}
+function renderHome(){
+  const summary=$("#homeVehicleSummary"),stats=$("#homeStats");
+  if(!summary||!stats)return;
+  const car=vehicles[0];
+  summary.innerHTML=car
+    ? '<h3>'+escapeHtml(car.make)+' '+escapeHtml(car.model)+'</h3><p>'+(car.year?escapeHtml(car.year):t("unknownYear"))+' · '+escapeHtml(car.mileage||t("notSet"))+' km</p><span class="home-registration">'+escapeHtml((car.registration||"").toUpperCase())+'</span>'
+    : '<h3>'+t("homeTitle")+'</h3><p>'+t("homeEmpty")+'</p>';
+  const total=vehicles.reduce((sum,item)=>sum+(item.expenses||[]).reduce((part,entry)=>part+(Number(entry.amount)||0),0),0);
+  stats.innerHTML='<div class="home-stat"><small>'+t("homeCarCount")+'</small><strong>'+vehicles.length+' / 3</strong></div><div class="home-stat"><small>'+t("homeExpenseTotal")+'</small><strong>'+formatMoney(total)+'</strong></div>';
+  $("#homeVehiclesButton").textContent=t("homeVehicles");$("#homeAddCarButton").textContent=t("homeAdd");
+  $("#homeNote").textContent=t("homeNote");
+}
+function renderHistory(){
+  const target=$("#historyContent");if(!target)return;
+  const entries=[];
+  vehicles.forEach(car=>{
+    (car.fuelLog||[]).forEach(item=>entries.push({date:item.date||"",car:car.make+" "+car.model,kind:t("historyFuel"),description:(item.litres||0)+" L · "+(item.odometer||"—")+" km",amount:Number(item.total)||0}));
+    (car.expenses||[]).forEach(item=>entries.push({date:item.date||"",car:car.make+" "+car.model,kind:t("historyExpense"),description:item.description||t(item.category)||t("other"),amount:Number(item.amount)||0}));
+  });
+  entries.sort((a,b)=>b.date.localeCompare(a.date));
+  target.innerHTML=entries.length?entries.map(item=>'<article class="combined-history-entry"><div><span class="history-kind">'+item.kind+'</span><strong>'+escapeHtml(item.car)+'</strong><small>'+escapeHtml(item.date)+' · '+escapeHtml(item.description)+'</small></div><strong>'+formatMoney(item.amount)+'</strong></article>').join(""):'<div class="empty-state">'+t("historyEmpty")+'</div>';
+}
+
+function showGarage(){showView("vehicles");selectedVehicleId=null;$("#carProfileSection").hidden=true;$("#garageSection").hidden=false;}
+function openProfile(id){const car=vehicles.find(item=>item.id===id);if(!car)return;showView("vehicles");selectedVehicleId=id;$("#garageSection").hidden=true;$("#carFormSection").hidden=true;$("#carProfileSection").hidden=false;renderProfile(car);window.scrollTo({top:0,behavior:"smooth"});}
 function formatMoney(value){return new Intl.NumberFormat(locale(),{style:"currency",currency:"EUR"}).format(value);}
 function fuelStats(car){
  const log=[...(car.fuelLog||[])].sort((a,b)=>a.odometer-b.odometer);let previous=null,litres=0,stats={};
@@ -101,20 +150,34 @@ function render(){
   document.querySelectorAll("[data-i18n]").forEach(el=>{el.textContent=t(el.dataset.i18n);});
   renderLanguageOptions();renderFuelOptions();
   const demoNotice=$("#demoNotice");if(demoNotice)demoNotice.hidden=!DEMO_MODE;
+  $("#navHomeLabel")?.replaceChildren(document.createTextNode(t("navHome")));
   $("#carCount").textContent=vehicles.length+" / 3";
   $("#carList").innerHTML=vehicles.length?vehicles.map(car=>`<article class="car-card" data-open-profile="${escapeHtml(car.id)}" tabindex="0" role="button" aria-label="${t("profile")}: ${escapeHtml(car.make)} ${escapeHtml(car.model)}"><div class="car-card-top"><div class="car-symbol" aria-hidden="true">🚗</div><div class="car-actions"><button class="edit-button" type="button" data-edit="${escapeHtml(car.id)}" aria-label="${t("edit")}" title="${t("edit")}">✎</button><button class="delete-button" type="button" data-delete="${escapeHtml(car.id)}" aria-label="${t("remove")}" title="${t("remove")}">×</button></div></div><h3>${escapeHtml(car.make)} ${escapeHtml(car.model)}</h3><p class="car-meta">${car.year?escapeHtml(car.year):t("unknownYear")}</p><span class="car-registration">${escapeHtml((car.registration||"").toUpperCase())}</span><p class="card-hint">${t("tapProfile")}</p></article>`).join(""):`<div class="empty-state">${t("empty")}</div>`;
   $("#addCarButton").disabled=vehicles.length>=3;
   $("#limitNote").hidden=vehicles.length>=3;
+  document.querySelectorAll(".nav-button").forEach(button=>{const key={home:"navHome",vehicles:"navVehicles",history:"navHistory",profile:"navProfile"}[button.dataset.view];if(key)button.textContent=t(key);});
+  $("#homeSection").querySelector("h2").textContent=t("homeTitle");
+  $("#historySection").querySelector("h2").textContent=t("historyTitle");
+  $("#historySection").querySelector(".section-intro").textContent=t("historyIntro");
+  $("#appProfileSection").querySelector("h2").textContent=t("appProfile");
+  $("#appProfileSection .settings-card:nth-of-type(1) strong").textContent=t("languageSetting");
+  $("#appProfileSection .settings-card:nth-of-type(1) p").textContent=t("languageHelp");
+  $("#appProfileSection .settings-card:nth-of-type(2) strong").textContent=t("futureSettings");
+  $("#appProfileSection .settings-card:nth-of-type(2) p").textContent=t("futureHelp");
+  renderHome();renderHistory();
   if(!$("#carFormSection").hidden){$("#carFormTitle").textContent=t(editingVehicleId?"editCar":"newCar");$("#carFormSubmit").textContent=t(editingVehicleId?"updateCar":"saveCar");}
 }
-function openForm(){if(vehicles.length>=3){alert(t("limitReached"));return;}editingVehicleId=null;$("#carForm").reset();$("#carFormSection").hidden=false;$("#carProfileSection").hidden=true;render();$("#carForm").elements.make.focus();}
+function openForm(){showView("vehicles");if(vehicles.length>=3){alert(t("limitReached"));return;}editingVehicleId=null;$("#carForm").reset();$("#carFormSection").hidden=false;$("#carProfileSection").hidden=true;render();$("#carForm").elements.make.focus();}
 function editVehicle(id){
   const car=vehicles.find(item=>item.id===id);if(!car)return;
-  selectedVehicleId=id;editingVehicleId=id;
+  showView("vehicles");selectedVehicleId=id;editingVehicleId=id;
   ["make","model","registration","year","engine","fuel","power","transmission","vin","mileage","color"].forEach(key=>$("#carForm").elements[key].value=car[key]||"");
   $("#garageSection").hidden=false;$("#carProfileSection").hidden=true;$("#carFormSection").hidden=false;render();$("#carForm").elements.make.focus();
 }
 function closeForm(){editingVehicleId=null;$("#carFormSection").hidden=true;$("#carForm").reset();}
+document.querySelectorAll(".nav-button").forEach(button=>button.addEventListener("click",()=>showView(button.dataset.view)));
+$("#homeVehiclesButton").addEventListener("click",()=>showView("vehicles"));
+$("#homeAddCarButton").addEventListener("click",openForm);
 $("#languageSelect").addEventListener("change",event=>{language=event.target.value;localStorage.setItem("my-car-language",language);render();if(selectedVehicleId){const car=vehicles.find(item=>item.id===selectedVehicleId);if(car)renderProfile(car);}});
 $("#addCarButton").addEventListener("click",openForm);
 $("#closeForm").addEventListener("click",closeForm);
@@ -132,7 +195,7 @@ $("#fuelForm").addEventListener("submit",event=>{
  const max=Math.max(-1,...car.fuelLog.map(item=>Number(item.odometer)));
  if(odometer<max){alert(t("mileageError"));return;}
  car.fuelLog.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),date:$("#fuelDate").value,fuelType:$("#fuelType").value,litres,pricePerLitre:price,total:Number((litres*price).toFixed(2)),odometer,fullTank:$("#fuelFullTank").checked});
- saveVehicles();$("#fuelForm").reset();$("#fuelDate").value=new Date().toISOString().slice(0,10);$("#fuelTotal").value="";renderProfile(car);
+ saveVehicles();$("#fuelForm").reset();$("#fuelDate").value=new Date().toISOString().slice(0,10);$("#fuelTotal").value="";renderProfile(car);renderHistory();renderHome();
 });
 $("#expenseForm").addEventListener("submit",event=>{
  event.preventDefault();const car=vehicles.find(item=>item.id===selectedVehicleId);if(!car)return;
@@ -140,12 +203,12 @@ $("#expenseForm").addEventListener("submit",event=>{
  if(!(amount>0)||!Number.isFinite(amount)){alert(t("invalidData"));return;}
  car.expenses=Array.isArray(car.expenses)?car.expenses:[];
  car.expenses.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),date:$("#expenseDate").value,category:$("#expenseCategory").value,description:$("#expenseDescription").value.trim(),amount:Number(amount.toFixed(2)),odometer});
- saveVehicles();$("#expenseForm").reset();$("#expenseDate").value=new Date().toISOString().slice(0,10);renderProfile(car);
+ saveVehicles();$("#expenseForm").reset();$("#expenseDate").value=new Date().toISOString().slice(0,10);renderProfile(car);renderHistory();renderHome();
 });
 $("#expenseHistory").addEventListener("click",event=>{
  const button=event.target.closest("[data-delete-expense]");if(!button)return;
  const car=vehicles.find(item=>item.id===selectedVehicleId);if(!car||!confirm(t("confirmDeleteExpense")))return;
- car.expenses=(car.expenses||[]).filter(item=>item.id!==button.dataset.deleteExpense);saveVehicles();renderExpenses(car);
+ car.expenses=(car.expenses||[]).filter(item=>item.id!==button.dataset.deleteExpense);saveVehicles();renderExpenses(car);renderHistory();renderHome();
 });
 $("#carForm").addEventListener("submit",event=>{
   event.preventDefault();
@@ -160,7 +223,7 @@ $("#carForm").addEventListener("submit",event=>{
 });
 $("#carList").addEventListener("click",event=>{
   const editButton=event.target.closest("[data-edit]");if(editButton){event.stopPropagation();editVehicle(editButton.dataset.edit);return;}
-  const deleteButton=event.target.closest("[data-delete]");if(deleteButton){event.stopPropagation();if(!confirm(t("confirmDelete")))return;vehicles=vehicles.filter(car=>car.id!==deleteButton.dataset.delete);saveVehicles();render();return;}
+  const deleteButton=event.target.closest("[data-delete]");if(deleteButton){event.stopPropagation();if(!confirm(t("confirmDelete")))return;vehicles=vehicles.filter(car=>car.id!==deleteButton.dataset.delete);saveVehicles();render();renderHistory();renderHome();return;}
   const card=event.target.closest("[data-open-profile]");if(card)openProfile(card.dataset.openProfile);
 });
 $("#carList").addEventListener("keydown",event=>{if((event.key==="Enter"||event.key===" ")&&event.target.matches("[data-open-profile]")){event.preventDefault();openProfile(event.target.dataset.openProfile);}});
