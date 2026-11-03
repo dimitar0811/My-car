@@ -20,6 +20,17 @@ const uiText = {
   ru:{navHome:"Главная",navVehicles:"Автомобили",navHistory:"История",navProfile:"Профиль",homeTitle:"Твой автомобильный помощник",homeEmpty:"Ты ещё не добавил автомобиль.",homeCarCount:"Автомобили",homeExpenseTotal:"Записанные расходы",homeVehicles:"Мои автомобили",homeAdd:"＋ Добавить автомобиль",homeNote:"Умные напоминания и план обслуживания будут добавлены на следующих этапах.",historyTitle:"История",historyIntro:"Все записи о заправках и расходах твоих автомобилей.",historyEmpty:"Записей о топливе и расходах пока нет.",historyFuel:"ЗАПРАВКА",historyExpense:"РАСХОД",appProfile:"Профиль приложения",languageSetting:"Язык приложения",languageHelp:"Используй выбор языка в верхней части экрана. Сейчас Ma-car поддерживает шесть языков.",futureSettings:"Будущие настройки",futureHelp:"Валюта, единицы измерения, уведомления и резервное копирование будут добавлены позже."}
 };
 
+
+const serviceText = {
+  bg:{title:"Поддръжка и сервиз",intro:"Записвай извършеното обслужване и следващия срок според сервизната книжка или указанията на производителя.",date:"Дата",type:"Дейност",odometer:"Пробег при обслужване (км)",cost:"Цена (€)",description:"Описание / използвани части",nextService:"Следващо обслужване (по сервизната книжка)",nextDate:"Следваща дата",nextKm:"Следващ пробег (км)",save:"Запиши обслужването",history:"История на обслужването",empty:"Все още няма записано обслужване.",included:"Цената на обслужването се включва в общите разходи.",assistant:"Следваща поддръжка",noPlan:"Няма зададен следващ срок. Въведи го според сервизната книжка или указанията на производителя.",planned:"Планирано",due:"Срокът е достигнат според въведените данни",record:"Обслужване",delete:"Изтрий",confirmDelete:"Да изтрия ли този запис за обслужване?",oil:"Масло",filters:"Филтри",brakes:"Спирачна система",tyres:"Гуми",battery:"Акумулатор",belts:"Ремъци / верига",general:"Общо обслужване",other:"Друго"},
+  en:{title:"Maintenance & service",intro:"Record completed work and the next due point from the service book or manufacturer guidance.",date:"Date",type:"Service item",odometer:"Odometer at service (km)",cost:"Cost (€)",description:"Description / parts used",nextService:"Next service (from service book)",nextDate:"Next date",nextKm:"Next mileage (km)",save:"Save service record",history:"Service history",empty:"No service records yet.",included:"Service costs are included in total expenses.",assistant:"Next maintenance",noPlan:"No next due point set. Enter it from the service book or manufacturer guidance.",planned:"Planned",due:"Due based on the information entered",record:"Service",delete:"Delete",confirmDelete:"Delete this service record?",oil:"Oil",filters:"Filters",brakes:"Braking system",tyres:"Tyres",battery:"Battery",belts:"Belts / chain",general:"General service",other:"Other"},
+  es:{title:"Mantenimiento y servicio",intro:"Registra los trabajos realizados y el próximo vencimiento según el libro de mantenimiento o el fabricante.",date:"Fecha",type:"Trabajo",odometer:"Kilometraje del servicio (km)",cost:"Coste (€)",description:"Descripción / piezas utilizadas",nextService:"Próximo servicio (según el libro)",nextDate:"Próxima fecha",nextKm:"Próximo kilometraje (km)",save:"Guardar servicio",history:"Historial de mantenimiento",empty:"Todavía no hay servicios registrados.",included:"El coste del servicio se incluye en los gastos totales.",assistant:"Próximo mantenimiento",noPlan:"No hay un próximo vencimiento. Añádelo según el libro de mantenimiento o el fabricante.",planned:"Planificado",due:"Vencido según los datos introducidos",record:"Servicio",delete:"Eliminar",confirmDelete:"¿Eliminar este registro de servicio?",oil:"Aceite",filters:"Filtros",brakes:"Sistema de frenos",tyres:"Neumáticos",battery:"Batería",belts:"Correas / cadena",general:"Mantenimiento general",other:"Otro"},
+  de:{title:"Wartung & Service",intro:"Erfasse erledigte Arbeiten und den nächsten Termin laut Serviceheft oder Herstellerangaben.",date:"Datum",type:"Arbeit",odometer:"Kilometerstand beim Service (km)",cost:"Kosten (€)",description:"Beschreibung / verwendete Teile",nextService:"Nächster Service (laut Serviceheft)",nextDate:"Nächstes Datum",nextKm:"Nächster Kilometerstand (km)",save:"Service speichern",history:"Serviceverlauf",empty:"Noch keine Serviceeinträge vorhanden.",included:"Servicekosten werden in die Gesamtausgaben eingerechnet.",assistant:"Nächste Wartung",noPlan:"Kein nächster Termin festgelegt. Bitte laut Serviceheft oder Herstellerangaben eintragen.",planned:"Geplant",due:"Laut eingegebenen Daten fällig",record:"Service",delete:"Löschen",confirmDelete:"Diesen Serviceeintrag löschen?",oil:"Öl",filters:"Filter",brakes:"Bremsanlage",tyres:"Reifen",battery:"Batterie",belts:"Riemen / Kette",general:"Allgemeine Wartung",other:"Sonstiges"},
+  pt:{title:"Manutenção e serviço",intro:"Regista os trabalhos realizados e o próximo prazo indicado no livro de manutenção ou pelo fabricante.",date:"Data",type:"Trabalho",odometer:"Quilometragem na revisão (km)",cost:"Custo (€)",description:"Descrição / peças utilizadas",nextService:"Próxima revisão (segundo o livro)",nextDate:"Próxima data",nextKm:"Próxima quilometragem (km)",save:"Guardar revisão",history:"Histórico de manutenção",empty:"Ainda não existem revisões registadas.",included:"O custo da revisão é incluído nas despesas totais.",assistant:"Próxima manutenção",noPlan:"Não existe um próximo prazo definido. Introduz os dados do livro de manutenção ou do fabricante.",planned:"Planeado",due:"Prazo atingido segundo os dados introduzidos",record:"Revisão",delete:"Eliminar",confirmDelete:"Eliminar este registo de revisão?",oil:"Óleo",filters:"Filtros",brakes:"Sistema de travagem",tyres:"Pneus",battery:"Bateria",belts:"Correias / corrente",general:"Manutenção geral",other:"Outro"},
+  ru:{title:"Обслуживание и сервис",intro:"Записывай выполненные работы и следующий срок по сервисной книжке или рекомендациям производителя.",date:"Дата",type:"Работа",odometer:"Пробег при обслуживании (км)",cost:"Стоимость (€)",description:"Описание / использованные детали",nextService:"Следующее обслуживание (по сервисной книжке)",nextDate:"Следующая дата",nextKm:"Следующий пробег (км)",save:"Сохранить обслуживание",history:"История обслуживания",empty:"Записей об обслуживании пока нет.",included:"Стоимость обслуживания включается в общие расходы.",assistant:"Следующее обслуживание",noPlan:"Следующий срок не задан. Укажи его по сервисной книжке или рекомендациям производителя.",planned:"Запланировано",due:"Срок наступил согласно введённым данным",record:"Обслуживание",delete:"Удалить",confirmDelete:"Удалить эту запись об обслуживании?",oil:"Масло",filters:"Фильтры",brakes:"Тормозная система",tyres:"Шины",battery:"Аккумулятор",belts:"Ремни / цепь",general:"Общее обслуживание",other:"Другое"}
+};
+function st(key){return serviceText[language]?.[key]||serviceText.en[key]||key;}
+
 const languageNames = {bg:"🇧🇬 Български",en:"🇬🇧 English",es:"🇪🇸 Español",de:"🇩🇪 Deutsch",pt:"🇵🇹 Português",ru:"🇷🇺 Русский"};
 let language = localStorage.getItem("my-car-language") || (translations[navigator.language?.toLowerCase()] ? navigator.language.toLowerCase() : (translations[navigator.language?.slice(0,2)] ? navigator.language.slice(0,2) : "en"));
 let vehicles = loadVehicles();
@@ -103,7 +114,13 @@ function renderHome(){
   const total=vehicles.reduce((sum,item)=>sum+(item.expenses||[]).reduce((part,entry)=>part+(Number(entry.amount)||0),0),0);
   stats.innerHTML='<div class="home-stat"><small>'+t("homeCarCount")+'</small><strong>'+vehicles.length+' / 3</strong></div><div class="home-stat"><small>'+t("homeExpenseTotal")+'</small><strong>'+formatMoney(total)+'</strong></div>';
   $("#homeVehiclesButton").textContent=t("homeVehicles");$("#homeAddCarButton").textContent=t("homeAdd");
-  $("#homeNote").textContent=t("homeNote");
+  const planned=vehicles.flatMap(car=>(car.serviceLog||[]).filter(item=>item.nextDueDate||item.nextDueOdometer).map(item=>({car,item}))).sort((a,b)=>(a.item.nextDueDate||"9999-12-31").localeCompare(b.item.nextDueDate||"9999-12-31"))[0];
+  if(planned){
+    const dueDate=planned.item.nextDueDate?new Date(planned.item.nextDueDate+"T00:00:00").toLocaleDateString(locale()):"";
+    const dueKm=planned.item.nextDueOdometer?Number(planned.item.nextDueOdometer).toLocaleString(locale())+" km":"";
+    const due=(planned.item.nextDueDate&&planned.item.nextDueDate<=new Date().toISOString().slice(0,10))||(planned.item.nextDueOdometer&&Number(planned.car.mileage)>=Number(planned.item.nextDueOdometer));
+    $("#homeNote").textContent=st("assistant")+": "+planned.car.make+" "+planned.car.model+" — "+[dueDate,dueKm].filter(Boolean).join(" / ")+" · "+(due?st("due"):st("planned"));
+  }else{$("#homeNote").textContent=st("noPlan");}
 }
 function renderHistory(){
   const target=$("#historyContent");if(!target)return;
@@ -111,6 +128,7 @@ function renderHistory(){
   vehicles.forEach(car=>{
     (car.fuelLog||[]).forEach(item=>entries.push({date:item.date||"",car:car.make+" "+car.model,kind:t("historyFuel"),description:(item.litres||0)+" L · "+(item.odometer||"—")+" km",amount:Number(item.total)||0}));
     (car.expenses||[]).forEach(item=>entries.push({date:item.date||"",car:car.make+" "+car.model,kind:t("historyExpense"),description:item.description||t(item.category)||t("other"),amount:Number(item.amount)||0}));
+    (car.serviceLog||[]).forEach(item=>entries.push({date:item.date||"",car:car.make+" "+car.model,kind:st("record"),description:(st(item.type)||st("other"))+" · "+(item.description||"")+" · "+(item.odometer||"—")+" km",amount:Number(item.cost)||0}));
   });
   entries.sort((a,b)=>b.date.localeCompare(a.date));
   target.innerHTML=entries.length?entries.map(item=>'<article class="combined-history-entry"><div><span class="history-kind">'+item.kind+'</span><strong>'+escapeHtml(item.car)+'</strong><small>'+escapeHtml(item.date)+' · '+escapeHtml(item.description)+'</small></div><strong>'+formatMoney(item.amount)+'</strong></article>').join(""):'<div class="empty-state">'+t("historyEmpty")+'</div>';
@@ -132,11 +150,38 @@ function renderFuel(car){
 }
 function renderExpenses(car){
  const entries=[...(car.expenses||[])].sort((a,b)=>b.date.localeCompare(a.date));
- const total=entries.reduce((sum,item)=>sum+(Number(item.amount)||0),0);
+ const total=entries.reduce((sum,item)=>sum+(Number(item.amount)||0),0)+(car.serviceLog||[]).reduce((sum,item)=>sum+(Number(item.cost)||0),0);
  $("#expenseTotal").textContent=formatMoney(total);
  const categoryKeys=["repair","maintenance","parts","tyres","insurance","taxes","other"];
  $("#expenseHistory").innerHTML=entries.length?entries.map(item=>'<article class="expense-entry"><div><strong>'+escapeHtml(item.date)+' · '+escapeHtml(t(categoryKeys.includes(item.category)?item.category:"other"))+'</strong><small>'+escapeHtml(item.description||t("notSet"))+(item.odometer!==""&&item.odometer!=null?' · '+escapeHtml(item.odometer)+' km':"")+'</small></div><div class="expense-entry-values"><strong>'+formatMoney(Number(item.amount)||0)+'</strong><button class="expense-delete" type="button" data-delete-expense="'+escapeHtml(item.id)+'">'+t("deleteExpense")+'</button></div></article>').join(""):'<p class="empty-fuel">'+t("emptyExpenses")+'</p>';
 }
+
+function renderServiceTypes(){
+ const select=$("#serviceType"),current=select.value;
+ const types=["oil","filters","brakes","tyres","battery","belts","general","other"];
+ select.innerHTML=types.map(type=>'<option value="'+type+'">'+escapeHtml(st(type))+'</option>').join("");
+ if(types.includes(current))select.value=current;
+}
+function renderService(car){
+ const records=[...(car.serviceLog||[])].sort((a,b)=>b.date.localeCompare(a.date));
+ const plan=records.find(item=>item.nextDueDate||item.nextDueOdometer);
+ const summary=$("#servicePlanSummary");
+ if(plan){
+  const date=plan.nextDueDate?new Date(plan.nextDueDate+"T00:00:00").toLocaleDateString(locale()):"";
+  const km=plan.nextDueOdometer?Number(plan.nextDueOdometer).toLocaleString(locale())+" km":"";
+  const due=(plan.nextDueDate&&plan.nextDueDate<=new Date().toISOString().slice(0,10))||(plan.nextDueOdometer&&Number(car.mileage)>=Number(plan.nextDueOdometer));
+  summary.innerHTML='<strong>'+st("assistant")+'</strong><p>'+escapeHtml([date,km].filter(Boolean).join(" · "))+'</p><small>'+st(due?"due":"planned")+'</small>';
+ }else{summary.innerHTML='<strong>'+st("assistant")+'</strong><p>'+st("noPlan")+'</p>';}
+ $("#serviceHistory").innerHTML=records.length?records.map(item=>'<article class="service-entry"><div><strong>'+escapeHtml(item.date)+' · '+escapeHtml(st(item.type)||st("other"))+'</strong><small>'+escapeHtml(item.description||"")+' · '+escapeHtml(item.odometer)+' km</small>'+(item.nextDueDate||item.nextDueOdometer?'<small>'+st("nextService")+': '+escapeHtml([item.nextDueDate,item.nextDueOdometer?Number(item.nextDueOdometer).toLocaleString(locale())+" km":""].filter(Boolean).join(" · "))+'</small>':"")+'</div><div class="service-entry-values"><strong>'+formatMoney(Number(item.cost)||0)+'</strong><button class="service-delete" type="button" data-delete-service="'+escapeHtml(item.id)+'">'+st("delete")+'</button></div></article>').join(""):'<p class="empty-fuel">'+st("empty")+'</p>';
+}
+function renderServiceLanguage(){
+ $("#serviceSectionTitle").textContent=st("title");
+ $("#serviceIntro").textContent=st("intro");
+ $("#serviceHistoryTitle").textContent=st("history");
+ document.querySelectorAll("[data-service-text]").forEach(el=>{el.textContent=st(el.dataset.serviceText);});
+ renderServiceTypes();
+}
+
 function renderProfile(car){
   $("#profileTitle").textContent=(car.make+" "+car.model).trim();
   $("#profileRegistration").textContent=car.registration||"";
@@ -144,11 +189,12 @@ function renderProfile(car){
   $("#profileDetails").innerHTML=fields.map(([key,value])=>`<div class="detail-item"><span>${t(key)}</span><strong>${escapeHtml(value||t("notSet"))}</strong></div>`).join("");
   renderFuel(car);
   renderExpenses(car);
+  renderService(car);
 }
 function render(){
   document.documentElement.lang=language;
   document.querySelectorAll("[data-i18n]").forEach(el=>{el.textContent=t(el.dataset.i18n);});
-  renderLanguageOptions();renderFuelOptions();
+  renderLanguageOptions();renderFuelOptions();renderServiceLanguage();
   const demoNotice=$("#demoNotice");if(demoNotice)demoNotice.hidden=!DEMO_MODE;
   $("#carCount").textContent=vehicles.length+" / 3";
   $("#carList").innerHTML=vehicles.length?vehicles.map(car=>`<article class="car-card" data-open-profile="${escapeHtml(car.id)}" tabindex="0" role="button" aria-label="${t("profile")}: ${escapeHtml(car.make)} ${escapeHtml(car.model)}"><div class="car-card-top"><div class="car-symbol" aria-hidden="true">🚗</div><div class="car-actions"><button class="edit-button" type="button" data-edit="${escapeHtml(car.id)}" aria-label="${t("edit")}" title="${t("edit")}">✎</button><button class="delete-button" type="button" data-delete="${escapeHtml(car.id)}" aria-label="${t("remove")}" title="${t("remove")}">×</button></div></div><h3>${escapeHtml(car.make)} ${escapeHtml(car.model)}</h3><p class="car-meta">${car.year?escapeHtml(car.year):t("unknownYear")}</p><span class="car-registration">${escapeHtml((car.registration||"").toUpperCase())}</span><p class="card-hint">${t("tapProfile")}</p></article>`).join(""):`<div class="empty-state">${t("empty")}</div>`;
@@ -196,6 +242,22 @@ $("#fuelForm").addEventListener("submit",event=>{
  car.fuelLog.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),date:$("#fuelDate").value,fuelType:$("#fuelType").value,litres,pricePerLitre:price,total:Number((litres*price).toFixed(2)),odometer,fullTank:$("#fuelFullTank").checked});
  saveVehicles();$("#fuelForm").reset();$("#fuelDate").value=new Date().toISOString().slice(0,10);$("#fuelTotal").value="";renderProfile(car);renderHistory();renderHome();
 });
+
+$("#serviceDate").value=new Date().toISOString().slice(0,10);
+$("#serviceForm").addEventListener("submit",event=>{
+ event.preventDefault();const car=vehicles.find(item=>item.id===selectedVehicleId);if(!car)return;
+ const date=$("#serviceDate").value,odometer=Number($("#serviceOdometer").value),cost=$("#serviceCost").value===""?0:Number($("#serviceCost").value),nextDueOdometer=$("#serviceNextOdometer").value===""?"":Number($("#serviceNextOdometer").value),nextDueDate=$("#serviceNextDate").value;
+ if(!date||!Number.isFinite(odometer)||odometer<0||!Number.isFinite(cost)||cost<0||(nextDueOdometer!==""&&(!Number.isFinite(nextDueOdometer)||nextDueOdometer<=odometer))||(nextDueDate&&nextDueDate<date)){alert(t("invalidData"));return;}
+ car.serviceLog=Array.isArray(car.serviceLog)?car.serviceLog:[];
+ car.serviceLog.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),date,type:$("#serviceType").value,odometer,description:$("#serviceDescription").value.trim(),cost:Number(cost.toFixed(2)),nextDueDate,nextDueOdometer});
+ saveVehicles();$("#serviceForm").reset();$("#serviceDate").value=new Date().toISOString().slice(0,10);renderProfile(car);renderHistory();renderHome();
+});
+$("#serviceHistory").addEventListener("click",event=>{
+ const button=event.target.closest("[data-delete-service]");if(!button)return;
+ const car=vehicles.find(item=>item.id===selectedVehicleId);if(!car||!confirm(st("confirmDelete")))return;
+ car.serviceLog=(car.serviceLog||[]).filter(item=>item.id!==button.dataset.deleteService);saveVehicles();renderService(car);renderHistory();renderHome();renderExpenses(car);
+});
+
 $("#expenseForm").addEventListener("submit",event=>{
  event.preventDefault();const car=vehicles.find(item=>item.id===selectedVehicleId);if(!car)return;
  const amount=Number($("#expenseAmount").value),odometer=$("#expenseOdometer").value;
