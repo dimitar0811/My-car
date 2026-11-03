@@ -49,3 +49,15 @@
 .service-entry-values strong{display:block}
 .service-delete{border:0;background:transparent;color:#8a4c4c;font-size:12px;text-decoration:underline;cursor:pointer;padding:5px 0}
 @media(max-width:560px){.service-entry{font-size:13px}}
+
+
+.assistant-panel{margin-top:16px;padding:18px;background:#fff;border:1px solid #dce8df;border-radius:16px;box-shadow:0 5px 18px #183b2b08}
+.assistant-panel-heading h3{margin:0;font-size:18px;color:#204a34}
+.assistant-intro,.assistant-empty{color:#718078;font-size:13px;line-height:1.55;margin:8px 0 12px}
+.assistant-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-top:1px solid #e8eee9}
+.assistant-item-main{min-width:0}
+.assistant-item-main strong{display:block;font-size:14px;color:#294c39}
+.assistant-item-main p{margin:5px 0;color:#344c3d;font-size:13px}
+.assistant-item-main small{display:block;margin-top:4px;color:#718078;font-size:11px;line-height:1.4}
+.assistant-open{flex:0 0 auto;padding:9px 11px;font-size:12px}
+@media(max-width:560px){.assistant-item{align-items:flex-start;flex-direction:column}.assistant-open{width:100%}}
