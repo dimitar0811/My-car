@@ -111,7 +111,7 @@ function renderHome(){
   summary.innerHTML=car
     ? '<h3>'+escapeHtml(car.make)+' '+escapeHtml(car.model)+'</h3><p>'+(car.year?escapeHtml(car.year):t("unknownYear"))+' · '+escapeHtml(car.mileage||t("notSet"))+' km</p><span class="home-registration">'+escapeHtml((car.registration||"").toUpperCase())+'</span>'
     : '<h3>'+t("homeTitle")+'</h3><p>'+t("homeEmpty")+'</p>';
-  const total=vehicles.reduce((sum,item)=>sum+(item.expenses||[]).reduce((part,entry)=>part+(Number(entry.amount)||0),0),0);
+  const total=vehicles.reduce((sum,item)=>sum+(item.expenses||[]).reduce((part,entry)=>part+(Number(entry.amount)||0),0)+(item.serviceLog||[]).reduce((part,entry)=>part+(Number(entry.cost)||0),0),0);
   stats.innerHTML='<div class="home-stat"><small>'+t("homeCarCount")+'</small><strong>'+vehicles.length+' / 3</strong></div><div class="home-stat"><small>'+t("homeExpenseTotal")+'</small><strong>'+formatMoney(total)+'</strong></div>';
   $("#homeVehiclesButton").textContent=t("homeVehicles");$("#homeAddCarButton").textContent=t("homeAdd");
   const planned=vehicles.flatMap(car=>(car.serviceLog||[]).filter(item=>item.nextDueDate||item.nextDueOdometer).map(item=>({car,item}))).sort((a,b)=>(a.item.nextDueDate||"9999-12-31").localeCompare(b.item.nextDueDate||"9999-12-31"))[0];
