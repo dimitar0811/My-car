@@ -160,10 +160,10 @@ function render(){
   $("#historySection").querySelector("h2").textContent=t("historyTitle");
   $("#historySection").querySelector(".section-intro").textContent=t("historyIntro");
   $("#appProfileSection").querySelector("h2").textContent=t("appProfile");
-  $("#appProfileSection .settings-card:nth-of-type(1) strong").textContent=t("languageSetting");
-  $("#appProfileSection .settings-card:nth-of-type(1) p").textContent=t("languageHelp");
-  $("#appProfileSection .settings-card:nth-of-type(2) strong").textContent=t("futureSettings");
-  $("#appProfileSection .settings-card:nth-of-type(2) p").textContent=t("futureHelp");
+  $("#appProfileSection").querySelectorAll(".settings-card")[0].querySelector("strong").textContent=t("languageSetting");
+  $("#appProfileSection").querySelectorAll(".settings-card")[0].querySelector("p").textContent=t("languageHelp");
+  $("#appProfileSection").querySelectorAll(".settings-card")[1].querySelector("strong").textContent=t("futureSettings");
+  $("#appProfileSection").querySelectorAll(".settings-card")[1].querySelector("p").textContent=t("futureHelp");
   renderHome();renderHistory();
   if(!$("#carFormSection").hidden){$("#carFormTitle").textContent=t(editingVehicleId?"editCar":"newCar");$("#carFormSubmit").textContent=t(editingVehicleId?"updateCar":"saveCar");}
 }
