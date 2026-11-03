@@ -9,16 +9,43 @@
   <link rel="apple-touch-icon" href="icons/my-car-icon.svg">
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="styles.css">
-  <title>My Car</title>
+  <title>Ma-car</title>
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="#" aria-label="My Car home"><span class="brand-mark">M</span><span>My Car</span></a>
+    <a class="brand" href="#" aria-label="Ma-car home"><span class="brand-mark">M</span><span>Ma-car</span></a>
     <label class="language-picker"><span class="sr-only">Language</span><select id="languageSelect" class="language-button" aria-label="Language"></select></label>
   </header>
   <main class="container">
     <section class="hero"><div><p class="eyebrow" data-i18n="eyebrow">ТВОЯТ АВТОМОБИЛЕН ПОМОЩНИК</p><h1 data-i18n="heading">Всичко за автомобила. На едно място.</h1><p class="subtitle" data-i18n="subtitle">Следи автомобилите си, разходите и предстоящото обслужване лесно.</p></div><div class="hero-icon" aria-hidden="true">🚘</div></section>
-    <section id="garageSection">
+
+    <nav class="main-nav" aria-label="Основна навигация">
+      <button type="button" class="nav-button active" data-view="home" aria-current="page">Начало</button>
+      <button type="button" class="nav-button" data-view="vehicles">Автомобили</button>
+      <button type="button" class="nav-button" data-view="history">История</button>
+      <button type="button" class="nav-button" data-view="profile">Профил</button>
+    </nav>
+    <section id="homeSection" class="dashboard-section">
+      <div class="section-heading"><div><p class="eyebrow">MA-CAR ASSISTANT</p><h2>Твоят автомобилен помощник</h2></div></div>
+      <div id="homeVehicleSummary" class="home-vehicle-card"></div>
+      <div id="homeStats" class="home-stats"></div>
+      <div class="home-actions">
+        <button id="homeVehiclesButton" class="primary-button" type="button">Моите автомобили</button>
+        <button id="homeAddCarButton" class="secondary-button" type="button">＋ Добави автомобил</button>
+      </div>
+      <p class="home-note">Интелигентните напомняния и планът за поддръжка ще се добавят в следващите етапи.</p>
+    </section>
+    <section id="historySection" class="dashboard-section" hidden>
+      <div class="section-heading"><div><p class="eyebrow">ЗАПИСИ</p><h2>История</h2></div></div>
+      <p class="section-intro">Всички записани зареждания и разходи за твоите автомобили.</p>
+      <div id="historyContent" class="combined-history"></div>
+    </section>
+    <section id="appProfileSection" class="dashboard-section" hidden>
+      <div class="section-heading"><div><p class="eyebrow">НАСТРОЙКИ</p><h2>Профил на приложението</h2></div></div>
+      <div class="settings-card"><strong>Език на приложението</strong><p>Използвай избора за език в горната част на екрана. Ma-car поддържа шест езика.</p></div>
+      <div class="settings-card"><strong>Предстоящи настройки</strong><p>В следващите етапи ще добавим валута, мерни единици, известия и архивиране.</p></div>
+    </section>
+    <section id="garageSection" hidden>
       <aside id="demoNotice" class="demo-notice" hidden><strong>ТЕСТОВИ ДАННИ — ДЕМО РЕЖИМ</strong><span>Три примерни автомобила с история на горивото и разходите. Тези записи са отделни от личните ти данни.</span><a href="./">Изход от тестовия режим</a></aside>
     <section class="section-heading"><div><p class="eyebrow" data-i18n="garage">ГАРАЖ</p><h2 data-i18n="yourCars">Твоите автомобили</h2></div><span id="carCount" class="count">0 / 3</span></section>
       <section id="carList" class="car-list" aria-live="polite"></section>
