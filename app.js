@@ -33,10 +33,18 @@ function t(key){return translations[language]?.[key] || translations.en[key] || 
 function locale(){return ({bg:"bg-BG",en:"en-GB",es:"es-ES",de:"de-DE",pt:"pt-PT",ru:"ru-RU"})[language]||"en-GB";}
 function renderLanguageOptions(){const select=$("#languageSelect");select.innerHTML=Object.keys(translations).map(code=>'<option value="'+escapeHtml(code)+'">'+escapeHtml(languageNames[code]||code.toUpperCase())+'</option>').join("");select.value=language;}
 function renderFuelOptions(){const select=$("#fuelType"),current=select.value;const types=[["petrol","petrol"],["diesel","diesel"],["lpg","lpg"],["cng","cng"],["electricity","electricity"]];select.innerHTML=types.map(([value,key])=>`<option value="${value}">${t(key)}</option>`).join("");select.value=types.some(([value])=>value===current)?current:"petrol";}
+function demoDateOffset(days){const date=new Date();date.setHours(12,0,0,0);date.setDate(date.getDate()+days);return date.toISOString().slice(0,10);}
+function createDemoDocuments(offset=0){return [
+{type:"liability",expiryDate:demoDateOffset(12+offset),provider:"Примерен застраховател",number:"DEMO-ГО-001"},
+{type:"casco",expiryDate:demoDateOffset(75+offset),provider:"Примерен застраховател",number:"DEMO-КАСКО-001"},
+{type:"vehicleTax",expiryDate:demoDateOffset(24+offset),provider:"Община — пример",number:"DEMO-ДАНЪК"},
+{type:"vignette",expiryDate:demoDateOffset(5+offset),provider:"Национално тол управление",number:"DEMO-ВИНЕТКА"},
+{type:"inspection",expiryDate:demoDateOffset(42+offset),provider:"Примерен пункт",number:"DEMO-ГТП"}
+];}
 function createDemoVehicles(){
  // Clearly fictional sample data for preview only. Never used in the normal garage.
  return [
-  {id:"demo-toyota",make:"Toyota",model:"Corolla 1.6 VVT-i",registration:"DEMO-001",year:"2018",engine:"1.6 бензин, 4 цилиндъра",fuel:"Бензин",power:"97 kW / 132 hp",transmission:"Ръчна, 6 степени",vin:"DEMO0000000000001",mileage:"125500",color:"Сребрист металик",
+  {id:"demo-toyota",make:"Toyota",model:"Corolla 1.6 VVT-i",registration:"DEMO-001",year:"2018",engine:"1.6 бензин, 4 цилиндъра",fuel:"Бензин",power:"97 kW / 132 hp",transmission:"Ръчна, 6 степени",vin:"DEMO0000000000001",mileage:"125500",color:"Сребрист металик",documents:createDemoDocuments(0),
    fuelLog:[
     {id:"toy-f1",date:"2026-09-02",fuelType:"petrol",litres:42,pricePerLitre:1.31,total:55.02,odometer:123600,fullTank:true},
     {id:"toy-f2",date:"2026-09-10",fuelType:"petrol",litres:21,pricePerLitre:1.32,total:27.72,odometer:123880,fullTank:false},
@@ -53,7 +61,7 @@ function createDemoVehicles(){
     {id:"toy-e5",date:"2026-10-15",category:"insurance",description:"Примерна вноска Гражданска отговорност",amount:78,odometer:"125000"},
     {id:"toy-e6",date:"2026-10-28",category:"other",description:"Автомивка и почистване на салона",amount:22,odometer:"125420"}
    ]},
-  {id:"demo-vw",make:"Volkswagen",model:"Passat 2.0 TDI DSG",registration:"DEMO-002",year:"2020",engine:"2.0 TDI дизел, common-rail",fuel:"Дизел",power:"110 kW / 150 hp",transmission:"Автоматична DSG, 7 степени",vin:"DEMO0000000000002",mileage:"98500",color:"Тъмносин металик",
+  {id:"demo-vw",make:"Volkswagen",model:"Passat 2.0 TDI DSG",registration:"DEMO-002",year:"2020",engine:"2.0 TDI дизел, common-rail",fuel:"Дизел",power:"110 kW / 150 hp",transmission:"Автоматична DSG, 7 степени",vin:"DEMO0000000000002",mileage:"98500",color:"Тъмносин металик",documents:createDemoDocuments(4),
    fuelLog:[
     {id:"vw-f1",date:"2026-09-01",fuelType:"diesel",litres:52,pricePerLitre:1.37,total:71.24,odometer:96300,fullTank:true},
     {id:"vw-f2",date:"2026-09-09",fuelType:"diesel",litres:22,pricePerLitre:1.38,total:30.36,odometer:96620,fullTank:false},
@@ -70,7 +78,7 @@ function createDemoVehicles(){
     {id:"vw-e5",date:"2026-10-18",category:"parts",description:"Смяна на чистачки и течност за стъкла",amount:46,odometer:"98020"},
     {id:"vw-e6",date:"2026-10-26",category:"insurance",description:"Примерна вноска Каско",amount:145,odometer:"98380"}
    ]},
-  {id:"demo-dacia",make:"Dacia",model:"Duster 1.6 SCe LPG",registration:"DEMO-003",year:"2019",engine:"1.6 SCe бензин / LPG",fuel:"LPG",power:"84 kW / 114 hp",transmission:"Ръчна, 5 степени",vin:"DEMO0000000000003",mileage:"76400",color:"Бял",
+  {id:"demo-dacia",make:"Dacia",model:"Duster 1.6 SCe LPG",registration:"DEMO-003",year:"2019",engine:"1.6 SCe бензин / LPG",fuel:"LPG",power:"84 kW / 114 hp",transmission:"Ръчна, 5 степени",vin:"DEMO0000000000003",mileage:"76400",color:"Бял",documents:createDemoDocuments(8),
    fuelLog:[
     {id:"dac-f1",date:"2026-09-03",fuelType:"lpg",litres:39,pricePerLitre:0.67,total:26.13,odometer:74800,fullTank:true},
     {id:"dac-f2",date:"2026-09-11",fuelType:"lpg",litres:19,pricePerLitre:0.68,total:12.92,odometer:75100,fullTank:false},
@@ -118,6 +126,27 @@ function renderExpenses(car){
  const categoryKeys=["repair","maintenance","parts","tyres","insurance","taxes","other"];
  $("#expenseHistory").innerHTML=entries.length?entries.map(item=>'<article class="expense-entry"><div><strong>'+escapeHtml(item.date)+' · '+escapeHtml(t(categoryKeys.includes(item.category)?item.category:"other"))+'</strong><small>'+escapeHtml(item.description||t("notSet"))+(item.odometer!==""&&item.odometer!=null?' · '+escapeHtml(item.odometer)+' km':"")+'</small></div><div class="expense-entry-values"><strong>'+formatMoney(Number(item.amount)||0)+'</strong><button class="expense-delete" type="button" data-delete-expense="'+escapeHtml(item.id)+'">'+t("deleteExpense")+'</button></div></article>').join(""):'<p class="empty-fuel">'+t("emptyExpenses")+'</p>';
 }
+const DOCUMENT_TYPES=["liability","casco","vehicleTax","vignette","inspection"];
+function daysUntil(dateValue){if(!dateValue)return null;const target=new Date(dateValue+"T00:00:00");if(Number.isNaN(target.getTime()))return null;const today=new Date();today.setHours(0,0,0,0);return Math.ceil((target-today)/86400000);}
+function documentStatus(days){if(days===null)return "missing";if(days<0)return "expired";if(days<=30)return "dueSoon";return "valid";}
+function renderDocuments(car){
+ car.documents=Array.isArray(car.documents)?car.documents:[];
+ const all=DOCUMENT_TYPES.map(type=>car.documents.find(item=>item.type===type)||{type,expiryDate:""});
+ $("#documentList").innerHTML=all.map(item=>{
+  const days=daysUntil(item.expiryDate),status=documentStatus(days);
+  const statusText=status==="expired"?"ИЗТЕКЪЛ СРОК":status==="dueSoon"?"ИЗТИЧА ДО 30 ДНИ":status==="valid"?"ВАЛИДЕН":"НЯМА ВЪВЕДЕН СРОК";
+  const detail=days===null?"Добави дата":days<0?"Изтекъл преди "+Math.abs(days)+" дни":"Остават "+days+" дни";
+  return '<article class="document-entry '+status+'"><div class="document-entry-main"><strong>'+escapeHtml(t(item.type))+(item.type==="liability"?"": "")+'</strong><span class="document-status">'+statusText+'</span><small>'+escapeHtml(item.expiryDate||"—")+(item.provider?" · "+escapeHtml(item.provider):"")+(item.number?" · "+escapeHtml(item.number):"")+'</small><small>'+detail+'</small></div><div class="document-entry-actions"><button type="button" class="document-edit" data-edit-document="'+item.type+'">Промени</button>'+(item.expiryDate?'<button type="button" class="document-delete" data-delete-document="'+item.type+'">Изтрий</button>':"")+'</div></article>';
+ }).join("");
+ const alerts=all.map(item=>({item,days:daysUntil(item.expiryDate)})).filter(x=>x.days!==null&&x.days<=30).sort((a,b)=>a.days-b.days);
+ $("#documentAlerts").innerHTML=alerts.map(({item,days})=>'<p class="document-alert '+(days<0?"is-expired":"is-due")+'"><strong>'+escapeHtml(t(item.type))+'</strong> — '+(days<0?"Изтекъл преди "+Math.abs(days)+" дни":"Остават "+days+" дни")+'</p>').join("");
+}
+function renderReminderSummary(){
+ const due=[];for(const car of vehicles){for(const item of (Array.isArray(car.documents)?car.documents:[])){const days=daysUntil(item.expiryDate);if(days!==null&&days<=30)due.push({car,item,days});}}
+ const box=$("#reminderSummary");if(!box)return;if(!due.length){box.hidden=true;box.innerHTML="";return;}
+ due.sort((a,b)=>a.days-b.days);box.hidden=false;
+ box.innerHTML='<strong>Има '+due.length+' срока за проверка</strong>'+due.map(({car,item,days})=>'<p><span>'+escapeHtml(car.make+" "+car.model)+'</span> · '+escapeHtml(t(item.type))+' — '+(days<0?"Изтекъл преди "+Math.abs(days)+" дни":"Остават "+days+" дни")+'</p>').join("");
+}
 function renderProfile(car){
   $("#profileTitle").textContent=(car.make+" "+car.model).trim();
   $("#profileRegistration").textContent=car.registration||"";
@@ -126,6 +155,7 @@ function renderProfile(car){
   $("#profileDetails").innerHTML=fields.map(([key,value])=>`<div class="detail-item"><span>${t(key)}</span><strong>${escapeHtml(value||t("notSet"))}</strong></div>`).join("");
   renderFuel(car);
   renderExpenses(car);
+  renderDocuments(car);
 }
 function renderDashboard(){
   const fuelCount=vehicles.reduce((sum,car)=>sum+(Array.isArray(car.fuelLog)?car.fuelLog.length:0),0);
@@ -134,6 +164,7 @@ function renderDashboard(){
   $("#overviewFuelCount").textContent=fuelCount;
   $("#overviewExpenseTotal").textContent=formatMoney(expenseTotal);
   $("#assistantMessage").textContent=t(vehicles.length?"assistantReady":"assistantEmpty");
+  renderReminderSummary();
   $("#dashboardAddCar").hidden=vehicles.length>=3;
 }
 function render(){
@@ -187,6 +218,21 @@ $("#expenseHistory").addEventListener("click",event=>{
  const button=event.target.closest("[data-delete-expense]");if(!button)return;
  const car=vehicles.find(item=>item.id===selectedVehicleId);if(!car||!confirm(t("confirmDeleteExpense")))return;
  car.expenses=(car.expenses||[]).filter(item=>item.id!==button.dataset.deleteExpense);saveVehicles();renderExpenses(car);
+});
+$("#documentForm").addEventListener("submit",event=>{
+ event.preventDefault();const car=vehicles.find(item=>item.id===selectedVehicleId);if(!car)return;
+ const type=$("#documentType").value,expiryDate=$("#documentExpiry").value;
+ if(!DOCUMENT_TYPES.includes(type)||!expiryDate){alert(t("invalidData"));return;}
+ car.documents=Array.isArray(car.documents)?car.documents:[];
+ const record={type,expiryDate,provider:$("#documentProvider").value.trim(),number:$("#documentNumber").value.trim(),amount:$("#documentAmount").value?Number($("#documentAmount").value):null};
+ const index=car.documents.findIndex(item=>item.type===type);if(index>=0)car.documents[index]=record;else car.documents.push(record);
+ saveVehicles();$("#documentForm").reset();renderDocuments(car);renderReminderSummary();
+});
+$("#documentList").addEventListener("click",event=>{
+ const edit=event.target.closest("[data-edit-document]"),del=event.target.closest("[data-delete-document]");
+ const car=vehicles.find(item=>item.id===selectedVehicleId);if(!car)return;
+ if(edit){const type=edit.dataset.editDocument,item=(car.documents||[]).find(entry=>entry.type===type);$("#documentType").value=type;$("#documentExpiry").value=item?.expiryDate||"";$("#documentProvider").value=item?.provider||"";$("#documentNumber").value=item?.number||"";$("#documentAmount").value=item?.amount??"";$("#documentExpiry").focus();return;}
+ if(del){const type=del.dataset.deleteDocument;if(!confirm("Да изтрия ли този запис?"))return;car.documents=(car.documents||[]).filter(item=>item.type!==type);saveVehicles();renderDocuments(car);renderReminderSummary();}
 });
 $("#carForm").addEventListener("submit",event=>{
   event.preventDefault();
