@@ -18,6 +18,19 @@
   </header>
   <main class="container">
     <section class="hero"><div><p class="eyebrow" data-i18n="eyebrow">ТВОЯТ АВТОМОБИЛЕН ПОМОЩНИК</p><h1 data-i18n="heading">Всичко за автомобила. На едно място.</h1><p class="subtitle" data-i18n="subtitle">Следи автомобилите си, разходите и предстоящото обслужване лесно.</p></div><div class="hero-icon" aria-hidden="true">🚘</div></section>
+    <section class="overview" aria-label="My Car overview">
+      <article class="assistant-card">
+        <div class="assistant-topline"><span class="assistant-orb" aria-hidden="true">✦</span><span data-i18n="assistantLabel">MY CAR ASSISTANT</span><span class="assistant-status" data-i18n="assistantStatus">ЛИЧЕН АВТОМОБИЛЕН АСИСТЕНТ</span></div>
+        <h2 data-i18n="assistantTitle">Автомобилът ти. Под твой контрол.</h2>
+        <p id="assistantMessage" data-i18n="assistantEmpty">Добави първия си автомобил, за да започнем да подреждаме неговата информация и история.</p>
+        <div class="assistant-actions"><button id="dashboardAddCar" class="assistant-primary" type="button" data-i18n="addFirstCar">Добави автомобил</button><a href="#garageSection" data-i18n="viewGarage">Отвори гаража</a></div>
+      </article>
+      <div class="overview-stats">
+        <article class="stat-card"><span class="stat-icon" aria-hidden="true">🚘</span><span class="stat-label" data-i18n="statVehicles">Автомобили</span><strong id="overviewVehicleCount">0</strong><small data-i18n="statVehiclesHint">В твоя гараж</small></article>
+        <article class="stat-card"><span class="stat-icon" aria-hidden="true">⛽</span><span class="stat-label" data-i18n="statFuelEntries">Зареждания</span><strong id="overviewFuelCount">0</strong><small data-i18n="statFuelHint">Записани зареждания</small></article>
+        <article class="stat-card"><span class="stat-icon" aria-hidden="true">€</span><span class="stat-label" data-i18n="statExpenses">Разходи</span><strong id="overviewExpenseTotal">€0</strong><small data-i18n="statExpensesHint">Общо записани разходи</small></article>
+      </div>
+    </section>
     <section id="garageSection">
       <aside id="demoNotice" class="demo-notice" hidden><strong>ТЕСТОВИ ДАННИ — ДЕМО РЕЖИМ</strong><span>Три примерни автомобила с история на горивото и разходите. Тези записи са отделни от личните ти данни.</span><a href="./">Изход от тестовия режим</a></aside>
     <section class="section-heading"><div><p class="eyebrow" data-i18n="garage">ГАРАЖ</p><h2 data-i18n="yourCars">Твоите автомобили</h2></div><span id="carCount" class="count">0 / 3</span></section>
