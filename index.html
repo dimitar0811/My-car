@@ -52,15 +52,15 @@
       <div class="profile-section-heading"><div><p class="eyebrow" data-i18n="vehicleOverview">OVERVIEW</p><h3 data-i18n="vehicleDetailsTitle">Данни за автомобила</h3></div></div>
       <div id="profileDetails" class="profile-grid"></div>
       <section class="documents-section">
-        <div class="documents-heading"><div><p class="eyebrow">ДОКУМЕНТИ И ЗАДЪЛЖЕНИЯ</p><h3>Срокове и напомняния</h3></div></div>
+        <div class="documents-heading"><div><p class="eyebrow" data-i18n="documentsEyebrow">ДОКУМЕНТИ И ЗАДЪЛЖЕНИЯ</p><h3 data-i18n="documentsTitle">Срокове и напомняния</h3></div></div>
         <div id="documentAlerts" class="document-alerts" aria-live="polite"></div>
         <div id="documentList" class="document-list"></div>
         <form id="documentForm" class="document-form">
-          <h4>Добави или обнови срок</h4>
-          <div class="form-row"><label><span>Вид документ</span><select id="documentType" required><option value="liability">Гражданска отговорност</option><option value="casco">Каско</option><option value="vehicleTax">Данък МПС</option><option value="vignette">Винетка</option><option value="inspection">ГТП</option></select></label><label><span>Валидно до</span><input id="documentExpiry" type="date" required></label></div>
-          <div class="form-row"><label><span>Застраховател / институция</span><input id="documentProvider" type="text" maxlength="80"></label><label><span>Номер / бележка</span><input id="documentNumber" type="text" maxlength="80"></label></div>
-          <label><span>Сума (€) — по желание</span><input id="documentAmount" type="number" min="0" step="0.01"></label>
-          <button class="primary-button" type="submit">Запази срока</button>
+          <h4 data-i18n="addDocument">Добави или обнови срок</h4>
+          <div class="form-row"><label><span data-i18n="documentType">Вид документ</span><select id="documentType" required><option value="liability" data-i18n="liability">Гражданска отговорност</option><option value="casco" data-i18n="casco">Каско</option><option value="vehicleTax" data-i18n="vehicleTax">Данък МПС</option><option value="vignette" data-i18n="vignette">Винетка</option><option value="inspection" data-i18n="inspection">ГТП</option></select></label><label><span data-i18n="expiryDate">Валидно до</span><input id="documentExpiry" type="date" required></label></div>
+          <div class="form-row"><label><span data-i18n="provider">Застраховател / институция</span><input id="documentProvider" type="text" maxlength="80"></label><label><span data-i18n="documentNumber">Номер / бележка</span><input id="documentNumber" type="text" maxlength="80"></label></div>
+          <label><span data-i18n="documentAmount">Сума (€) — по желание</span><input id="documentAmount" type="number" min="0" step="0.01"></label>
+          <button class="primary-button" type="submit" data-i18n="saveDocument">Запази срока</button>
         </form>
       </section>
       <button id="profileEdit" class="primary-button" type="button" data-i18n="edit">Редактирай</button>
