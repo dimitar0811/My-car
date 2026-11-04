@@ -117,8 +117,6 @@ function createDemoVehicles(){
     {id:"toy-f4",date:"2026-10-30",fuelType:"petrol",litres:32,pricePerLitre:1.36,total:43.52,odometer:124920,fullTank:true}
    ],
    expenses:[
-    {id:"toy-e1",date:"2026-10-05",category:"maintenance",description:"Смяна на масло и маслен филтър",amount:95,odometer:"124050"},
-    {id:"toy-e2",date:"2026-10-14",category:"parts",description:"Въздушен и купе филтър",amount:38.5,odometer:"124280"},
     {id:"toy-e3",date:"2026-10-25",category:"insurance",description:"Гражданска отговорност – вноска",amount:72,odometer:"124650"},
     {id:"toy-e4",date:"2026-10-27",category:"parking",description:"Градски паркинг",amount:8,odometer:"124700"},
     {id:"toy-e5",date:"2026-10-29",category:"washing",description:"Автомивка",amount:12,odometer:"124850"},
@@ -147,7 +145,6 @@ function createDemoVehicles(){
     {id:"vw-f4",date:"2026-10-29",fuelType:"diesel",litres:42,pricePerLitre:1.42,total:59.64,odometer:98150,fullTank:true}
    ],
    expenses:[
-    {id:"vw-e1",date:"2026-10-06",category:"repair",description:"Смяна на предни спирачни накладки",amount:145,odometer:"97120"},
     {id:"vw-e2",date:"2026-10-16",category:"tyres",description:"Два нови зимни гуми",amount:210,odometer:"97420"},
     {id:"vw-e3",date:"2026-10-27",category:"taxes",description:"Годишен данък МПС",amount:86.4,odometer:"98000"},
     {id:"vw-e4",date:"2026-10-28",category:"parking",description:"Паркинг при пътуване",amount:14,odometer:"98050"},
