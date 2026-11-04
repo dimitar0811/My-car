@@ -51,9 +51,27 @@ function renderDocuments(car){
  documentTypes.forEach(type=>{const date=$("#doc-"+type+"-date"),ref=$("#doc-"+type+"-reference"),status=$("#doc-"+type+"-status");if(date&&document.activeElement!==date)date.value=docs[type].expiryDate||"";if(ref&&document.activeElement!==ref)ref.value=docs[type].reference||"";if(status){status.textContent=documentStatus(docs[type].expiryDate);const days=documentDays(docs[type].expiryDate);status.dataset.state=days===null?"missing":days<0?"expired":days<=30?"warning":"ok";}});
 }
 function checkDocumentNotifications(){
- const sent=JSON.parse(localStorage.getItem("my-car-document-alerts-v1")||"{}");let changed=false;
- vehicles.forEach(car=>documentTypes.forEach(type=>{const doc=ensureDocuments(car)[type],days=documentDays(doc.expiryDate);if(days===null)return;[30,15,7].forEach(mark=>{const key=[car.id,type,doc.expiryDate,mark].join("|");if(days<=mark&&days>(mark===30?15:mark===15?7:0)&&!sent[key]){if("Notification" in window&&Notification.permission==="granted")new Notification("Ma-car · "+dt(type),{body:car.make+" "+car.model+": "+dt("days").replace("{n}",days)});sent[key]=true;changed=true;}});}));
- vehicles.forEach(car=>documentTypes.forEach(type=>{const doc=ensureDocuments(car)[type],days=documentDays(doc.expiryDate);if(days===null||days>0)return;const key=[car.id,type,doc.expiryDate,days===0?"today":"expired"].join("|");if(!sent[key]){if("Notification" in window&&Notification.permission==="granted")new Notification("Ma-car · "+dt(type),{body:car.make+" "+car.model+": "+(days===0?dt("today"):dt("expired"))});sent[key]=true;changed=true;}}));
+ if(!("Notification" in window)||Notification.permission!=="granted")return;
+ let sent={};try{sent=JSON.parse(localStorage.getItem("my-car-document-alerts-v1")||"{}")||{};}catch{}
+ let changed=false;
+ vehicles.forEach(car=>documentTypes.forEach(type=>{
+  const doc=ensureDocuments(car)[type],days=documentDays(doc.expiryDate);if(days===null)return;
+  [30,15,7].forEach(mark=>{
+   const key=[car.id,type,doc.expiryDate,mark].join("|");
+   if(days<=mark&&days>(mark===30?15:mark===15?7:0)&&!sent[key]){
+    new Notification("Ma-car · "+dt(type),{body:car.make+" "+car.model+": "+dt("days").replace("{n}",days)});
+    sent[key]=true;changed=true;
+   }
+  });
+ }));
+ vehicles.forEach(car=>documentTypes.forEach(type=>{
+  const doc=ensureDocuments(car)[type],days=documentDays(doc.expiryDate);if(days===null||days>0)return;
+  const key=[car.id,type,doc.expiryDate,days===0?"today":"expired"].join("|");
+  if(!sent[key]){
+   new Notification("Ma-car · "+dt(type),{body:car.make+" "+car.model+": "+(days===0?dt("today"):dt("expired"))});
+   sent[key]=true;changed=true;
+  }
+ }));
  if(changed)localStorage.setItem("my-car-document-alerts-v1",JSON.stringify(sent));
 }
 
