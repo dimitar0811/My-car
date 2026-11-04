@@ -15,6 +15,13 @@ Object.assign(translations.en,{assistantLabel:"MY CAR ASSISTANT",assistantStatus
 Object.assign(translations.es,{assistantLabel:"ASISTENTE MY CAR",assistantStatus:"TU ASISTENTE PERSONAL",assistantTitle:"Tu coche. Bajo tu control.",assistantEmpty:"Añade tu primer vehículo para organizar sus datos e historial.",assistantReady:"Tu vehículo está en el garaje. Abre su perfil para revisar los datos, repostajes y gastos.",addFirstCar:"Añadir vehículo",viewGarage:"Abrir garaje",statVehicles:"Vehículos",statVehiclesHint:"En tu garaje",statFuelEntries:"Repostajes",statFuelHint:"Repostajes registrados",statExpenses:"Gastos",statExpensesHint:"Total de gastos registrados"});
 Object.assign(translations.de,{assistantLabel:"MY CAR ASSISTENT",assistantStatus:"DEIN PERSÖNLICHER BEGLEITER",assistantTitle:"Dein Auto. Unter deiner Kontrolle.",assistantEmpty:"Füge dein erstes Fahrzeug hinzu, um seine Daten und Historie zu organisieren.",assistantReady:"Dein Fahrzeug ist in der Garage. Öffne sein Profil, um Daten, Tankvorgänge und Kosten zu prüfen.",addFirstCar:"Fahrzeug hinzufügen",viewGarage:"Garage öffnen",statVehicles:"Fahrzeuge",statVehiclesHint:"In deiner Garage",statFuelEntries:"Tankvorgänge",statFuelHint:"Erfasste Tankvorgänge",statExpenses:"Kosten",statExpensesHint:"Erfasste Gesamtkosten"});
 Object.assign(translations.pt,{assistantLabel:"ASSISTENTE MY CAR",assistantStatus:"O TEU ASSISTENTE PESSOAL",assistantTitle:"O teu carro. Sob o teu controlo.",assistantEmpty:"Adiciona o teu primeiro veículo para organizar os seus dados e histórico.",assistantReady:"O teu veículo está na garagem. Abre o perfil para consultar dados, abastecimentos e despesas.",addFirstCar:"Adicionar veículo",viewGarage:"Abrir garagem",statVehicles:"Veículos",statVehiclesHint:"Na tua garagem",statFuelEntries:"Abastecimentos",statFuelHint:"Abastecimentos registados",statExpenses:"Despesas",statExpensesHint:"Total de despesas registadas"});
+
+Object.assign(translations.bg,{vehicleOverview:"ОБЩ ПРЕГЛЕД",vehicleDetailsTitle:"Данни за автомобила"});
+Object.assign(translations.en,{vehicleOverview:"OVERVIEW",vehicleDetailsTitle:"Vehicle details"});
+Object.assign(translations.es,{vehicleOverview:"RESUMEN",vehicleDetailsTitle:"Datos del vehículo"});
+Object.assign(translations.de,{vehicleOverview:"ÜBERSICHT",vehicleDetailsTitle:"Fahrzeugdaten"});
+Object.assign(translations.pt,{vehicleOverview:"VISÃO GERAL",vehicleDetailsTitle:"Dados do veículo"});
+Object.assign(translations.ru,{vehicleOverview:"ОБЗОР",vehicleDetailsTitle:"Данные автомобиля"});
 Object.assign(translations.ru,{assistantLabel:"АССИСТЕНТ MY CAR",assistantStatus:"ТВОЙ ЛИЧНЫЙ ПОМОЩНИК",assistantTitle:"Твой автомобиль. Под твоим контролем.",assistantEmpty:"Добавь первый автомобиль, чтобы упорядочить его данные и историю.",assistantReady:"Автомобиль уже в гараже. Открой профиль, чтобы проверить данные, заправки и расходы.",addFirstCar:"Добавить автомобиль",viewGarage:"Открыть гараж",statVehicles:"Автомобили",statVehiclesHint:"В твоём гараже",statFuelEntries:"Заправки",statFuelHint:"Записанные заправки",statExpenses:"Расходы",statExpensesHint:"Общая сумма записанных расходов"});
 const languageNames = {bg:"🇧🇬 Български",en:"🇬🇧 English",es:"🇪🇸 Español",de:"🇩🇪 Deutsch",pt:"🇵🇹 Português",ru:"🇷🇺 Русский"};
 let language = localStorage.getItem("my-car-language") || (translations[navigator.language?.toLowerCase()] ? navigator.language.toLowerCase() : (translations[navigator.language?.slice(0,2)] ? navigator.language.slice(0,2) : "en"));
@@ -97,6 +104,7 @@ function renderExpenses(car){
 function renderProfile(car){
   $("#profileTitle").textContent=(car.make+" "+car.model).trim();
   $("#profileRegistration").textContent=car.registration||"";
+  $("#profileMileage").textContent=car.mileage?new Intl.NumberFormat(locale()).format(Number(car.mileage))+" km":t("notSet");
   const fields=[["year",car.year],["engine",car.engine],["fuel",car.fuel],["power",car.power],["transmission",car.transmission],["vin",car.vin],["mileage",car.mileage],["color",car.color]];
   $("#profileDetails").innerHTML=fields.map(([key,value])=>`<div class="detail-item"><span>${t(key)}</span><strong>${escapeHtml(value||t("notSet"))}</strong></div>`).join("");
   renderFuel(car);
