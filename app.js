@@ -136,7 +136,7 @@ function renderDocuments(car){
   const days=daysUntil(item.expiryDate),status=documentStatus(days);
   const statusText=status==="expired"?t("expired"):status==="dueSoon"?t("dueSoon"):status==="valid"?t("valid"):t("noDocument");
   const detail=days===null?t("noDocument"):days<0?t("daysOverdue").replace("{days}",Math.abs(days)):t("daysLeft").replace("{days}",days);
-  return '<article class="document-entry '+status+'"><div class="document-entry-main"><strong>'+escapeHtml(t(item.type))+'</strong><span class="document-status">'+statusText+'</span><small>'+escapeHtml(item.expiryDate||"—")+(item.provider?" · "+escapeHtml(item.provider):"")+(item.number?" · "+escapeHtml(item.number):"")+'</small><small>'+detail+'</small></div><div class="document-entry-actions"><button type="button" class="document-edit" data-edit-document="'+item.type+'">'+t("editDocument")+'</button>'+(item.expiryDate?'<button type="button" class="document-delete" data-delete-document="'+item.type+'">Изтрий</button>':"")+'</div></article>';
+  return '<article class="document-entry '+status+'"><div class="document-entry-main"><strong>'+escapeHtml(t(item.type))+'</strong><span class="document-status">'+statusText+'</span><small>'+escapeHtml(item.expiryDate||"—")+(item.provider?" · "+escapeHtml(item.provider):"")+(item.number?" · "+escapeHtml(item.number):"")+'</small><small>'+detail+'</small></div><div class="document-entry-actions"><button type="button" class="document-edit" data-edit-document="'+item.type+'">'+t("editDocument")+'</button>'+(item.expiryDate?'<button type="button" class="document-delete" data-delete-document="'+item.type+'">'+t("deleteDocument")+'</button>':"")+'</div></article>';
  }).join("");
  const alerts=all.map(item=>({item,days:daysUntil(item.expiryDate)})).filter(x=>x.days!==null&&x.days<=30).sort((a,b)=>a.days-b.days);
  $("#documentAlerts").innerHTML=alerts.map(({item,days})=>'<p class="document-alert '+(days<0?"is-expired":"is-due")+'"><strong>'+escapeHtml(t(item.type))+'</strong> — '+(days<0?t("daysOverdue").replace("{days}",Math.abs(days)):t("daysLeft").replace("{days}",days))+'</p>').join("");
@@ -145,7 +145,7 @@ function renderReminderSummary(){
  const due=[];for(const car of vehicles){for(const item of (Array.isArray(car.documents)?car.documents:[])){const days=daysUntil(item.expiryDate);if(days!==null&&days<=30)due.push({car,item,days});}}
  const box=$("#reminderSummary");if(!box)return;if(!due.length){box.hidden=true;box.innerHTML="";return;}
  due.sort((a,b)=>a.days-b.days);box.hidden=false;
- box.innerHTML='<strong>'+t("reminderCount").replace("{count}",due.length)+'</strong>'+due.map(({car,item,days})=>'<p><span>'+escapeHtml(car.make+" "+car.model)+'</span> · '+escapeHtml(t(item.type))+' — '+(days<0?"Изтекъл преди "+Math.abs(days)+" дни":"Остават "+days+" дни")+'</p>').join("");
+ box.innerHTML='<strong>'+t("reminderCount").replace("{count}",due.length)+'</strong>'+due.map(({car,item,days})=>'<p><span>'+escapeHtml(car.make+" "+car.model)+'</span> · '+escapeHtml(t(item.type))+' — '+(days<0?t("daysOverdue").replace("{days}",Math.abs(days)):t("daysLeft").replace("{days}",days))+'</p>').join("");
 }
 function renderProfile(car){
   $("#profileTitle").textContent=(car.make+" "+car.model).trim();
