@@ -1,5 +1,5 @@
 const STORAGE_KEY = "my-car-vehicles-v1";
-const DEMO_STORAGE_KEY = "my-car-demo-vehicles-v1";
+const DEMO_STORAGE_KEY = "my-car-demo-vehicles-v2";
 const DEMO_MODE = new URLSearchParams(location.search).get("demo") === "1";
 const translations = {
   bg: {eyebrow:"ТВОЯТ АВТОМОБИЛЕН ПОМОЩНИК",heading:"Всичко за автомобила. На едно място.",subtitle:"Следи автомобилите си, разходите и предстоящото обслужване лесно.",garage:"ГАРАЖ",yourCars:"Твоите автомобили",addCar:"Добави автомобил",limitNote:"Основната версия позволява до 3 автомобила.",newCar:"Нов автомобил",editCar:"Редактирай автомобил",make:"Марка",model:"Модел",registration:"Регистрационен номер",year:"Година",saveCar:"Запази автомобила",updateCar:"Запази промените",edit:"Редактирай",footer:"Твоят автомобилен дневник",empty:"Все още нямаш добавени автомобили. Започни, като добавиш първия си автомобил.",remove:"Изтрий автомобила",confirmDelete:"Сигурен ли си, че искаш да изтриеш този автомобил?",car:"Автомобил",limitReached:"Достигна лимита от 3 автомобила.",unknownYear:"Годината не е посочена.",back:"← Обратно към гаража",profile:"Профил на автомобила",engine:"Двигател",fuel:"Гориво",power:"Мощност",transmission:"Скоростна кутия",vin:"VIN номер",mileage:"Пробег (км)",color:"Цвят",notSet:"Не е посочено",saveDetails:"Запази данните",fuelLog:"ДНЕВНИК НА ГОРИВОТО",fuelHeading:"Гориво",average:"Среден разход",date:"Дата",fuelType:"Вид гориво",litres:"Литри",pricePerLitre:"Цена за литър (€)",totalAmount:"Обща сума (€)",odometer:"Пробег (км)",fullTank:"Зареждане до пълен резервоар",saveFuel:"Запиши зареждането",fuelHistory:"История на зарежданията",petrol:"Бензин",diesel:"Дизел",lpg:"Пропан-бутан (LPG)",cng:"Метан (CNG)",electricity:"Електричество",additionalData:"Допълнителни технически данни",fuelConsumption:"Разход",tapProfile:"Натисни за профил →",invalidData:"Провери въведените данни.",mileageError:"Пробегът не може да е по-малък от последния запис.",validYear:"Въведи валидна година между 1900 и 2100.",automatic:"Автоматично",emptyFuel:"Все още няма записи за зареждане.",expenseLog:"ДНЕВНИК НА РАЗХОДИТЕ",expenseHeading:"Разходи по автомобила",totalExpenses:"Общо разходи",expenseDate:"Дата",expenseCategory:"Категория",repair:"Ремонт",maintenance:"Обслужване",parts:"Части",tyres:"Гуми",insurance:"Застраховка",taxes:"Данъци и такси",other:"Други",expenseDescription:"Описание",expenseAmount:"Сума (€)",expenseOdometer:"Пробег (км)",saveExpense:"Запиши разхода",expenseHistory:"История на разходите",emptyExpenses:"Все още няма записани разходи.",deleteExpense:"Изтрий разхода",confirmDeleteExpense:"Сигурен ли си, че искаш да изтриеш този разход?"},
@@ -34,41 +34,58 @@ function locale(){return ({bg:"bg-BG",en:"en-GB",es:"es-ES",de:"de-DE",pt:"pt-PT
 function renderLanguageOptions(){const select=$("#languageSelect");select.innerHTML=Object.keys(translations).map(code=>'<option value="'+escapeHtml(code)+'">'+escapeHtml(languageNames[code]||code.toUpperCase())+'</option>').join("");select.value=language;}
 function renderFuelOptions(){const select=$("#fuelType"),current=select.value;const types=[["petrol","petrol"],["diesel","diesel"],["lpg","lpg"],["cng","cng"],["electricity","electricity"]];select.innerHTML=types.map(([value,key])=>`<option value="${value}">${t(key)}</option>`).join("");select.value=types.some(([value])=>value===current)?current:"petrol";}
 function createDemoVehicles(){
+ // Clearly fictional sample data for preview only. Never used in the normal garage.
  return [
-  {id:"demo-toyota",make:"Toyota",model:"Corolla 1.6",registration:"CB 1234 AB",year:"2018",engine:"1.6 бензин",fuel:"Бензин",power:"97 kW / 132 hp",transmission:"Ръчна",vin:"DEMO0000000000001",mileage:"125500",color:"Сребрист",
+  {id:"demo-toyota",make:"Toyota",model:"Corolla 1.6 VVT-i",registration:"DEMO-001",year:"2018",engine:"1.6 бензин, 4 цилиндъра",fuel:"Бензин",power:"97 kW / 132 hp",transmission:"Ръчна, 6 степени",vin:"DEMO0000000000001",mileage:"125500",color:"Сребрист металик",
    fuelLog:[
-    {id:"toy-f1",date:"2026-10-03",fuelType:"petrol",litres:40,pricePerLitre:1.32,total:52.8,odometer:124000,fullTank:true},
-    {id:"toy-f2",date:"2026-10-12",fuelType:"petrol",litres:20,pricePerLitre:1.34,total:26.8,odometer:124250,fullTank:false},
-    {id:"toy-f3",date:"2026-10-22",fuelType:"petrol",litres:25,pricePerLitre:1.35,total:33.75,odometer:124500,fullTank:true},
-    {id:"toy-f4",date:"2026-10-30",fuelType:"petrol",litres:32,pricePerLitre:1.36,total:43.52,odometer:124920,fullTank:true}
+    {id:"toy-f1",date:"2026-09-02",fuelType:"petrol",litres:42,pricePerLitre:1.31,total:55.02,odometer:123600,fullTank:true},
+    {id:"toy-f2",date:"2026-09-10",fuelType:"petrol",litres:21,pricePerLitre:1.32,total:27.72,odometer:123880,fullTank:false},
+    {id:"toy-f3",date:"2026-09-17",fuelType:"petrol",litres:30,pricePerLitre:1.33,total:39.9,odometer:124160,fullTank:true},
+    {id:"toy-f4",date:"2026-09-26",fuelType:"petrol",litres:39,pricePerLitre:1.34,total:52.26,odometer:124520,fullTank:true},
+    {id:"toy-f5",date:"2026-10-12",fuelType:"petrol",litres:25,pricePerLitre:1.35,total:33.75,odometer:124850,fullTank:false},
+    {id:"toy-f6",date:"2026-10-30",fuelType:"petrol",litres:38,pricePerLitre:1.36,total:51.68,odometer:125500,fullTank:true}
    ],
    expenses:[
-    {id:"toy-e1",date:"2026-10-05",category:"maintenance",description:"Смяна на масло и маслен филтър",amount:95,odometer:"124050"},
-    {id:"toy-e2",date:"2026-10-14",category:"parts",description:"Въздушен и купе филтър",amount:38.5,odometer:"124280"},
-    {id:"toy-e3",date:"2026-10-25",category:"insurance",description:"Гражданска отговорност – вноска",amount:72,odometer:"124650"}
+    {id:"toy-e1",date:"2026-08-14",category:"maintenance",description:"Периодично обслужване: масло 5W-30 и маслен филтър",amount:112,odometer:"123200"},
+    {id:"toy-e2",date:"2026-08-14",category:"parts",description:"Въздушен и купе филтър",amount:42,odometer:"123200"},
+    {id:"toy-e3",date:"2026-09-05",category:"repair",description:"Смяна на предни чистачки",amount:28,odometer:"123700"},
+    {id:"toy-e4",date:"2026-10-03",category:"tyres",description:"Баланс и проверка на гуми",amount:32,odometer:"124700"},
+    {id:"toy-e5",date:"2026-10-15",category:"insurance",description:"Примерна вноска Гражданска отговорност",amount:78,odometer:"125000"},
+    {id:"toy-e6",date:"2026-10-28",category:"other",description:"Автомивка и почистване на салона",amount:22,odometer:"125420"}
    ]},
-  {id:"demo-vw",make:"Volkswagen",model:"Passat 2.0 TDI",registration:"CA 5678 KT",year:"2020",engine:"2.0 дизел",fuel:"Дизел",power:"110 kW / 150 hp",transmission:"Автоматична DSG",vin:"DEMO0000000000002",mileage:"98500",color:"Тъмносин",
+  {id:"demo-vw",make:"Volkswagen",model:"Passat 2.0 TDI DSG",registration:"DEMO-002",year:"2020",engine:"2.0 TDI дизел, common-rail",fuel:"Дизел",power:"110 kW / 150 hp",transmission:"Автоматична DSG, 7 степени",vin:"DEMO0000000000002",mileage:"98500",color:"Тъмносин металик",
    fuelLog:[
-    {id:"vw-f1",date:"2026-10-02",fuelType:"diesel",litres:50,pricePerLitre:1.38,total:69,odometer:97000,fullTank:true},
-    {id:"vw-f2",date:"2026-10-11",fuelType:"diesel",litres:18,pricePerLitre:1.4,total:25.2,odometer:97300,fullTank:false},
-    {id:"vw-f3",date:"2026-10-20",fuelType:"diesel",litres:27,pricePerLitre:1.41,total:38.07,odometer:97600,fullTank:true},
-    {id:"vw-f4",date:"2026-10-29",fuelType:"diesel",litres:42,pricePerLitre:1.42,total:59.64,odometer:98150,fullTank:true}
+    {id:"vw-f1",date:"2026-09-01",fuelType:"diesel",litres:52,pricePerLitre:1.37,total:71.24,odometer:96300,fullTank:true},
+    {id:"vw-f2",date:"2026-09-09",fuelType:"diesel",litres:22,pricePerLitre:1.38,total:30.36,odometer:96620,fullTank:false},
+    {id:"vw-f3",date:"2026-09-16",fuelType:"diesel",litres:34,pricePerLitre:1.39,total:47.26,odometer:96980,fullTank:true},
+    {id:"vw-f4",date:"2026-09-25",fuelType:"diesel",litres:45,pricePerLitre:1.40,total:63,odometer:97450,fullTank:true},
+    {id:"vw-f5",date:"2026-10-12",fuelType:"diesel",litres:26,pricePerLitre:1.41,total:36.66,odometer:97800,fullTank:false},
+    {id:"vw-f6",date:"2026-10-29",fuelType:"diesel",litres:48,pricePerLitre:1.42,total:68.16,odometer:98500,fullTank:true}
    ],
    expenses:[
-    {id:"vw-e1",date:"2026-10-06",category:"repair",description:"Смяна на предни спирачни накладки",amount:145,odometer:"97120"},
-    {id:"vw-e2",date:"2026-10-16",category:"tyres",description:"Два нови зимни гуми",amount:210,odometer:"97420"},
-    {id:"vw-e3",date:"2026-10-27",category:"taxes",description:"Годишен данък МПС",amount:86.4,odometer:"98000"}
+    {id:"vw-e1",date:"2026-07-18",category:"maintenance",description:"Смяна на моторно масло и всички филтри",amount:185,odometer:"95800"},
+    {id:"vw-e2",date:"2026-08-07",category:"repair",description:"Смяна на предни спирачни накладки",amount:165,odometer:"96150"},
+    {id:"vw-e3",date:"2026-09-12",category:"tyres",description:"Комплект зимни гуми – примерен разход",amount:420,odometer:"96750"},
+    {id:"vw-e4",date:"2026-10-04",category:"taxes",description:"Примерен годишен данък МПС",amount:112,odometer:"97500"},
+    {id:"vw-e5",date:"2026-10-18",category:"parts",description:"Смяна на чистачки и течност за стъкла",amount:46,odometer:"98020"},
+    {id:"vw-e6",date:"2026-10-26",category:"insurance",description:"Примерна вноска Каско",amount:145,odometer:"98380"}
    ]},
-  {id:"demo-dacia",make:"Dacia",model:"Duster 1.6 LPG",registration:"PB 9012 MH",year:"2019",engine:"1.6 бензин / LPG",fuel:"LPG",power:"84 kW / 114 hp",transmission:"Ръчна",vin:"DEMO0000000000003",mileage:"76400",color:"Бял",
+  {id:"demo-dacia",make:"Dacia",model:"Duster 1.6 SCe LPG",registration:"DEMO-003",year:"2019",engine:"1.6 SCe бензин / LPG",fuel:"LPG",power:"84 kW / 114 hp",transmission:"Ръчна, 5 степени",vin:"DEMO0000000000003",mileage:"76400",color:"Бял",
    fuelLog:[
-    {id:"dac-f1",date:"2026-10-04",fuelType:"lpg",litres:38,pricePerLitre:0.68,total:25.84,odometer:75000,fullTank:true},
-    {id:"dac-f2",date:"2026-10-13",fuelType:"lpg",litres:20,pricePerLitre:0.69,total:13.8,odometer:75300,fullTank:false},
-    {id:"dac-f3",date:"2026-10-23",fuelType:"lpg",litres:22,pricePerLitre:0.7,total:15.4,odometer:75600,fullTank:true},
-    {id:"dac-f4",date:"2026-10-31",fuelType:"lpg",litres:35,pricePerLitre:0.71,total:24.85,odometer:76200,fullTank:true}
+    {id:"dac-f1",date:"2026-09-03",fuelType:"lpg",litres:39,pricePerLitre:0.67,total:26.13,odometer:74800,fullTank:true},
+    {id:"dac-f2",date:"2026-09-11",fuelType:"lpg",litres:19,pricePerLitre:0.68,total:12.92,odometer:75100,fullTank:false},
+    {id:"dac-f3",date:"2026-09-18",fuelType:"lpg",litres:24,pricePerLitre:0.68,total:16.32,odometer:75400,fullTank:true},
+    {id:"dac-f4",date:"2026-09-27",fuelType:"lpg",litres:37,pricePerLitre:0.69,total:25.53,odometer:75750,fullTank:true},
+    {id:"dac-f5",date:"2026-10-13",fuelType:"lpg",litres:21,pricePerLitre:0.70,total:14.70,odometer:76050,fullTank:false},
+    {id:"dac-f6",date:"2026-10-31",fuelType:"lpg",litres:35,pricePerLitre:0.71,total:24.85,odometer:76400,fullTank:true}
    ],
    expenses:[
-    {id:"dac-e1",date:"2026-10-08",category:"other",description:"Автомивка и почистване на салона",amount:24,odometer:"75120"},
-    {id:"dac-e2",date:"2026-10-18",category:"maintenance",description:"Реглаж на преден мост",amount:42,odometer:"75480"}
+    {id:"dac-e1",date:"2026-07-22",category:"maintenance",description:"Смяна на масло и маслен филтър",amount:105,odometer:"74200"},
+    {id:"dac-e2",date:"2026-08-16",category:"repair",description:"Проверка и обслужване на LPG системата",amount:68,odometer:"74600"},
+    {id:"dac-e3",date:"2026-09-08",category:"parts",description:"Въздушен филтър и филтър купе",amount:39,odometer:"74950"},
+    {id:"dac-e4",date:"2026-09-21",category:"tyres",description:"Монтаж и баланс на гуми",amount:48,odometer:"75500"},
+    {id:"dac-e5",date:"2026-10-09",category:"insurance",description:"Примерна вноска Гражданска отговорност",amount:74,odometer:"75880"},
+    {id:"dac-e6",date:"2026-10-24",category:"other",description:"Почистване на автомобил",amount:25,odometer:"76250"}
    ]}
  ];
 }
