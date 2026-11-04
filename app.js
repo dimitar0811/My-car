@@ -388,6 +388,7 @@ function editVehicle(id){
 }
 function closeForm(){editingVehicleId=null;$("#carFormSection").hidden=true;$("#carForm").reset();}
 document.querySelectorAll(".nav-button").forEach(button=>button.addEventListener("click",()=>showView(button.dataset.view)));
+$("#demoScreenButton")?.addEventListener("click",()=>{if(DEMO_MODE){showView("vehicles");}else{location.href=new URL("?demo=1",location.href).toString();}});
 $("#homeVehiclesButton").addEventListener("click",()=>showView("vehicles"));
 $("#homeAddCarButton").addEventListener("click",openForm);
 $("#assistantPanel").addEventListener("click",event=>{const button=event.target.closest("[data-assistant-car]");if(button)openProfile(button.dataset.assistantCar);});
