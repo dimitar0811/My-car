@@ -127,7 +127,6 @@ function renderExpenses(car){
  $("#expenseHistory").innerHTML=entries.length?entries.map(item=>'<article class="expense-entry"><div><strong>'+escapeHtml(item.date)+' · '+escapeHtml(t(categoryKeys.includes(item.category)?item.category:"other"))+'</strong><small>'+escapeHtml(item.description||t("notSet"))+(item.odometer!==""&&item.odometer!=null?' · '+escapeHtml(item.odometer)+' km':"")+'</small></div><div class="expense-entry-values"><strong>'+formatMoney(Number(item.amount)||0)+'</strong><button class="expense-delete" type="button" data-delete-expense="'+escapeHtml(item.id)+'">'+t("deleteExpense")+'</button></div></article>').join(""):'<p class="empty-fuel">'+t("emptyExpenses")+'</p>';
 }
 const DOCUMENT_TYPES=["liability","casco","vehicleTax","vignette","inspection"];
-const DOCUMENT_LABELS={liability:"Гражданска отговорност",casco:"Каско",vehicleTax:"Данък МПС",vignette:"Винетка",inspection:"ГТП"};
 function daysUntil(dateValue){if(!dateValue)return null;const target=new Date(dateValue+"T00:00:00");if(Number.isNaN(target.getTime()))return null;const today=new Date();today.setHours(0,0,0,0);return Math.ceil((target-today)/86400000);}
 function documentStatus(days){if(days===null)return "missing";if(days<0)return "expired";if(days<=30)return "dueSoon";return "valid";}
 function renderDocuments(car){
@@ -135,18 +134,18 @@ function renderDocuments(car){
  const all=DOCUMENT_TYPES.map(type=>car.documents.find(item=>item.type===type)||{type,expiryDate:""});
  $("#documentList").innerHTML=all.map(item=>{
   const days=daysUntil(item.expiryDate),status=documentStatus(days);
-  const statusText=status==="expired"?"ИЗТЕКЪЛ СРОК":status==="dueSoon"?"ИЗТИЧА ДО 30 ДНИ":status==="valid"?"ВАЛИДЕН":"НЯМА ВЪВЕДЕН СРОК";
-  const detail=days===null?"Добави дата":days<0?"Изтекъл преди "+Math.abs(days)+" дни":"Остават "+days+" дни";
-  return '<article class="document-entry '+status+'"><div class="document-entry-main"><strong>'+escapeHtml(DOCUMENT_LABELS[item.type]||item.type)+(item.type==="liability"?"": "")+'</strong><span class="document-status">'+statusText+'</span><small>'+escapeHtml(item.expiryDate||"—")+(item.provider?" · "+escapeHtml(item.provider):"")+(item.number?" · "+escapeHtml(item.number):"")+'</small><small>'+detail+'</small></div><div class="document-entry-actions"><button type="button" class="document-edit" data-edit-document="'+item.type+'">Промени</button>'+(item.expiryDate?'<button type="button" class="document-delete" data-delete-document="'+item.type+'">Изтрий</button>':"")+'</div></article>';
+  const statusText=status==="expired"?t("expired"):status==="dueSoon"?t("dueSoon"):status==="valid"?t("valid"):t("noDocument");
+  const detail=days===null?t("noDocument"):days<0?t("daysOverdue").replace("{days}",Math.abs(days)):t("daysLeft").replace("{days}",days);
+  return '<article class="document-entry '+status+'"><div class="document-entry-main"><strong>'+escapeHtml(t(item.type))+'</strong><span class="document-status">'+statusText+'</span><small>'+escapeHtml(item.expiryDate||"—")+(item.provider?" · "+escapeHtml(item.provider):"")+(item.number?" · "+escapeHtml(item.number):"")+'</small><small>'+detail+'</small></div><div class="document-entry-actions"><button type="button" class="document-edit" data-edit-document="'+item.type+'">'+t("editDocument")+'</button>'+(item.expiryDate?'<button type="button" class="document-delete" data-delete-document="'+item.type+'">Изтрий</button>':"")+'</div></article>';
  }).join("");
  const alerts=all.map(item=>({item,days:daysUntil(item.expiryDate)})).filter(x=>x.days!==null&&x.days<=30).sort((a,b)=>a.days-b.days);
- $("#documentAlerts").innerHTML=alerts.map(({item,days})=>'<p class="document-alert '+(days<0?"is-expired":"is-due")+'"><strong>'+escapeHtml(t(item.type))+'</strong> — '+(days<0?"Изтекъл преди "+Math.abs(days)+" дни":"Остават "+days+" дни")+'</p>').join("");
+ $("#documentAlerts").innerHTML=alerts.map(({item,days})=>'<p class="document-alert '+(days<0?"is-expired":"is-due")+'"><strong>'+escapeHtml(t(item.type))+'</strong> — '+(days<0?t("daysOverdue").replace("{days}",Math.abs(days)):t("daysLeft").replace("{days}",days))+'</p>').join("");
 }
 function renderReminderSummary(){
  const due=[];for(const car of vehicles){for(const item of (Array.isArray(car.documents)?car.documents:[])){const days=daysUntil(item.expiryDate);if(days!==null&&days<=30)due.push({car,item,days});}}
  const box=$("#reminderSummary");if(!box)return;if(!due.length){box.hidden=true;box.innerHTML="";return;}
  due.sort((a,b)=>a.days-b.days);box.hidden=false;
- box.innerHTML='<strong>Има '+due.length+' срока за проверка</strong>'+due.map(({car,item,days})=>'<p><span>'+escapeHtml(car.make+" "+car.model)+'</span> · '+escapeHtml(t(item.type))+' — '+(days<0?"Изтекъл преди "+Math.abs(days)+" дни":"Остават "+days+" дни")+'</p>').join("");
+ box.innerHTML='<strong>'+t("reminderCount").replace("{count}",due.length)+'</strong>'+due.map(({car,item,days})=>'<p><span>'+escapeHtml(car.make+" "+car.model)+'</span> · '+escapeHtml(t(item.type))+' — '+(days<0?"Изтекъл преди "+Math.abs(days)+" дни":"Остават "+days+" дни")+'</p>').join("");
 }
 function renderProfile(car){
   $("#profileTitle").textContent=(car.make+" "+car.model).trim();
@@ -233,7 +232,7 @@ $("#documentList").addEventListener("click",event=>{
  const edit=event.target.closest("[data-edit-document]"),del=event.target.closest("[data-delete-document]");
  const car=vehicles.find(item=>item.id===selectedVehicleId);if(!car)return;
  if(edit){const type=edit.dataset.editDocument,item=(car.documents||[]).find(entry=>entry.type===type);$("#documentType").value=type;$("#documentExpiry").value=item?.expiryDate||"";$("#documentProvider").value=item?.provider||"";$("#documentNumber").value=item?.number||"";$("#documentAmount").value=item?.amount??"";$("#documentExpiry").focus();return;}
- if(del){const type=del.dataset.deleteDocument;if(!confirm("Да изтрия ли този запис?"))return;car.documents=(car.documents||[]).filter(item=>item.type!==type);saveVehicles();renderDocuments(car);renderReminderSummary();}
+ if(del){const type=del.dataset.deleteDocument;if(!confirm(t("confirmDeleteDocument")))return;car.documents=(car.documents||[]).filter(item=>item.type!==type);saveVehicles();renderDocuments(car);renderReminderSummary();}
 });
 $("#carForm").addEventListener("submit",event=>{
   event.preventDefault();
