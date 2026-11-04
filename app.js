@@ -1,5 +1,5 @@
 const STORAGE_KEY = "my-car-vehicles-v1";
-const DEMO_STORAGE_KEY = "my-car-demo-vehicles-v1";
+const DEMO_STORAGE_KEY = "my-car-demo-vehicles-v2";
 const DEMO_MODE = new URLSearchParams(location.search).get("demo") === "1";
 const translations = {
   bg: {eyebrow:"ТВОЯТ АВТОМОБИЛЕН ПОМОЩНИК",heading:"Всичко за автомобила. На едно място.",subtitle:"Следи автомобилите си, разходите и предстоящото обслужване лесно.",garage:"ГАРАЖ",yourCars:"Твоите автомобили",addCar:"Добави автомобил",limitNote:"Основната версия позволява до 3 автомобила.",newCar:"Нов автомобил",editCar:"Редактирай автомобил",make:"Марка",model:"Модел",registration:"Регистрационен номер",year:"Година",saveCar:"Запази автомобила",updateCar:"Запази промените",edit:"Редактирай",footer:"Твоят автомобилен дневник",empty:"Все още нямаш добавени автомобили. Започни, като добавиш първия си автомобил.",remove:"Изтрий автомобила",confirmDelete:"Сигурен ли си, че искаш да изтриеш този автомобил?",car:"Автомобил",limitReached:"Достигна лимита от 3 автомобила.",unknownYear:"Годината не е посочена.",back:"← Обратно към гаража",profile:"Профил на автомобила",engine:"Двигател",fuel:"Гориво",power:"Мощност",transmission:"Скоростна кутия",vin:"VIN номер",mileage:"Пробег (км)",color:"Цвят",notSet:"Не е посочено",saveDetails:"Запази данните",fuelLog:"ДНЕВНИК НА ГОРИВОТО",fuelHeading:"Гориво",average:"Среден разход",date:"Дата",fuelType:"Вид гориво",litres:"Литри",pricePerLitre:"Цена за литър (€)",totalAmount:"Обща сума (€)",odometer:"Пробег (км)",fullTank:"Зареждане до пълен резервоар",saveFuel:"Запиши зареждането",fuelHistory:"История на зарежданията",petrol:"Бензин",diesel:"Дизел",lpg:"Пропан-бутан (LPG)",cng:"Метан (CNG)",electricity:"Електричество",additionalData:"Допълнителни технически данни",fuelConsumption:"Разход",tapProfile:"Натисни за профил →",invalidData:"Провери въведените данни.",mileageError:"Пробегът не може да е по-малък от последния запис.",validYear:"Въведи валидна година между 1900 и 2100.",automatic:"Автоматично",emptyFuel:"Все още няма записи за зареждане.",expenseLog:"ДНЕВНИК НА РАЗХОДИТЕ",expenseHeading:"Разходи по автомобила",totalExpenses:"Общо разходи",expenseDate:"Дата",expenseCategory:"Категория",repair:"Ремонт",maintenance:"Обслужване",parts:"Части",tyres:"Гуми",insurance:"Застраховка",taxes:"Данъци и такси",other:"Други",expenseDescription:"Описание",expenseAmount:"Сума (€)",expenseOdometer:"Пробег (км)",saveExpense:"Запиши разхода",expenseHistory:"История на разходите",emptyExpenses:"Все още няма записани разходи.",deleteExpense:"Изтрий разхода",confirmDeleteExpense:"Сигурен ли си, че искаш да изтриеш този разход?"},
@@ -31,16 +31,38 @@ const serviceText = {
 };
 function st(key){return serviceText[language]?.[key]||serviceText.en[key]||key;}
 
+const serviceActivityNames={
+ bg:{oil:"Масло и маслен филтър",filters:"Въздушен / горивен / купе филтър",brakes:"Спирачна система",tyres:"Гуми и сезонна смяна",battery:"Акумулатор",belts:"Ремъци / ангренажна верига",general:"Периодично обслужване",diagnostics:"Компютърна диагностика",sparkPlugs:"Свещи",coolant:"Охладителна течност",transmission:"Скоростна кутия",suspension:"Окачване и амортисьори",exhaust:"Изпускателна система",airConditioning:"Климатик",alignment:"Реглаж на ходова част",tyreRotation:"Ротация и баланс на гуми",inspection:"ГТП / технически преглед",repair:"Ремонт",roadside:"Пътна помощ",wash:"Измиване и детайлинг",other:"Друга дейност"},
+ en:{oil:"Oil and oil filter",filters:"Air / fuel / cabin filters",brakes:"Braking system",tyres:"Tyres and seasonal change",battery:"Battery",belts:"Belts / timing chain",general:"Scheduled maintenance",diagnostics:"Computer diagnostics",sparkPlugs:"Spark plugs",coolant:"Coolant",transmission:"Transmission",suspension:"Suspension and shock absorbers",exhaust:"Exhaust system",airConditioning:"Air conditioning",alignment:"Wheel alignment",tyreRotation:"Tyre rotation and balancing",inspection:"MOT / vehicle inspection",repair:"Repair",roadside:"Roadside assistance",wash:"Wash and detailing",other:"Other activity"},
+ es:{oil:"Aceite y filtro",filters:"Filtros de aire / combustible / habitáculo",brakes:"Sistema de frenos",tyres:"Neumáticos y cambio estacional",battery:"Batería",belts:"Correas / cadena de distribución",general:"Mantenimiento periódico",diagnostics:"Diagnóstico electrónico",sparkPlugs:"Bujías",coolant:"Refrigerante",transmission:"Transmisión",suspension:"Suspensión y amortiguadores",exhaust:"Sistema de escape",airConditioning:"Aire acondicionado",alignment:"Alineación",tyreRotation:"Rotación y equilibrado de neumáticos",inspection:"ITV / inspección técnica",repair:"Reparación",roadside:"Asistencia en carretera",wash:"Lavado y detallado",other:"Otra actividad"},
+ de:{oil:"Öl und Ölfilter",filters:"Luft- / Kraftstoff- / Innenraumfilter",brakes:"Bremsanlage",tyres:"Reifen und Saisonwechsel",battery:"Batterie",belts:"Riemen / Steuerkette",general:"Regelmäßige Wartung",diagnostics:"Fahrzeugdiagnose",sparkPlugs:"Zündkerzen",coolant:"Kühlmittel",transmission:"Getriebe",suspension:"Fahrwerk und Stoßdämpfer",exhaust:"Abgasanlage",airConditioning:"Klimaanlage",alignment:"Achsvermessung",tyreRotation:"Reifenwechsel und Auswuchten",inspection:"HU / Fahrzeugprüfung",repair:"Reparatur",roadside:"Pannenhilfe",wash:"Wäsche und Aufbereitung",other:"Sonstige Tätigkeit"},
+ pt:{oil:"Óleo e filtro de óleo",filters:"Filtros de ar / combustível / habitáculo",brakes:"Sistema de travagem",tyres:"Pneus e mudança sazonal",battery:"Bateria",belts:"Correias / corrente de distribuição",general:"Manutenção periódica",diagnostics:"Diagnóstico eletrónico",sparkPlugs:"Velas",coolant:"Líquido de refrigeração",transmission:"Transmissão",suspension:"Suspensão e amortecedores",exhaust:"Sistema de escape",airConditioning:"Ar condicionado",alignment:"Alinhamento",tyreRotation:"Rotação e equilíbrio dos pneus",inspection:"Inspeção técnica / MOT",repair:"Reparação",roadside:"Assistência em viagem",wash:"Lavagem e detalhe",other:"Outra atividade"},
+ ru:{oil:"Масло и масляный фильтр",filters:"Воздушный / топливный / салонный фильтр",brakes:"Тормозная система",tyres:"Шины и сезонная замена",battery:"Аккумулятор",belts:"Ремни / цепь ГРМ",general:"Плановое обслуживание",diagnostics:"Компьютерная диагностика",sparkPlugs:"Свечи зажигания",coolant:"Охлаждающая жидкость",transmission:"Коробка передач",suspension:"Подвеска и амортизаторы",exhaust:"Выхлопная система",airConditioning:"Кондиционер",alignment:"Развал-схождение",tyreRotation:"Ротация и балансировка шин",inspection:"Техосмотр / MOT",repair:"Ремонт",roadside:"Помощь на дороге",wash:"Мойка и детейлинг",other:"Другая работа"}
+};
+const expenseCategoryNames={
+ bg:{repair:"Ремонт",maintenance:"Обслужване",parts:"Части",tyres:"Гуми",insurance:"Застраховка",taxes:"Данъци и такси",parking:"Паркинг",tolls:"Пътни такси",washing:"Автомивка",roadside:"Пътна помощ",fines:"Глоби",accessories:"Аксесоари",other:"Други"},
+ en:{repair:"Repairs",maintenance:"Maintenance",parts:"Parts",tyres:"Tyres",insurance:"Insurance",taxes:"Tax and fees",parking:"Parking",tolls:"Tolls",washing:"Car wash",roadside:"Roadside assistance",fines:"Fines",accessories:"Accessories",other:"Other"},
+ es:{repair:"Reparaciones",maintenance:"Mantenimiento",parts:"Piezas",tyres:"Neumáticos",insurance:"Seguro",taxes:"Impuestos y tasas",parking:"Aparcamiento",tolls:"Peajes",washing:"Lavado",roadside:"Asistencia en carretera",fines:"Multas",accessories:"Accesorios",other:"Otros"},
+ de:{repair:"Reparaturen",maintenance:"Wartung",parts:"Teile",tyres:"Reifen",insurance:"Versicherung",taxes:"Steuern und Gebühren",parking:"Parken",tolls:"Maut",washing:"Autowäsche",roadside:"Pannenhilfe",fines:"Bußgelder",accessories:"Zubehör",other:"Sonstiges"},
+ pt:{repair:"Reparações",maintenance:"Manutenção",parts:"Peças",tyres:"Pneus",insurance:"Seguro",taxes:"Impostos e taxas",parking:"Estacionamento",tolls:"Portagens",washing:"Lavagem",roadside:"Assistência em viagem",fines:"Multas",accessories:"Acessórios",other:"Outros"},
+ ru:{repair:"Ремонт",maintenance:"Обслуживание",parts:"Запчасти",tyres:"Шины",insurance:"Страховка",taxes:"Налоги и сборы",parking:"Парковка",tolls:"Платные дороги",washing:"Мойка",roadside:"Помощь на дороге",fines:"Штрафы",accessories:"Аксессуары",other:"Другое"}
+};
+function serviceActivityLabel(type){return serviceActivityNames[language]?.[type]||serviceActivityNames.en[type]||st(type);}
+function expenseCategoryLabel(type){return expenseCategoryNames[language]?.[type]||expenseCategoryNames.en[type]||t("other");}
+const serviceActivityTypes=["oil","filters","brakes","tyres","battery","belts","general","diagnostics","sparkPlugs","coolant","transmission","suspension","exhaust","airConditioning","alignment","tyreRotation","inspection","repair","roadside","wash","other"];
+const expenseCategoryTypes=["repair","maintenance","parts","tyres","insurance","taxes","parking","tolls","washing","roadside","fines","accessories","other"];
+function renderExpenseOptions(){const select=$("#expenseCategory"),current=select.value;select.innerHTML=expenseCategoryTypes.map(type=>'<option value="'+type+'">'+escapeHtml(expenseCategoryLabel(type))+'</option>').join("");select.value=expenseCategoryTypes.includes(current)?current:"other";}
+
 const documentText={
- bg:{title:"Документи и срокове",intro:"Въведи датата на валидност. Ще виждаш предупреждение 30, 15 и 7 дни предварително.",insurance:"Застраховка",tax:"Данък МПС",vignette:"Винетка",inspection:"ГТП / MOT",expiry:"Валидна до",reference:"Номер / бележка",save:"Запази сроковете",notify:"Разреши известия",permission:"Известията се показват, когато приложението е отворено или бъде отворено отново.",expired:"Изтекъл срок",today:"Изтича днес",days:"Остават {n} дни",missing:"Не е въведена дата",saved:"Сроковете са запазени.",permissionGranted:"Известията са разрешени.",permissionDenied:"Известията не са разрешени от браузъра."},
- en:{title:"Documents & expiry dates",intro:"Enter each expiry date. Get alerts 30, 15 and 7 days beforehand.",insurance:"Insurance",tax:"Vehicle tax",vignette:"Road vignette",inspection:"Inspection / MOT",expiry:"Valid until",reference:"Reference / note",save:"Save dates",notify:"Enable notifications",permission:"Notifications appear while the app is open or when you open it again.",expired:"Expired",today:"Expires today",days:"{n} days left",missing:"No date entered",saved:"Expiry dates saved.",permissionGranted:"Notifications are enabled.",permissionDenied:"Notifications are blocked by the browser."},
- es:{title:"Documentos y vencimientos",intro:"Introduce cada fecha de caducidad. Recibe avisos 30, 15 y 7 días antes.",insurance:"Seguro",tax:"Impuesto del vehículo",vignette:"Viñeta",inspection:"Inspección técnica / ITV",expiry:"Válido hasta",reference:"Referencia / nota",save:"Guardar fechas",notify:"Activar notificaciones",permission:"Los avisos aparecen mientras la aplicación está abierta o al volver a abrirla.",expired:"Caducado",today:"Caduca hoy",days:"Quedan {n} días",missing:"Sin fecha",saved:"Fechas guardadas.",permissionGranted:"Notificaciones activadas.",permissionDenied:"El navegador ha bloqueado las notificaciones."},
- de:{title:"Dokumente und Ablaufdaten",intro:"Trage jedes Ablaufdatum ein. Erinnerungen 30, 15 und 7 Tage vorher.",insurance:"Versicherung",tax:"Kfz-Steuer",vignette:"Vignette",inspection:"HU / MOT",expiry:"Gültig bis",reference:"Referenz / Notiz",save:"Daten speichern",notify:"Benachrichtigungen aktivieren",permission:"Hinweise erscheinen, solange die App geöffnet ist oder erneut geöffnet wird.",expired:"Abgelaufen",today:"Läuft heute ab",days:"Noch {n} Tage",missing:"Kein Datum eingetragen",saved:"Ablaufdaten gespeichert.",permissionGranted:"Benachrichtigungen aktiviert.",permissionDenied:"Benachrichtigungen sind im Browser blockiert."},
- pt:{title:"Documentos e validade",intro:"Introduz cada data de validade. Recebe avisos 30, 15 e 7 dias antes.",insurance:"Seguro",tax:"Imposto do veículo",vignette:"Vinheta",inspection:"Inspeção / MOT",expiry:"Válido até",reference:"Referência / nota",save:"Guardar datas",notify:"Ativar notificações",permission:"Os avisos aparecem enquanto a aplicação está aberta ou quando a abres novamente.",expired:"Expirado",today:"Expira hoje",days:"Faltam {n} dias",missing:"Sem data",saved:"Datas guardadas.",permissionGranted:"Notificações ativadas.",permissionDenied:"O navegador bloqueou as notificações."},
- ru:{title:"Документы и сроки",intro:"Укажи даты окончания действия. Напоминания за 30, 15 и 7 дней.",insurance:"Страховка",tax:"Транспортный налог",vignette:"Виньетка",inspection:"Техосмотр / MOT",expiry:"Действует до",reference:"Номер / примечание",save:"Сохранить даты",notify:"Включить уведомления",permission:"Уведомления появляются, когда приложение открыто или открывается снова.",expired:"Срок истёк",today:"Истекает сегодня",days:"Осталось {n} дн.",missing:"Дата не указана",saved:"Сроки сохранены.",permissionGranted:"Уведомления включены.",permissionDenied:"Браузер заблокировал уведомления."}
+ bg:{casco:"Каско",title:"Документи и срокове",intro:"Въведи датата на валидност. Ще виждаш предупреждение 30, 15 и 7 дни предварително.",insurance:"Застраховка",tax:"Данък МПС",vignette:"Винетка",inspection:"ГТП / MOT",expiry:"Валидна до",reference:"Номер / бележка",save:"Запази сроковете",notify:"Разреши известия",permission:"Известията се показват, когато приложението е отворено или бъде отворено отново.",expired:"Изтекъл срок",today:"Изтича днес",days:"Остават {n} дни",missing:"Не е въведена дата",saved:"Сроковете са запазени.",permissionGranted:"Известията са разрешени.",permissionDenied:"Известията не са разрешени от браузъра."},
+ en:{casco:"Comprehensive insurance",title:"Documents & expiry dates",intro:"Enter each expiry date. Get alerts 30, 15 and 7 days beforehand.",insurance:"Insurance",tax:"Vehicle tax",vignette:"Road vignette",inspection:"Inspection / MOT",expiry:"Valid until",reference:"Reference / note",save:"Save dates",notify:"Enable notifications",permission:"Notifications appear while the app is open or when you open it again.",expired:"Expired",today:"Expires today",days:"{n} days left",missing:"No date entered",saved:"Expiry dates saved.",permissionGranted:"Notifications are enabled.",permissionDenied:"Notifications are blocked by the browser."},
+ es:{casco:"Seguro a todo riesgo",title:"Documentos y vencimientos",intro:"Introduce cada fecha de caducidad. Recibe avisos 30, 15 y 7 días antes.",insurance:"Seguro",tax:"Impuesto del vehículo",vignette:"Viñeta",inspection:"Inspección técnica / ITV",expiry:"Válido hasta",reference:"Referencia / nota",save:"Guardar fechas",notify:"Activar notificaciones",permission:"Los avisos aparecen mientras la aplicación está abierta o al volver a abrirla.",expired:"Caducado",today:"Caduca hoy",days:"Quedan {n} días",missing:"Sin fecha",saved:"Fechas guardadas.",permissionGranted:"Notificaciones activadas.",permissionDenied:"El navegador ha bloqueado las notificaciones."},
+ de:{casco:"Vollkaskoversicherung",title:"Dokumente und Ablaufdaten",intro:"Trage jedes Ablaufdatum ein. Erinnerungen 30, 15 und 7 Tage vorher.",insurance:"Versicherung",tax:"Kfz-Steuer",vignette:"Vignette",inspection:"HU / MOT",expiry:"Gültig bis",reference:"Referenz / Notiz",save:"Daten speichern",notify:"Benachrichtigungen aktivieren",permission:"Hinweise erscheinen, solange die App geöffnet ist oder erneut geöffnet wird.",expired:"Abgelaufen",today:"Läuft heute ab",days:"Noch {n} Tage",missing:"Kein Datum eingetragen",saved:"Ablaufdaten gespeichert.",permissionGranted:"Benachrichtigungen aktiviert.",permissionDenied:"Benachrichtigungen sind im Browser blockiert."},
+ pt:{casco:"Seguro contra todos os riscos",title:"Documentos e validade",intro:"Introduz cada data de validade. Recebe avisos 30, 15 e 7 dias antes.",insurance:"Seguro",tax:"Imposto do veículo",vignette:"Vinheta",inspection:"Inspeção / MOT",expiry:"Válido até",reference:"Referência / nota",save:"Guardar datas",notify:"Ativar notificações",permission:"Os avisos aparecem enquanto a aplicação está aberta ou quando a abres novamente.",expired:"Expirado",today:"Expira hoje",days:"Faltam {n} dias",missing:"Sem data",saved:"Datas guardadas.",permissionGranted:"Notificações ativadas.",permissionDenied:"O navegador bloqueou as notificações."},
+ ru:{casco:"КАСКО",title:"Документы и сроки",intro:"Укажи даты окончания действия. Напоминания за 30, 15 и 7 дней.",insurance:"Страховка",tax:"Транспортный налог",vignette:"Виньетка",inspection:"Техосмотр / MOT",expiry:"Действует до",reference:"Номер / примечание",save:"Сохранить даты",notify:"Включить уведомления",permission:"Уведомления появляются, когда приложение открыто или открывается снова.",expired:"Срок истёк",today:"Истекает сегодня",days:"Осталось {n} дн.",missing:"Дата не указана",saved:"Сроки сохранены.",permissionGranted:"Уведомления включены.",permissionDenied:"Браузер заблокировал уведомления."}
 };
 function dt(key){return documentText[language]?.[key]||documentText.en[key]||key;}
-const documentTypes=["insurance","tax","vignette","inspection"];
+const documentTypes=["insurance","casco","tax","vignette","inspection"];
 function ensureDocuments(car){if(!car.documents||typeof car.documents!=="object")car.documents={};documentTypes.forEach(type=>{if(!car.documents[type])car.documents[type]={expiryDate:"",reference:""};});return car.documents;}
 function documentDays(date){if(!date)return null;const now=new Date();now.setHours(0,0,0,0);const due=new Date(date+"T00:00:00");return Math.ceil((due-now)/86400000);}
 function documentStatus(date){const days=documentDays(date);if(days===null)return dt("missing");if(days<0)return dt("expired");if(days===0)return dt("today");return dt("days").replace("{n}",days);}
@@ -97,8 +119,26 @@ function createDemoVehicles(){
    expenses:[
     {id:"toy-e1",date:"2026-10-05",category:"maintenance",description:"Смяна на масло и маслен филтър",amount:95,odometer:"124050"},
     {id:"toy-e2",date:"2026-10-14",category:"parts",description:"Въздушен и купе филтър",amount:38.5,odometer:"124280"},
-    {id:"toy-e3",date:"2026-10-25",category:"insurance",description:"Гражданска отговорност – вноска",amount:72,odometer:"124650"}
-   ]},
+    {id:"toy-e3",date:"2026-10-25",category:"insurance",description:"Гражданска отговорност – вноска",amount:72,odometer:"124650"},
+    {id:"toy-e4",date:"2026-10-27",category:"parking",description:"Градски паркинг",amount:8,odometer:"124700"},
+    {id:"toy-e5",date:"2026-10-29",category:"washing",description:"Автомивка",amount:12,odometer:"124850"},
+    {id:"toy-e6",date:"2026-10-31",category:"tolls",description:"Пътни такси",amount:6.5,odometer:"125100"}
+   ],
+   serviceLog:[
+    {id:"toy-s1",date:"2026-08-12",type:"oil",odometer:121000,description:"Масло 5W-30 и маслен филтър",cost:95,nextDueDate:"2027-02-12",nextDueOdometer:131000},
+    {id:"toy-s2",date:"2026-08-12",type:"filters",odometer:121000,description:"Въздушен и купе филтър",cost:38.5},
+    {id:"toy-s3",date:"2026-06-20",type:"brakes",odometer:119500,description:"Предни накладки и проверка на дискове",cost:145},
+    {id:"toy-s4",date:"2026-04-18",type:"tyres",odometer:116000,description:"Летни гуми – монтаж и баланс",cost:280},
+    {id:"toy-s5",date:"2026-03-10",type:"battery",odometer:114200,description:"Проверка и тест на акумулатора",cost:0},
+    {id:"toy-s6",date:"2026-02-05",type:"diagnostics",odometer:112500,description:"Компютърна диагностика – без записани грешки",cost:25}
+   ],
+   documents:{
+    insurance:{expiryDate:"2027-03-15",reference:"DEMO-GO-TOY-001"},
+    casco:{expiryDate:"2027-03-15",reference:"DEMO-CASCO-TOY-001"},
+    tax:{expiryDate:"2027-06-30",reference:"DEMO-TAX-TOY-001"},
+    vignette:{expiryDate:"2027-01-31",reference:"DEMO-VIG-TOY-001"},
+    inspection:{expiryDate:"2027-02-20",reference:"DEMO-GTP-TOY-001"}
+   }},
   {id:"demo-vw",make:"Volkswagen",model:"Passat 2.0 TDI",registration:"CA 5678 KT",year:"2020",engine:"2.0 дизел",fuel:"Дизел",power:"110 kW / 150 hp",transmission:"Автоматична DSG",vin:"DEMO0000000000002",mileage:"98500",color:"Тъмносин",
    fuelLog:[
     {id:"vw-f1",date:"2026-10-02",fuelType:"diesel",litres:50,pricePerLitre:1.38,total:69,odometer:97000,fullTank:true},
@@ -109,8 +149,26 @@ function createDemoVehicles(){
    expenses:[
     {id:"vw-e1",date:"2026-10-06",category:"repair",description:"Смяна на предни спирачни накладки",amount:145,odometer:"97120"},
     {id:"vw-e2",date:"2026-10-16",category:"tyres",description:"Два нови зимни гуми",amount:210,odometer:"97420"},
-    {id:"vw-e3",date:"2026-10-27",category:"taxes",description:"Годишен данък МПС",amount:86.4,odometer:"98000"}
-   ]},
+    {id:"vw-e3",date:"2026-10-27",category:"taxes",description:"Годишен данък МПС",amount:86.4,odometer:"98000"},
+    {id:"vw-e4",date:"2026-10-28",category:"parking",description:"Паркинг при пътуване",amount:14,odometer:"98050"},
+    {id:"vw-e5",date:"2026-10-30",category:"roadside",description:"Проверка на пътна помощ – тестов запис",amount:0,odometer:"98200"},
+    {id:"vw-e6",date:"2026-10-31",category:"tolls",description:"Магистрални такси",amount:11.2,odometer:"98300"}
+   ],
+   serviceLog:[
+    {id:"vw-s1",date:"2026-09-15",type:"oil",odometer:96500,description:"Масло по спецификация VW и маслен филтър",cost:165,nextDueDate:"2027-03-15",nextDueOdometer:111500},
+    {id:"vw-s2",date:"2026-09-15",type:"filters",odometer:96500,description:"Горивен, въздушен и купе филтър",cost:82},
+    {id:"vw-s3",date:"2026-07-10",type:"transmission",odometer:94200,description:"Проверка на DSG и обслужване по график",cost:240},
+    {id:"vw-s4",date:"2026-05-22",type:"brakes",odometer:92100,description:"Предни накладки и спирачна течност",cost:190},
+    {id:"vw-s5",date:"2026-04-12",type:"suspension",odometer:90800,description:"Проверка на предно окачване",cost:45},
+    {id:"vw-s6",date:"2026-02-18",type:"diagnostics",odometer:88700,description:"Диагностика на двигателя и DPF",cost:35}
+   ],
+   documents:{
+    insurance:{expiryDate:"2027-01-20",reference:"DEMO-GO-VW-001"},
+    casco:{expiryDate:"2027-01-20",reference:"DEMO-CASCO-VW-001"},
+    tax:{expiryDate:"2027-03-31",reference:"DEMO-TAX-VW-001"},
+    vignette:{expiryDate:"2027-02-28",reference:"DEMO-VIG-VW-001"},
+    inspection:{expiryDate:"2027-05-10",reference:"DEMO-MOT-VW-001"}
+   }},
   {id:"demo-dacia",make:"Dacia",model:"Duster 1.6 LPG",registration:"PB 9012 MH",year:"2019",engine:"1.6 бензин / LPG",fuel:"LPG",power:"84 kW / 114 hp",transmission:"Ръчна",vin:"DEMO0000000000003",mileage:"76400",color:"Бял",
    fuelLog:[
     {id:"dac-f1",date:"2026-10-04",fuelType:"lpg",litres:38,pricePerLitre:0.68,total:25.84,odometer:75000,fullTank:true},
@@ -119,9 +177,28 @@ function createDemoVehicles(){
     {id:"dac-f4",date:"2026-10-31",fuelType:"lpg",litres:35,pricePerLitre:0.71,total:24.85,odometer:76200,fullTank:true}
    ],
    expenses:[
-    {id:"dac-e1",date:"2026-10-08",category:"other",description:"Автомивка и почистване на салона",amount:24,odometer:"75120"},
-    {id:"dac-e2",date:"2026-10-18",category:"maintenance",description:"Реглаж на преден мост",amount:42,odometer:"75480"}
-   ]}
+    {id:"dac-e1",date:"2026-10-08",category:"washing",description:"Автомивка и почистване на салона",amount:24,odometer:"75120"},
+    {id:"dac-e2",date:"2026-10-18",category:"maintenance",description:"Реглаж на преден мост",amount:42,odometer:"75480"},
+    {id:"dac-e3",date:"2026-10-21",category:"parts",description:"Филтър за газова уредба",amount:32,odometer:"75600"},
+    {id:"dac-e4",date:"2026-10-24",category:"parking",description:"Паркинг",amount:5,odometer:"75800"},
+    {id:"dac-e5",date:"2026-10-28",category:"tolls",description:"Пътни такси",amount:7.5,odometer:"76050"},
+    {id:"dac-e6",date:"2026-10-30",category:"accessories",description:"Стелки за купето",amount:29,odometer:"76200"}
+   ],
+   serviceLog:[
+    {id:"dac-s1",date:"2026-08-22",type:"oil",odometer:73500,description:"Масло 5W-40 и маслен филтър",cost:88,nextDueDate:"2027-02-22",nextDueOdometer:83500},
+    {id:"dac-s2",date:"2026-08-22",type:"filters",odometer:73500,description:"Въздушен и купе филтър",cost:35},
+    {id:"dac-s3",date:"2026-07-14",type:"coolant",odometer:72100,description:"Проверка на охладителна течност",cost:18},
+    {id:"dac-s4",date:"2026-05-17",type:"tyres",odometer:70000,description:"Смяна на гуми и баланс",cost:48},
+    {id:"dac-s5",date:"2026-04-09",type:"airConditioning",odometer:68600,description:"Почистване и зареждане на климатик",cost:65},
+    {id:"dac-s6",date:"2026-02-12",type:"diagnostics",odometer:66800,description:"Диагностика на бензинова и LPG система",cost:30}
+   ],
+   documents:{
+    insurance:{expiryDate:"2027-04-10",reference:"DEMO-GO-DAC-001"},
+    casco:{expiryDate:"2027-04-10",reference:"DEMO-CASCO-DAC-001"},
+    tax:{expiryDate:"2027-05-31",reference:"DEMO-TAX-DAC-001"},
+    vignette:{expiryDate:"2027-03-31",reference:"DEMO-VIG-DAC-001"},
+    inspection:{expiryDate:"2027-04-25",reference:"DEMO-GTP-DAC-001"}
+   }}
  ];
 }
 function loadVehicles(){
@@ -193,7 +270,7 @@ function renderHistory(){
   vehicles.forEach(car=>{
     (car.fuelLog||[]).forEach(item=>entries.push({date:item.date||"",car:car.make+" "+car.model,kind:t("historyFuel"),description:(item.litres||0)+" L · "+(item.odometer||"—")+" km",amount:Number(item.total)||0}));
     (car.expenses||[]).forEach(item=>entries.push({date:item.date||"",car:car.make+" "+car.model,kind:t("historyExpense"),description:item.description||t(item.category)||t("other"),amount:Number(item.amount)||0}));
-    (car.serviceLog||[]).forEach(item=>entries.push({date:item.date||"",car:car.make+" "+car.model,kind:st("record"),description:(st(item.type)||st("other"))+" · "+(item.description||"")+" · "+(item.odometer||"—")+" km",amount:Number(item.cost)||0}));
+    (car.serviceLog||[]).forEach(item=>entries.push({date:item.date||"",car:car.make+" "+car.model,kind:st("record"),description:serviceActivityLabel(item.type)+" · "+(item.description||"")+" · "+(item.odometer||"—")+" km",amount:Number(item.cost)||0}));
   });
   entries.sort((a,b)=>b.date.localeCompare(a.date));
   target.innerHTML=entries.length?entries.map(item=>'<article class="combined-history-entry"><div><span class="history-kind">'+item.kind+'</span><strong>'+escapeHtml(item.car)+'</strong><small>'+escapeHtml(item.date)+' · '+escapeHtml(item.description)+'</small></div><strong>'+formatMoney(item.amount)+'</strong></article>').join(""):'<div class="empty-state">'+t("historyEmpty")+'</div>';
@@ -217,14 +294,14 @@ function renderExpenses(car){
  const entries=[...(car.expenses||[])].sort((a,b)=>b.date.localeCompare(a.date));
  const total=entries.reduce((sum,item)=>sum+(Number(item.amount)||0),0)+(car.serviceLog||[]).reduce((sum,item)=>sum+(Number(item.cost)||0),0);
  $("#expenseTotal").textContent=formatMoney(total);
- const categoryKeys=["repair","maintenance","parts","tyres","insurance","taxes","other"];
- $("#expenseHistory").innerHTML=entries.length?entries.map(item=>'<article class="expense-entry"><div><strong>'+escapeHtml(item.date)+' · '+escapeHtml(t(categoryKeys.includes(item.category)?item.category:"other"))+'</strong><small>'+escapeHtml(item.description||t("notSet"))+(item.odometer!==""&&item.odometer!=null?' · '+escapeHtml(item.odometer)+' km':"")+'</small></div><div class="expense-entry-values"><strong>'+formatMoney(Number(item.amount)||0)+'</strong><button class="expense-delete" type="button" data-delete-expense="'+escapeHtml(item.id)+'">'+t("deleteExpense")+'</button></div></article>').join(""):'<p class="empty-fuel">'+t("emptyExpenses")+'</p>';
+ 
+ $("#expenseHistory").innerHTML=entries.length?entries.map(item=>'<article class="expense-entry"><div><strong>'+escapeHtml(item.date)+' · '+escapeHtml(expenseCategoryLabel(item.category))+'</strong><small>'+escapeHtml(item.description||t("notSet"))+(item.odometer!==""&&item.odometer!=null?' · '+escapeHtml(item.odometer)+' km':"")+'</small></div><div class="expense-entry-values"><strong>'+formatMoney(Number(item.amount)||0)+'</strong><button class="expense-delete" type="button" data-delete-expense="'+escapeHtml(item.id)+'">'+t("deleteExpense")+'</button></div></article>').join(""):'<p class="empty-fuel">'+t("emptyExpenses")+'</p>';
 }
 
 function renderServiceTypes(){
  const select=$("#serviceType"),current=select.value;
- const types=["oil","filters","brakes","tyres","battery","belts","general","other"];
- select.innerHTML=types.map(type=>'<option value="'+type+'">'+escapeHtml(st(type))+'</option>').join("");
+ const types=serviceActivityTypes;
+ select.innerHTML=types.map(type=>'<option value="'+type+'">'+escapeHtml(serviceActivityLabel(type))+'</option>').join("");
  if(types.includes(current))select.value=current;
 }
 function renderService(car){
@@ -237,7 +314,7 @@ function renderService(car){
   const due=(plan.nextDueDate&&plan.nextDueDate<=new Date().toISOString().slice(0,10))||(plan.nextDueOdometer&&Number(car.mileage)>=Number(plan.nextDueOdometer));
   summary.innerHTML='<strong>'+st("assistant")+'</strong><p>'+escapeHtml([date,km].filter(Boolean).join(" · "))+'</p><small>'+st(due?"due":"planned")+'</small>';
  }else{summary.innerHTML='<strong>'+st("assistant")+'</strong><p>'+st("noPlan")+'</p>';}
- $("#serviceHistory").innerHTML=records.length?records.map(item=>'<article class="service-entry"><div><strong>'+escapeHtml(item.date)+' · '+escapeHtml(st(item.type)||st("other"))+'</strong><small>'+escapeHtml(item.description||"")+' · '+escapeHtml(item.odometer)+' km</small>'+(item.nextDueDate||item.nextDueOdometer?'<small>'+st("nextService")+': '+escapeHtml([item.nextDueDate,item.nextDueOdometer?Number(item.nextDueOdometer).toLocaleString(locale())+" km":""].filter(Boolean).join(" · "))+'</small>':"")+'</div><div class="service-entry-values"><strong>'+formatMoney(Number(item.cost)||0)+'</strong><button class="service-delete" type="button" data-delete-service="'+escapeHtml(item.id)+'">'+st("delete")+'</button></div></article>').join(""):'<p class="empty-fuel">'+st("empty")+'</p>';
+ $("#serviceHistory").innerHTML=records.length?records.map(item=>'<article class="service-entry"><div><strong>'+escapeHtml(item.date)+' · '+escapeHtml(serviceActivityLabel(item.type))+'</strong><small>'+escapeHtml(item.description||"")+' · '+escapeHtml(item.odometer)+' km</small>'+(item.nextDueDate||item.nextDueOdometer?'<small>'+st("nextService")+': '+escapeHtml([item.nextDueDate,item.nextDueOdometer?Number(item.nextDueOdometer).toLocaleString(locale())+" km":""].filter(Boolean).join(" · "))+'</small>':"")+'</div><div class="service-entry-values"><strong>'+formatMoney(Number(item.cost)||0)+'</strong><button class="service-delete" type="button" data-delete-service="'+escapeHtml(item.id)+'">'+st("delete")+'</button></div></article>').join(""):'<p class="empty-fuel">'+st("empty")+'</p>';
 }
 function renderServiceLanguage(){
  $("#serviceSectionTitle").textContent=st("title");
@@ -260,7 +337,7 @@ function renderProfile(car){
 function render(){
   document.documentElement.lang=language;
   document.querySelectorAll("[data-i18n]").forEach(el=>{el.textContent=t(el.dataset.i18n);});
-  renderLanguageOptions();renderFuelOptions();renderServiceLanguage();
+  renderLanguageOptions();renderFuelOptions();renderExpenseOptions();renderServiceLanguage();
   const demoNotice=$("#demoNotice");if(demoNotice)demoNotice.hidden=!DEMO_MODE;
   $("#carCount").textContent=vehicles.length+" / 3";
   $("#carList").innerHTML=vehicles.length?vehicles.map(car=>`<article class="car-card" data-open-profile="${escapeHtml(car.id)}" tabindex="0" role="button" aria-label="${t("profile")}: ${escapeHtml(car.make)} ${escapeHtml(car.model)}"><div class="car-card-top"><div class="car-symbol" aria-hidden="true">🚗</div><div class="car-actions"><button class="edit-button" type="button" data-edit="${escapeHtml(car.id)}" aria-label="${t("edit")}" title="${t("edit")}">✎</button><button class="delete-button" type="button" data-delete="${escapeHtml(car.id)}" aria-label="${t("remove")}" title="${t("remove")}">×</button></div></div><h3>${escapeHtml(car.make)} ${escapeHtml(car.model)}</h3><p class="car-meta">${car.year?escapeHtml(car.year):t("unknownYear")}</p><span class="car-registration">${escapeHtml((car.registration||"").toUpperCase())}</span><p class="card-hint">${t("tapProfile")}</p></article>`).join(""):`<div class="empty-state">${t("empty")}</div>`;
