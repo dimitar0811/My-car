@@ -76,6 +76,22 @@
   <div id="serviceHistory" class="service-history"></div>
 </section>
 
+<section id="documentSection" class="document-section">
+  <div class="service-heading"><div><p class="eyebrow">DOCUMENTS & REMINDERS</p><h3 id="documentSectionTitle">Документи и срокове</h3></div></div>
+  <p id="documentIntro" class="service-intro">Въведи датата на валидност. Ще виждаш предупреждение 30, 15 и 7 дни предварително.</p>
+  <form id="documentForm" class="document-form">
+    <div class="document-grid">
+      <article class="document-item"><h4 id="doc-insurance-heading">Застраховка</h4><label><span id="doc-insurance-expiry-label">Валидна до</span><input id="doc-insurance-date" type="date"></label><label><span id="doc-insurance-reference-label">Номер / бележка</span><input id="doc-insurance-reference" maxlength="80" type="text"></label><p id="doc-insurance-status" class="document-status"></p></article>
+      <article class="document-item"><h4 id="doc-tax-heading">Данък МПС</h4><label><span id="doc-tax-expiry-label">Платен / валиден до</span><input id="doc-tax-date" type="date"></label><label><span id="doc-tax-reference-label">Номер / бележка</span><input id="doc-tax-reference" maxlength="80" type="text"></label><p id="doc-tax-status" class="document-status"></p></article>
+      <article class="document-item"><h4 id="doc-vignette-heading">Винетка</h4><label><span id="doc-vignette-expiry-label">Валидна до</span><input id="doc-vignette-date" type="date"></label><label><span id="doc-vignette-reference-label">Номер / бележка</span><input id="doc-vignette-reference" maxlength="80" type="text"></label><p id="doc-vignette-status" class="document-status"></p></article>
+      <article class="document-item"><h4 id="doc-inspection-heading">ГТП / MOT</h4><label><span id="doc-inspection-expiry-label">Валидна до</span><input id="doc-inspection-date" type="date"></label><label><span id="doc-inspection-reference-label">Номер / бележка</span><input id="doc-inspection-reference" maxlength="80" type="text"></label><p id="doc-inspection-status" class="document-status"></p></article>
+    </div>
+    <button id="documentSave" class="primary-button" type="submit">Запази сроковете</button>
+    <button id="documentNotify" class="secondary-button" type="button">Разреши известия</button>
+    <p id="documentPermissionHelp" class="service-intro">Известията се показват, когато приложението е отворено или бъде отворено отново.</p>
+  </form>
+</section>
+
 <section class="fuel-section"><div class="fuel-heading"><div><p class="eyebrow" data-i18n="fuelLog">FUEL LOG</p><h3 data-i18n="fuelHeading">Гориво</h3></div><div class="consumption-box"><small data-i18n="average">Среден разход</small><strong id="averageConsumption">—</strong></div></div>
 <form id="fuelForm" class="fuel-form">
 <div class="form-row"><label><span data-i18n="date">Дата</span><input id="fuelDate" type="date" required></label><label><span data-i18n="fuelType">Вид гориво</span><select id="fuelType" required></select></label></div>
