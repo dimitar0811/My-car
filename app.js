@@ -99,7 +99,7 @@ function createDemoVehicles(){
 }
 function loadVehicles(){
  const key=DEMO_MODE?DEMO_STORAGE_KEY:STORAGE_KEY;
- try{const saved=JSON.parse(localStorage.getItem(key)||"null");if(Array.isArray(saved))return saved;}catch{}
+ try{const saved=JSON.parse(localStorage.getItem(key)||"null");if(Array.isArray(saved)){if(DEMO_MODE){let changed=false;saved.forEach((car,index)=>{if(!Array.isArray(car.documents)){car.documents=createDemoDocuments(index*4);changed=true;}});if(changed)localStorage.setItem(key,JSON.stringify(saved));}return saved;}}catch{}
  if(DEMO_MODE){const samples=createDemoVehicles();localStorage.setItem(DEMO_STORAGE_KEY,JSON.stringify(samples));return samples;}
  try{const data=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");return Array.isArray(data)?data:[];}catch{return [];}
 }
