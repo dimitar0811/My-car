@@ -40,8 +40,15 @@
     </section>
     <section id="carProfileSection" class="form-card profile-card" hidden>
       <button id="backToGarage" class="back-button" type="button" data-i18n="back">← Обратно към гаража</button>
-      <p class="eyebrow" data-i18n="profile">ПРОФИЛ НА АВТОМОБИЛА</p>
-      <h2 id="profileTitle"></h2><span id="profileRegistration" class="car-registration"></span>
+      <div class="profile-hero">
+        <div class="profile-vehicle-icon" aria-hidden="true">🚘</div>
+        <div class="profile-vehicle-copy">
+          <p class="eyebrow" data-i18n="profile">ПРОФИЛ НА АВТОМОБИЛА</p>
+          <h2 id="profileTitle"></h2><span id="profileRegistration" class="car-registration"></span>
+        </div>
+        <div class="profile-mileage"><span data-i18n="mileage">Пробег (км)</span><strong id="profileMileage">—</strong></div>
+      </div>
+      <div class="profile-section-heading"><div><p class="eyebrow" data-i18n="vehicleOverview">OVERVIEW</p><h3 data-i18n="vehicleDetailsTitle">Данни за автомобила</h3></div></div>
       <div id="profileDetails" class="profile-grid"></div>
       <button id="profileEdit" class="primary-button" type="button" data-i18n="edit">Редактирай</button>
 <section class="fuel-section"><div class="fuel-heading"><div><p class="eyebrow" data-i18n="fuelLog">FUEL LOG</p><h3 data-i18n="fuelHeading">Гориво</h3></div><div class="consumption-box"><small data-i18n="average">Среден разход</small><strong id="averageConsumption">—</strong></div></div>
