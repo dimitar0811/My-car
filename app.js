@@ -31,6 +31,32 @@ const serviceText = {
 };
 function st(key){return serviceText[language]?.[key]||serviceText.en[key]||key;}
 
+const documentText={
+ bg:{title:"Документи и срокове",intro:"Въведи датата на валидност. Ще виждаш предупреждение 30, 15 и 7 дни предварително.",insurance:"Застраховка",tax:"Данък МПС",vignette:"Винетка",inspection:"ГТП / MOT",expiry:"Валидна до",reference:"Номер / бележка",save:"Запази сроковете",notify:"Разреши известия",permission:"Известията се показват, когато приложението е отворено или бъде отворено отново.",expired:"Изтекъл срок",today:"Изтича днес",days:"Остават {n} дни",missing:"Не е въведена дата",saved:"Сроковете са запазени.",permissionGranted:"Известията са разрешени.",permissionDenied:"Известията не са разрешени от браузъра."},
+ en:{title:"Documents & expiry dates",intro:"Enter each expiry date. Get alerts 30, 15 and 7 days beforehand.",insurance:"Insurance",tax:"Vehicle tax",vignette:"Road vignette",inspection:"Inspection / MOT",expiry:"Valid until",reference:"Reference / note",save:"Save dates",notify:"Enable notifications",permission:"Notifications appear while the app is open or when you open it again.",expired:"Expired",today:"Expires today",days:"{n} days left",missing:"No date entered",saved:"Expiry dates saved.",permissionGranted:"Notifications are enabled.",permissionDenied:"Notifications are blocked by the browser."},
+ es:{title:"Documentos y vencimientos",intro:"Introduce cada fecha de caducidad. Recibe avisos 30, 15 y 7 días antes.",insurance:"Seguro",tax:"Impuesto del vehículo",vignette:"Viñeta",inspection:"Inspección técnica / ITV",expiry:"Válido hasta",reference:"Referencia / nota",save:"Guardar fechas",notify:"Activar notificaciones",permission:"Los avisos aparecen mientras la aplicación está abierta o al volver a abrirla.",expired:"Caducado",today:"Caduca hoy",days:"Quedan {n} días",missing:"Sin fecha",saved:"Fechas guardadas.",permissionGranted:"Notificaciones activadas.",permissionDenied:"El navegador ha bloqueado las notificaciones."},
+ de:{title:"Dokumente und Ablaufdaten",intro:"Trage jedes Ablaufdatum ein. Erinnerungen 30, 15 und 7 Tage vorher.",insurance:"Versicherung",tax:"Kfz-Steuer",vignette:"Vignette",inspection:"HU / MOT",expiry:"Gültig bis",reference:"Referenz / Notiz",save:"Daten speichern",notify:"Benachrichtigungen aktivieren",permission:"Hinweise erscheinen, solange die App geöffnet ist oder erneut geöffnet wird.",expired:"Abgelaufen",today:"Läuft heute ab",days:"Noch {n} Tage",missing:"Kein Datum eingetragen",saved:"Ablaufdaten gespeichert.",permissionGranted:"Benachrichtigungen aktiviert.",permissionDenied:"Benachrichtigungen sind im Browser blockiert."},
+ pt:{title:"Documentos e validade",intro:"Introduz cada data de validade. Recebe avisos 30, 15 e 7 dias antes.",insurance:"Seguro",tax:"Imposto do veículo",vignette:"Vinheta",inspection:"Inspeção / MOT",expiry:"Válido até",reference:"Referência / nota",save:"Guardar datas",notify:"Ativar notificações",permission:"Os avisos aparecem enquanto a aplicação está aberta ou quando a abres novamente.",expired:"Expirado",today:"Expira hoje",days:"Faltam {n} dias",missing:"Sem data",saved:"Datas guardadas.",permissionGranted:"Notificações ativadas.",permissionDenied:"O navegador bloqueou as notificações."},
+ ru:{title:"Документы и сроки",intro:"Укажи даты окончания действия. Напоминания за 30, 15 и 7 дней.",insurance:"Страховка",tax:"Транспортный налог",vignette:"Виньетка",inspection:"Техосмотр / MOT",expiry:"Действует до",reference:"Номер / примечание",save:"Сохранить даты",notify:"Включить уведомления",permission:"Уведомления появляются, когда приложение открыто или открывается снова.",expired:"Срок истёк",today:"Истекает сегодня",days:"Осталось {n} дн.",missing:"Дата не указана",saved:"Сроки сохранены.",permissionGranted:"Уведомления включены.",permissionDenied:"Браузер заблокировал уведомления."}
+};
+function dt(key){return documentText[language]?.[key]||documentText.en[key]||key;}
+const documentTypes=["insurance","tax","vignette","inspection"];
+function ensureDocuments(car){if(!car.documents||typeof car.documents!=="object")car.documents={};documentTypes.forEach(type=>{if(!car.documents[type])car.documents[type]={expiryDate:"",reference:""};});return car.documents;}
+function documentDays(date){if(!date)return null;const now=new Date();now.setHours(0,0,0,0);const due=new Date(date+"T00:00:00");return Math.ceil((due-now)/86400000);}
+function documentStatus(date){const days=documentDays(date);if(days===null)return dt("missing");if(days<0)return dt("expired");if(days===0)return dt("today");return dt("days").replace("{n}",days);}
+function renderDocuments(car){
+ const docs=ensureDocuments(car);
+ $("#documentSectionTitle").textContent=dt("title");$("#documentIntro").textContent=dt("intro");$("#documentSave").textContent=dt("save");$("#documentNotify").textContent=dt("notify");$("#documentPermissionHelp").textContent=dt("permission");
+ documentTypes.forEach(type=>{const heading=$("#doc-"+type+"-heading"),expiry=$("#doc-"+type+"-expiry-label"),reference=$("#doc-"+type+"-reference-label");if(heading)heading.textContent=dt(type);if(expiry)expiry.textContent=dt("expiry");if(reference)reference.textContent=dt("reference");});
+ documentTypes.forEach(type=>{const date=$("#doc-"+type+"-date"),ref=$("#doc-"+type+"-reference"),status=$("#doc-"+type+"-status");if(date&&document.activeElement!==date)date.value=docs[type].expiryDate||"";if(ref&&document.activeElement!==ref)ref.value=docs[type].reference||"";if(status){status.textContent=documentStatus(docs[type].expiryDate);const days=documentDays(docs[type].expiryDate);status.dataset.state=days===null?"missing":days<0?"expired":days<=30?"warning":"ok";}});
+}
+function checkDocumentNotifications(){
+ const sent=JSON.parse(localStorage.getItem("my-car-document-alerts-v1")||"{}");let changed=false;
+ vehicles.forEach(car=>documentTypes.forEach(type=>{const doc=ensureDocuments(car)[type],days=documentDays(doc.expiryDate);if(days===null)return;[30,15,7].forEach(mark=>{const key=[car.id,type,doc.expiryDate,mark].join("|");if(days<=mark&&days>(mark===30?15:mark===15?7:0)&&!sent[key]){if("Notification" in window&&Notification.permission==="granted")new Notification("Ma-car · "+dt(type),{body:car.make+" "+car.model+": "+dt("days").replace("{n}",days)});sent[key]=true;changed=true;}});}));
+ vehicles.forEach(car=>documentTypes.forEach(type=>{const doc=ensureDocuments(car)[type],days=documentDays(doc.expiryDate);if(days===null||days>0)return;const key=[car.id,type,doc.expiryDate,days===0?"today":"expired"].join("|");if(!sent[key]){if("Notification" in window&&Notification.permission==="granted")new Notification("Ma-car · "+dt(type),{body:car.make+" "+car.model+": "+(days===0?dt("today"):dt("expired"))});sent[key]=true;changed=true;}}));
+ if(changed)localStorage.setItem("my-car-document-alerts-v1",JSON.stringify(sent));
+}
+
 const languageNames = {bg:"🇧🇬 Български",en:"🇬🇧 English",es:"🇪🇸 Español",de:"🇩🇪 Deutsch",pt:"🇵🇹 Português",ru:"🇷🇺 Русский"};
 let language = localStorage.getItem("my-car-language") || (translations[navigator.language?.toLowerCase()] ? navigator.language.toLowerCase() : (translations[navigator.language?.slice(0,2)] ? navigator.language.slice(0,2) : "en"));
 let vehicles = loadVehicles();
@@ -134,11 +160,13 @@ function renderAssistantPanel(){
   const dateDue=!!date&&date<=today,kmDue=nextKm!==null&&Number.isFinite(Number(car.mileage))&&car.mileage!==""&&Number(car.mileage)>=nextKm;
   return {car,record,date,nextKm,due:dateDue||kmDue};
  })).sort((a,b)=>Number(b.due)-Number(a.due)||(a.date||"9999-12-31").localeCompare(b.date||"9999-12-31"));
+ const documentItems=vehicles.flatMap(car=>documentTypes.map(type=>({car,type,doc:ensureDocuments(car)[type],days:documentDays(ensureDocuments(car)[type].expiryDate)})).filter(x=>x.days!==null&&x.days<=30));
  const cards=items.slice(0,5).map(({car,record,date,nextKm,due})=>{
   const when=[date?new Date(date+"T00:00:00").toLocaleDateString(locale()):"",nextKm!==null?nextKm.toLocaleString(locale())+" km":""].filter(Boolean).join(" · ");
   return '<article class="assistant-item"><div class="assistant-item-main"><strong>'+escapeHtml(car.make+" "+car.model)+' · '+escapeHtml(st(record.type)||st("other"))+'</strong><p>'+escapeHtml(when)+'</p><small>'+escapeHtml(assistantText(due?"due":"planned"))+'</small><small>'+escapeHtml(assistantText("basis"))+'</small></div><button type="button" class="secondary-button assistant-open" data-assistant-car="'+escapeHtml(car.id)+'">'+escapeHtml(assistantText("open"))+'</button></article>';
  }).join("");
- panel.innerHTML='<div class="assistant-panel-heading"><div><p class="eyebrow">MA-CAR</p><h3>'+escapeHtml(assistantText("title"))+'</h3></div></div><p class="assistant-intro">'+escapeHtml(assistantText("intro"))+'</p>'+(cards||'<p class="assistant-empty">'+escapeHtml(vehicles.length?assistantText("noPlan"):assistantText("empty"))+'</p>');
+ const documentCards=documentItems.map(x=>'<article class="assistant-item"><div class="assistant-item-main"><strong>'+escapeHtml(x.car.make+" "+x.car.model)+" · "+escapeHtml(dt(x.type))+'</strong><p>'+escapeHtml(documentStatus(x.doc.expiryDate))+'</p><small>'+escapeHtml(x.doc.reference||"")+'</small></div><button type="button" class="secondary-button assistant-open" data-assistant-car="'+escapeHtml(x.car.id)+'">'+escapeHtml(assistantText("open"))+'</button></article>').join("");
+ panel.innerHTML='<div class="assistant-panel-heading"><div><p class="eyebrow">MA-CAR</p><h3>'+escapeHtml(assistantText("title"))+'</h3></div></div><p class="assistant-intro">'+escapeHtml(assistantText("intro"))+'</p>'+(cards+documentCards||'<p class="assistant-empty">'+escapeHtml(vehicles.length?assistantText("noPlan"):assistantText("empty"))+'</p>');
 }
 
 function renderHistory(){
@@ -209,6 +237,7 @@ function renderProfile(car){
   renderFuel(car);
   renderExpenses(car);
   renderService(car);
+  renderDocuments(car);
 }
 function render(){
   document.documentElement.lang=language;
@@ -278,6 +307,16 @@ $("#serviceHistory").addEventListener("click",event=>{
  car.serviceLog=(car.serviceLog||[]).filter(item=>item.id!==button.dataset.deleteService);saveVehicles();renderService(car);renderHistory();renderHome();renderExpenses(car);
 });
 
+
+$("#documentForm").addEventListener("submit",event=>{
+ event.preventDefault();const car=vehicles.find(item=>item.id===selectedVehicleId);if(!car)return;const docs=ensureDocuments(car);
+ documentTypes.forEach(type=>{docs[type]={expiryDate:$("#doc-"+type+"-date").value,reference:$("#doc-"+type+"-reference").value.trim()};});
+ saveVehicles();renderDocuments(car);renderHome();alert(dt("saved"));checkDocumentNotifications();
+});
+$("#documentNotify").addEventListener("click",async()=>{if(!("Notification" in window)){alert(dt("permissionDenied"));return;}const result=await Notification.requestPermission();alert(result==="granted"?dt("permissionGranted"):dt("permissionDenied"));checkDocumentNotifications();});
+window.addEventListener("focus",checkDocumentNotifications);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)checkDocumentNotifications();});
+
 $("#expenseForm").addEventListener("submit",event=>{
  event.preventDefault();const car=vehicles.find(item=>item.id===selectedVehicleId);if(!car)return;
  const amount=Number($("#expenseAmount").value),odometer=$("#expenseOdometer").value;
@@ -310,3 +349,4 @@ $("#carList").addEventListener("click",event=>{
 $("#carList").addEventListener("keydown",event=>{if((event.key==="Enter"||event.key===" ")&&event.target.matches("[data-open-profile]")){event.preventDefault();openProfile(event.target.dataset.openProfile);}});
 if("serviceWorker" in navigator&&location.protocol!=="file:"){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}
 render();
+checkDocumentNotifications();
