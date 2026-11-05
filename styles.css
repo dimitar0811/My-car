@@ -423,3 +423,28 @@ body{background:#ffffff!important}
 input,select{background:#fff;color:#12345b;border-color:#9bbde6}
 label{color:#24476f}
 .home-note,footer{color:#58708f}
+
+
+/* Tactile pop-forward feedback when a button is pressed */
+button,.nav-button,.round-shortcut,.home-car-tile{
+  position:relative;
+  transform:translateZ(0) scale(1);
+  transition:transform .22s cubic-bezier(.2,.85,.25,1.35),box-shadow .22s ease,filter .22s ease;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+button:active,.nav-button:active,.round-shortcut:active,.home-car-tile:active{
+  transform:perspective(600px) translateY(-5px) scale(1.12)!important;
+  z-index:5;
+  box-shadow:0 14px 28px #073b8a55,0 0 0 3px #69baff88,inset 0 2px 8px #ffffff55!important;
+  filter:brightness(1.08);
+}
+@media(hover:hover){
+ button:hover,.nav-button:hover,.round-shortcut:hover,.home-car-tile:hover{
+  transform:translateY(-3px) scale(1.035);
+  box-shadow:0 10px 22px #073b8a30;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ button,.nav-button,.round-shortcut,.home-car-tile{transition:none}
+}
