@@ -341,3 +341,41 @@ button{transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}button:
 .main-nav{padding-left:6px;padding-right:6px}
 }
 @media(prefers-reduced-motion:reduce){button{transition:none}}
+
+
+/* White button faces on the blue My Car background */
+.round-shortcut{
+  background:linear-gradient(145deg,#ffffff 0%,#eaf4ff 100%);
+  border:3px solid #8ed8ff;
+  color:#0750bd;
+  box-shadow:0 8px 20px #002b8a55,inset 0 2px 8px #ffffff;
+}
+.round-shortcut .shortcut-icon{
+  color:#075bd4;
+  text-shadow:none;
+}
+.round-shortcut:active{
+  background:#dceeff;
+  color:#003b9e;
+}
+.home-add-round,.hero-settings{
+  background:#fff;
+  color:#0756c8;
+  border:2px solid #a8ddff;
+}
+.nav-button{
+  background:#fff;
+  color:#0750bd;
+  border-color:#b8ddff;
+}
+.nav-button.active{
+  background:linear-gradient(145deg,#e7f5ff,#ffffff);
+  color:#0645b8;
+  border-color:#65caff;
+}
+.primary-button,.secondary-button,.add-button,.back-button,
+.edit-button,.delete-button,.icon-button{
+  background:#fff;
+  color:#0750bd;
+  border:1px solid #9bd5ff;
+}
