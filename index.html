@@ -17,7 +17,7 @@
     <label class="language-picker"><span class="sr-only">Language</span><select id="languageSelect" class="language-button" aria-label="Language"></select></label>
   </header>
   <main class="container">
-    <section class="hero"><div><p class="eyebrow" data-i18n="eyebrow">ТВОЯТ АВТОМОБИЛЕН ПОМОЩНИК</p><h1 data-i18n="heading">Всичко за автомобила. На едно място.</h1><p class="subtitle" data-i18n="subtitle">Следи автомобилите си, разходите и предстоящото обслужване лесно.</p></div><div class="hero-icon" aria-hidden="true">🚘</div></section>
+    <section class="hero"><div class="hero-brand"><span class="hero-car-mark" aria-hidden="true">🚘</span><div><p class="eyebrow">ТВОЯТ ИНТЕЛИГЕНТЕН</p><h1>My Car</h1><p class="subtitle">Автомобилният асистент</p></div></div><button class="hero-settings" type="button" data-home-action="settings" aria-label="Настройки">⚙</button></section>
 
     <nav class="main-nav" aria-label="Основна навигация">
       <button type="button" class="nav-button active" data-view="home" aria-current="page">Начало</button>
@@ -27,15 +27,19 @@
       <button type="button" class="nav-button demo-nav-button" id="demoScreenButton">Тестови коли и дейности</button>
     </nav>
     <section id="homeSection" class="dashboard-section">
-      <div class="section-heading"><div><p class="eyebrow">MA-CAR ASSISTANT</p><h2>Твоят автомобилен помощник</h2></div></div>
+      <div class="section-heading home-section-heading"><div><p class="eyebrow">ГАРАЖ</p><h2>Моите автомобили <span id="homeCarCount"></span></h2></div><button id="homeAddCarButton" class="home-add-round" type="button" aria-label="Добави автомобил">＋</button></div>
       <div id="homeVehicleSummary" class="home-vehicle-card"></div>
+      <div class="home-shortcuts" aria-label="Основни функции">
+        <button class="round-shortcut" type="button" data-home-action="fuel"><span class="shortcut-icon">⛽</span><span>Гориво<br>и разход</span></button>
+        <button class="round-shortcut" type="button" data-home-action="service"><span class="shortcut-icon">🔧</span><span>Сервиз<br>и поддръжка</span></button>
+        <button class="round-shortcut" type="button" data-home-action="documents"><span class="shortcut-icon">▤</span><span>Документи</span></button>
+        <button class="round-shortcut" type="button" data-home-action="reminders"><span class="shortcut-icon">♧</span><span>Напомняния</span></button>
+        <button class="round-shortcut" type="button" data-home-action="statistics"><span class="shortcut-icon">▥</span><span>Статистика</span></button>
+        <button class="round-shortcut" type="button" data-home-action="stations"><span class="shortcut-icon">⌖</span><span>Цени на горива</span></button>
+      </div>
       <div id="homeStats" class="home-stats"></div>
       <section id="assistantPanel" class="assistant-panel" aria-live="polite"></section>
-      <div class="home-actions">
-        <button id="homeVehiclesButton" class="primary-button" type="button">Моите автомобили</button>
-        <button id="homeAddCarButton" class="secondary-button" type="button">＋ Добави автомобил</button>
-      </div>
-      <p id="homeNote" class="home-note">Интелигентните напомняния и планът за поддръжка ще се добавят в следващите етапи.</p>
+      <p id="homeNote" class="home-note">Интелигентните напомняния и планът за поддръжка ще се показват тук.</p>
     </section>
     <section id="historySection" class="dashboard-section" hidden>
       <div class="section-heading"><div><p class="eyebrow">ЗАПИСИ</p><h2>История</h2></div></div>
