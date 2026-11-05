@@ -27,3 +27,72 @@ label{font-size:14px}
 input,select{font-size:16px}
 @media(max-width:560px){.add-button,.primary-button{width:108px;height:108px;min-width:108px;font-size:14px}.section-heading h2,.form-title h2{font-size:24px}}
 @media(prefers-reduced-motion:reduce){button,.language-button,.icon-button,.edit-button,.delete-button,.back-button,.expense-delete,.service-delete,.add-button,.primary-button{transition:none}}
+
+
+/* My Car visual refresh: blue header and premium dark dashboard */
+:root{
+  color-scheme:dark;
+  --mc-blue:#0868ee;
+  --mc-blue-deep:#0649b8;
+  --mc-bg:#071426;
+  --mc-panel:#10243b;
+  --mc-border:#1d4f85;
+  --mc-text:#f3f7ff;
+  --mc-muted:#a9bdd6;
+}
+body{background:radial-gradient(ellipse at 50% 0%,#12365e 0%,#091a30 42%,#06111f 100%);color:var(--mc-text)}
+.topbar{background:linear-gradient(110deg,#0750c7,#0879ff 55%,#0647b5);box-shadow:0 5px 22px #001b4a80}
+.brand-mark{background:#fff;color:#0756c8;border-radius:11px}
+.topbar .language-button{border-color:#80b8ff;color:#fff;background:#ffffff12}
+.container{max-width:1000px}
+.hero{background:linear-gradient(120deg,#087cff 0%,#0757d8 55%,#063b9a 100%);border:1px solid #318aff;border-radius:24px;box-shadow:0 14px 32px #001c4b70}
+.hero .eyebrow{color:#d1e6ff}
+.hero h1{color:#fff}
+.subtitle{color:#e0edff}
+.hero-icon{filter:drop-shadow(0 10px 15px #001b4a80)}
+.section-heading h2,.form-title h2,.fuel-heading h3,.expense-heading h3,.history-title,.profile-card h2{color:#f3f7ff}
+.section-heading .eyebrow,.eyebrow{color:#8eb9ed}
+.count{background:#123b69;color:#d7eaff;border:1px solid #2866a4}
+.car-list{gap:16px}
+.car-card,.form-card{background:linear-gradient(145deg,#142c47,#0b1b30);border:1px solid #20548b;border-radius:20px;box-shadow:0 10px 26px #0005}
+.car-card:hover{border-color:#48a0ff;box-shadow:0 12px 28px #001c4b80}
+.car-symbol{background:#0c4d9b;color:#fff}
+.car-card h3{color:#fff}
+.car-meta,.note,.card-hint{color:#b0c7e1}
+.car-registration{background:#173b60;color:#d9eaff}
+.add-button{width:108px;height:108px;min-width:108px;margin:20px auto 0;padding:12px;border:2px solid #65adff;border-radius:50%;background:linear-gradient(145deg,#168cff,#0751cf);color:#fff;box-shadow:0 8px 22px #0068e866;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.15;font-size:13px}
+.add-button span:first-child{font-size:27px;line-height:1}
+.add-button:hover{transform:translateY(-2px);filter:brightness(1.08)}
+button,.language-button,.icon-button,.edit-button,.delete-button,.back-button,.expense-delete,.service-delete{transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+button:active,.language-button:active,.icon-button:active,.edit-button:active,.delete-button:active,.back-button:active,.expense-delete:active,.service-delete:active,.add-button:active,.primary-button:active{transform:scale(1.055);filter:brightness(1.12)}
+.primary-button{width:auto;height:auto;min-width:0;margin:8px 0;padding:14px 22px;border:1px solid #3c98ff;border-radius:13px;background:linear-gradient(120deg,#087cff,#0752ce);color:#fff;font-size:16px;box-shadow:0 6px 18px #0068e844;display:inline-flex;flex-direction:row}
+.primary-button:hover{transform:translateY(-1px);filter:brightness(1.08)}
+.edit-button{background:#153e68;color:#e7f3ff}
+.delete-button{color:#b8c9dd}
+.icon-button{background:#173b60;color:#e7f3ff;border-color:#2b6094}
+.back-button{color:#82bdff}
+form{color:#eaf3ff}
+label{color:#d5e6fa}
+input,select{background:#091a2d;border-color:#315477;color:#f4f8ff}
+input::placeholder{color:#7892ad}
+input:focus,select:focus{border-color:#4b9fff;box-shadow:0 0 0 3px #238aff30}
+.detail-item,.fuel-entry,.expense-entry{background:#0b1c30;border:1px solid #1b4168;color:#edf5ff}
+.detail-item span,.fuel-entry small,.expense-entry small{color:#a9bdd6}
+.consumption-box,.expense-total{background:#12365b;border:1px solid #245b91}
+.consumption-box small,.expense-total small{color:#b5d2ef}
+.consumption-box strong,.expense-total strong{color:#8fc2ff}
+.fuel-section,.expense-section{border-color:#25496e}
+.fuel-consumption{color:#8fc2ff}
+.empty-state{background:#10243b;border-color:#315477;color:#c3d6eb}
+.empty-fuel{color:#b0c7e1}
+.demo-notice{background:#3a2c12;border-color:#98712a;color:#ffe7ae}
+.demo-notice a{color:#9dccff}
+footer{color:#8ea7c3;border-color:#24415f}
+@media(max-width:560px){
+ .container{padding:22px 15px}
+ .hero{padding:24px 20px;border-radius:20px}
+ .topbar{padding:0 16px}
+ .add-button{width:100px;height:100px;min-width:100px}
+ .car-card{padding:17px}
+}
+@media(prefers-reduced-motion:reduce){button,.language-button,.icon-button,.edit-button,.delete-button,.back-button,.expense-delete,.service-delete,.add-button,.primary-button{transition:none}}
