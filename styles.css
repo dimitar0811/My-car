@@ -294,3 +294,50 @@ button:active,.nav-button:active,.primary-button:active,.secondary-button:active
 @media(prefers-reduced-motion:reduce){
   button,.nav-button,.primary-button,.secondary-button,.add-button{transition:none}
 }
+
+/* Full glossy blue dashboard inspired by the approved visual reference */
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#fff;background:#0646c8}
+html,body{background:linear-gradient(145deg,#0758df 0%,#0878f4 48%,#0535ad 100%);color:#fff}
+body{min-height:100vh}.topbar{display:none}
+.container{max-width:1040px;padding:18px 16px 120px}
+.hero{min-height:132px;margin:0 -16px 16px;padding:22px;background:linear-gradient(120deg,#003db6,#0877f4 70%,#19a2ff);box-shadow:0 8px 26px #002b8a66;border-bottom:2px solid #36caff;border-radius:0 0 25px 25px}
+.hero-brand{display:flex;align-items:center;gap:16px}.hero-car-mark{font-size:58px;filter:drop-shadow(0 5px 8px #001c6a88)}
+.hero h1{font-size:clamp(34px,7vw,48px);letter-spacing:-1px;line-height:1;margin:0;color:white}
+.hero .eyebrow{font-size:11px;color:#bfe7ff;margin:0 0 5px}.hero .subtitle{font-size:17px;color:#e2f4ff;margin:5px 0 0}
+.hero-settings{width:52px;height:52px;border-radius:50%;border:1px solid #a9dcff;background:#ffffff20;color:white;font-size:28px}
+.section-heading{margin:20px 0 13px;align-items:center}.section-heading h2{color:white;font-size:23px}.section-heading .eyebrow{color:#b7e4ff}
+.home-vehicle-card{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:0;background:transparent;border:0;box-shadow:none}
+.home-car-tile{min-width:0;min-height:208px;border:2px solid #26caff;border-radius:23px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:7px;background:linear-gradient(155deg,#168bff,#0750d4 72%,#0033a5);color:#fff;box-shadow:0 8px 18px #002b9566,inset 0 1px 10px #ffffff28;cursor:pointer}
+.home-car-tile strong{font-size:clamp(13px,2.7vw,18px);text-align:center;line-height:1.2}
+.home-car-art{display:grid;place-items:center;width:100%;height:72px;font-size:57px;filter:drop-shadow(0 7px 5px #001e5b99)}
+.home-car-tile .home-registration{margin:0;background:#dceeff;color:#073b9c;border-radius:99px;padding:5px 9px;font-size:11px}
+.home-car-status{font-size:11px;font-weight:800;color:#e7fff2}
+.home-empty{grid-column:1/-1;text-align:center;padding:24px;border:2px dashed #83caff;border-radius:20px;background:#ffffff12;color:#fff}
+.home-add-round{width:48px;height:48px;border:2px solid #8edaff;border-radius:50%;background:linear-gradient(145deg,#27a7ff,#0750d4);color:#fff;font-size:29px;box-shadow:0 5px 15px #002d8c77}
+.home-shortcuts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 12px;margin:24px auto 20px;max-width:740px}
+.round-shortcut{aspect-ratio:1/1;max-width:220px;width:100%;justify-self:center;border-radius:50%;border:3px solid #5ed7ff;background:radial-gradient(circle at 32% 22%,#43baff 0%,#0875f5 38%,#0035b7 78%);box-shadow:0 9px 22px #002a9277,inset 0 2px 9px #ffffff75,inset 0 -8px 16px #001c6b66;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:12px 7px;font-size:clamp(12px,2.8vw,17px);font-weight:850;line-height:1.18;text-align:center;cursor:pointer}
+.shortcut-icon{font-size:clamp(34px,8vw,56px);line-height:1.1;text-shadow:0 3px 8px #002d8c88}
+.home-stats{margin:18px 0}.home-stat{background:linear-gradient(135deg,#0a63df,#0644bb);border:1px solid #45baff;color:#fff}.home-stat small,.home-stat strong{color:#fff}
+.assistant-panel,.settings-card,.form-card,.profile-card,.combined-history{background:linear-gradient(145deg,#0757ce,#043cae);border:1px solid #48bfff;color:#fff;box-shadow:0 8px 22px #002c8a55}
+.assistant-panel h3,.assistant-panel h4,.assistant-panel strong,.settings-card strong{color:#fff}
+.assistant-panel p,.settings-card p,.section-intro,.home-note{color:#d9edff}
+.main-nav{position:fixed;z-index:50;left:0;right:0;bottom:0;max-width:1040px;margin:0 auto;padding:9px 10px max(10px,env(safe-area-inset-bottom));border:1px solid #39baff;border-bottom:0;border-radius:23px 23px 0 0;background:linear-gradient(110deg,#00349f,#064fc9 55%,#075ee2);box-shadow:0 -7px 24px #002b8a66;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+.nav-button{border:1px solid transparent;border-radius:15px;color:#e1f3ff;padding:10px 3px;font-size:clamp(11px,2.8vw,14px);font-weight:850}
+.nav-button.active{background:linear-gradient(145deg,#26a5ff,#0860df);border-color:#8ddcff;color:#fff;box-shadow:inset 0 1px 8px #ffffff55,0 3px 10px #001f7b66}
+.demo-nav-button{display:none}
+.car-card,.detail-item,.document-item,.fuel-entry,.expense-entry,.service-plan-summary{background:linear-gradient(145deg,#0757ce,#043cae);border-color:#42baff;color:white}
+.car-card h3,.car-meta,.card-hint,.detail-item strong,.detail-item span,.document-item h4,.service-intro{color:#fff}
+.car-registration{background:#dceeff;color:#073b9c}
+.primary-button,.secondary-button,.add-button,.back-button{background:linear-gradient(135deg,#20a4ff,#0752d0);border:1px solid #65caff;color:#fff}
+input,select{background:#eaf5ff;color:#092f77;border-color:#74bfff}label{color:#e7f5ff}
+footer{color:#d5eaff;border-color:#54aaff}
+button{transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}button:active{transform:scale(1.07);box-shadow:0 10px 24px #001e8066}
+@media(max-width:560px){
+.container{padding:10px 12px 112px}.hero{margin:0 -12px 12px;padding:17px 16px;min-height:110px}
+.hero-car-mark{font-size:43px}.hero h1{font-size:34px}.hero .subtitle{font-size:14px}
+.home-vehicle-card{gap:7px}.home-car-tile{min-height:165px;padding:9px 5px;border-radius:18px}
+.home-car-art{height:55px;font-size:43px}.home-car-status{font-size:10px}
+.home-shortcuts{gap:13px 7px;margin:20px auto}.round-shortcut{border-width:2px;padding:8px 4px;gap:5px}
+.main-nav{padding-left:6px;padding-right:6px}
+}
+@media(prefers-reduced-motion:reduce){button{transition:none}}
