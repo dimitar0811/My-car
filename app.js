@@ -226,9 +226,8 @@ function renderHome(){
   const summary=$("#homeVehicleSummary"),stats=$("#homeStats");
   if(!summary||!stats)return;
   const car=vehicles[0];
-  summary.innerHTML=car
-    ? '<h3>'+escapeHtml(car.make)+' '+escapeHtml(car.model)+'</h3><p>'+(car.year?escapeHtml(car.year):t("unknownYear"))+' · '+escapeHtml(car.mileage||t("notSet"))+' km</p><span class="home-registration">'+escapeHtml((car.registration||"").toUpperCase())+'</span>'
-    : '<h3>'+t("homeTitle")+'</h3><p>'+t("homeEmpty")+'</p>';
+  const count=$("#homeCarCount");if(count)count.textContent="("+vehicles.length+")";
+  summary.innerHTML=vehicles.length?vehicles.slice(0,3).map(car=>'<button type="button" class="home-car-tile" data-home-car="'+escapeHtml(car.id)+'"><span class="home-car-art" aria-hidden="true">🚘</span><strong>'+escapeHtml(car.make)+" "+escapeHtml(car.model)+'</strong><span class="home-registration">'+escapeHtml((car.registration||"").toUpperCase())+'</span><span class="home-car-status">✓ Всичко е наред</span></button>').join(""):'<div class="home-empty">Няма добавени автомобили. Натисни +, за да добавиш първия.</div>';
   const total=vehicles.reduce((sum,item)=>sum+(item.expenses||[]).reduce((part,entry)=>part+(Number(entry.amount)||0),0)+(item.serviceLog||[]).reduce((part,entry)=>part+(Number(entry.cost)||0),0),0);
   stats.innerHTML='<div class="home-stat"><small>'+t("homeCarCount")+'</small><strong>'+vehicles.length+' / 3</strong></div><div class="home-stat"><small>'+t("homeExpenseTotal")+'</small><strong>'+formatMoney(total)+'</strong></div>';
   $("#homeVehiclesButton").textContent=t("homeVehicles");$("#homeAddCarButton").textContent=t("homeAdd");
@@ -389,8 +388,9 @@ function editVehicle(id){
 function closeForm(){editingVehicleId=null;$("#carFormSection").hidden=true;$("#carForm").reset();}
 document.querySelectorAll(".nav-button").forEach(button=>button.addEventListener("click",()=>showView(button.dataset.view)));
 $("#demoScreenButton")?.addEventListener("click",()=>{if(DEMO_MODE){showView("vehicles");}else{location.href=new URL("?demo=1",location.href).toString();}});
-$("#homeVehiclesButton").addEventListener("click",()=>showView("vehicles"));
 $("#homeAddCarButton").addEventListener("click",openForm);
+$("#homeVehicleSummary").addEventListener("click",event=>{const tile=event.target.closest("[data-home-car]");if(tile)openProfile(tile.dataset.homeCar);});
+document.querySelector(".home-shortcuts")?.addEventListener("click",event=>{const button=event.target.closest("[data-home-action]");if(!button)return;const action=button.dataset.homeAction;if(action==="settings"){showView("profile");return;}if(action==="statistics"){showView("history");return;}const car=vehicles[0];if(!car){showView("vehicles");return;}openProfile(car.id);const target=action==="fuel"||action==="stations"?"#fuelForm":action==="service"?"#serviceForm":action==="documents"||action==="reminders"?"#documentSection":"#profileDetails";requestAnimationFrame(()=>document.querySelector(target)?.scrollIntoView({behavior:"smooth",block:"start"}));});
 $("#assistantPanel").addEventListener("click",event=>{const button=event.target.closest("[data-assistant-car]");if(button)openProfile(button.dataset.assistantCar);});
 $("#languageSelect").addEventListener("change",event=>{language=event.target.value;localStorage.setItem("my-car-language",language);render();if(selectedVehicleId){const car=vehicles.find(item=>item.id===selectedVehicleId);if(car)renderProfile(car);}});
 $("#addCarButton").addEventListener("click",openForm);
