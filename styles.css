@@ -150,3 +150,47 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+
+/* Rounded, touch-responsive controls */
+button,.nav-button,.primary-button,.secondary-button,.add-button,.language-button,.icon-button{
+  border-radius:999px;
+  transform-origin:center;
+  -webkit-tap-highlight-color:transparent;
+}
+.primary-button,.secondary-button,.add-button{
+  box-shadow:0 5px 13px #174b3218;
+}
+button:hover,.nav-button:hover,.primary-button:hover,.secondary-button:hover,.add-button:hover{
+  transform:scale(1.025);
+}
+button:active,.nav-button:active,.primary-button:active,.secondary-button:active,.add-button:active{
+  transform:scale(1.055);
+  box-shadow:0 8px 20px #174b3230;
+}
+.nav-button.active{
+  border-radius:999px;
+  box-shadow:0 4px 14px #183b2b20,inset 0 0 0 1px #dcebe1;
+}
+.demo-nav-button{
+  border:1px solid #c2ddcc;
+  box-shadow:0 4px 12px #174b3210;
+}
+.edit-button,.delete-button{
+  border-radius:50%;
+  min-width:38px;
+  min-height:38px;
+  display:inline-grid;
+  place-items:center;
+}
+input,select{
+  border-radius:15px;
+}
+.car-card,.assistant-panel,.form-card,.home-vehicle-card,.settings-card,.document-item{
+  border-radius:22px;
+}
+@media(prefers-reduced-motion:reduce){
+  button:hover,button:active,.nav-button:hover,.nav-button:active,.primary-button:hover,.primary-button:active,.secondary-button:hover,.secondary-button:active,.add-button:hover,.add-button:active{
+    transform:none;
+  }
+}
