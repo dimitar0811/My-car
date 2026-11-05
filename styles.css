@@ -448,3 +448,17 @@ button:active,.nav-button:active,.round-shortcut:active,.home-car-tile:active{
 @media(prefers-reduced-motion:reduce){
  button,.nav-button,.round-shortcut,.home-car-tile{transition:none}
 }
+
+
+/* Reliable press feedback on touchscreens: JS adds .is-pressed on pointerdown */
+button.is-pressed,
+button.is-pressed:hover,
+.round-shortcut.is-pressed,
+.home-car-tile.is-pressed{
+  transform:translateY(-7px) scale(1.14)!important;
+  transform-origin:center center!important;
+  z-index:20!important;
+  box-shadow:0 18px 32px #073b8a66,0 0 0 4px #69baff99,inset 0 2px 8px #ffffff66!important;
+  filter:brightness(1.08);
+  transition:transform .12s cubic-bezier(.2,.85,.25,1.35),box-shadow .12s ease,filter .12s ease!important;
+}
