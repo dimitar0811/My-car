@@ -462,3 +462,27 @@ button.is-pressed:hover,
   filter:brightness(1.08);
   transition:transform .12s cubic-bezier(.2,.85,.25,1.35),box-shadow .12s ease,filter .12s ease!important;
 }
+
+
+/* Readability: larger text in activity and history cards, especially on phones */
+.service-entry,.expense-entry,.fuel-entry,.combined-history-entry{font-size:16px;line-height:1.5}
+.service-entry small,.expense-entry small,.fuel-entry small,.combined-history-entry small{font-size:14px;line-height:1.5;color:#52665b}
+.service-entry-values strong,.expense-entry-values strong,.combined-history-entry strong{font-size:16px;line-height:1.4}
+.service-entry-values,.expense-entry-values,.fuel-entry-values{font-size:15px;line-height:1.45}
+.service-subheading,.history-kind{font-size:14px;line-height:1.4}
+.service-plan-summary strong,.service-plan-summary p{font-size:16px;line-height:1.5}
+.service-plan-summary small{font-size:13px}
+.assistant-intro,.assistant-empty{font-size:15px;line-height:1.6}
+.assistant-item-main strong{font-size:16px;line-height:1.4}
+.assistant-item-main p{font-size:15px;line-height:1.5}
+.assistant-item-main small{font-size:13px;line-height:1.5}
+.home-vehicle-card p,.home-note,.section-intro{font-size:15px;line-height:1.6}
+.home-vehicle-card .home-registration{font-size:14px}
+@media(max-width:560px){
+ .service-entry,.expense-entry,.fuel-entry,.combined-history-entry{font-size:16px}
+ .service-entry small,.expense-entry small,.fuel-entry small,.combined-history-entry small{font-size:14px}
+ .service-entry-values,.expense-entry-values,.fuel-entry-values{font-size:15px}
+ .assistant-item-main strong{font-size:16px}
+ .assistant-item-main p{font-size:15px}
+ .assistant-item-main small{font-size:13px}
+}
