@@ -63,3 +63,90 @@
 @media(max-width:560px){.assistant-item{align-items:flex-start;flex-direction:column}.assistant-open{width:100%}}
 
 .document-section{border-top:1px solid #e2e9e4;margin-top:28px;padding-top:24px}.document-section h3{margin:0 0 12px;font-size:19px}.document-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.document-item{padding:15px;background:#f4f7f5;border:1px solid #e1e9e4;border-radius:12px;min-width:0}.document-item h4{margin:0 0 12px;color:#294c39;font-size:15px}.document-item label{margin-top:10px}.document-item input{min-width:0}.document-status{margin:10px 0 0;font-size:12px;font-weight:800;color:#476354}.document-status[data-state="warning"]{color:#956315}.document-status[data-state="expired"]{color:#a33b3b}.document-status[data-state="ok"]{color:#247044}.document-form>.secondary-button{width:100%;margin-top:0}.document-form>.primary-button{width:100%}@media(max-width:560px){.document-grid{grid-template-columns:1fr}}
+
+
+/* Visual refresh: clearer typography, tactile buttons, and subtle motion */
+:root{
+  color:#15251f;
+  --brand:#123e2c;
+  --brand-bright:#1c6845;
+  --brand-soft:#e7f3eb;
+  --focus-ring:#3b9567;
+}
+body{font-size:16px;line-height:1.55}
+.container{max-width:1040px}
+.hero{background:linear-gradient(125deg,#10251f 0%,#174a32 70%,#216344 100%);box-shadow:0 16px 36px #10251f20}
+.hero h1{font-size:clamp(31px,5vw,46px)}
+.subtitle{font-size:17px}
+.section-heading h2,.form-title h2{font-size:clamp(25px,3vw,30px)}
+.section-heading{margin-top:32px}
+.eyebrow{font-size:12px}
+.car-card,.home-vehicle-card,.settings-card,.assistant-panel,.form-card{box-shadow:0 8px 24px #183b2b0b;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.car-card:hover,.home-vehicle-card:hover,.settings-card:hover{transform:translateY(-3px);box-shadow:0 14px 30px #183b2b13}
+.car-card h3{font-size:21px}
+.car-meta,.car-registration,.card-hint{font-size:14px}
+.detail-item span{font-size:14px}
+.detail-item strong{font-size:16px}
+label{font-size:15px}
+input,select{font-size:17px;min-height:48px}
+.primary-button,.secondary-button,.add-button,.back-button,.edit-button,.delete-button,.expense-delete,.service-delete,.icon-button,.nav-button,.language-button{
+  transition:transform .16s ease,box-shadow .2s ease,background-color .2s ease,color .2s ease,border-color .2s ease,filter .2s ease;
+}
+.primary-button{background:linear-gradient(135deg,#174b32,#216b45);font-size:17px;min-height:50px;box-shadow:0 5px 12px #174b3224}
+.primary-button:hover{filter:brightness(1.08);box-shadow:0 8px 18px #174b3230;transform:translateY(-1px)}
+.secondary-button,.add-button{font-size:16px;min-height:48px}
+.secondary-button:hover,.add-button:hover{background:#dcefe3;border-color:#6f9f80;box-shadow:0 6px 14px #174b3215;transform:translateY(-1px)}
+button:active,.nav-button:active,.car-card:active{transform:scale(.975)}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--focus-ring);outline-offset:3px}
+.main-nav{grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;background:#e3eee7;border:1px solid #d6e5db;padding:7px}
+.nav-button{font-size:15px;padding:13px 10px;color:#425d4c}
+.nav-button.active{background:linear-gradient(135deg,#fff,#f6fbf7);color:#174b32;box-shadow:0 4px 12px #183b2b17}
+.nav-button:hover:not(.active){background:#d4e6da;color:#174b32}
+.demo-nav-button{color:#174b32;background:#d5e9dc}
+.home-stat{background:linear-gradient(135deg,#eaf3ed,#f4faf6);padding:18px}
+.home-stat small{font-size:14px}
+.home-stat strong{font-size:23px}
+.home-vehicle-card h3{font-size:23px}
+.home-vehicle-card p,.settings-card p,.section-intro,.home-note{font-size:15px}
+.assistant-panel{padding:22px}
+.assistant-panel-heading h3{font-size:21px}
+.assistant-intro,.assistant-empty{font-size:15px}
+.assistant-item-main strong{font-size:16px}
+.assistant-item-main p{font-size:15px}
+.assistant-item-main small{font-size:13px}
+.assistant-open{font-size:14px}
+.service-intro,.service-subheading,.service-plan-summary p{font-size:15px}
+.service-plan-summary strong{font-size:17px}
+.document-item h4{font-size:17px}
+.document-status{font-size:14px}
+.fuel-heading h3,.history-title,.expense-heading h3,.service-heading h3,.document-section h3{font-size:21px}
+.fuel-entry,.expense-entry,.service-entry,.combined-history-entry{font-size:15px}
+.demo-notice{font-size:15px;padding:18px}
+.count{font-size:14px}
+.note{font-size:14px}
+@media(max-width:700px){
+  .container{padding:24px 16px 28px}
+  .hero{padding:26px 22px}
+  .hero h1{font-size:clamp(29px,7vw,36px)}
+  .subtitle{font-size:16px}
+  .main-nav{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;padding:5px}
+  .nav-button{font-size:14px;padding:12px 5px}
+  .demo-nav-button{grid-column:span 3}
+  .section-heading h2,.form-title h2{font-size:25px}
+  .car-list{grid-template-columns:1fr}
+  .home-actions{grid-template-columns:1fr}
+  .home-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .home-stat strong{font-size:20px}
+  .profile-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .document-grid{grid-template-columns:1fr}
+  .assistant-item{align-items:flex-start;flex-direction:column}
+  .assistant-open{width:100%}
+}
+@media(max-width:390px){
+  .hero-icon{display:none}
+  .home-stats{grid-template-columns:1fr}
+  .profile-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
