@@ -470,3 +470,19 @@ $("#carList").addEventListener("keydown",event=>{if((event.key==="Enter"||event.
 if("serviceWorker" in navigator&&location.protocol!=="file:"){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}
 render();
 checkDocumentNotifications();
+
+
+// Touch-first tactile feedback: keep the pressed state active while the finger is down.
+document.addEventListener("pointerdown",event=>{
+  const button=event.target.closest("button");
+  if(button && !button.disabled) button.classList.add("is-pressed");
+}, {capture:true});
+const clearPressedButton=event=>{
+  const button=event.target.closest?.("button");
+  if(button) button.classList.remove("is-pressed");
+};
+document.addEventListener("pointerup",clearPressedButton,{capture:true});
+document.addEventListener("pointercancel",clearPressedButton,{capture:true});
+document.addEventListener("pointerout",event=>{
+  if(event.target instanceof Element && event.target.matches("button")) event.target.classList.remove("is-pressed");
+},{capture:true});
