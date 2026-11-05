@@ -194,3 +194,103 @@ input,select{
     transform:none;
   }
 }
+
+
+/* My Car approved blue visual identity */
+:root{
+  color:#102544;
+  --brand:#0756c8;
+  --brand-bright:#1677f2;
+  --brand-soft:#e8f1ff;
+  --focus-ring:#4b9cff;
+  background:#f3f7ff;
+}
+body{background:#f3f7ff;color:#102544}
+.topbar{
+  background:linear-gradient(110deg,#0645a8 0%,#0756c8 58%,#1677e8 100%);
+  box-shadow:0 5px 22px #063b8c24;
+}
+.brand-mark{background:#fff;color:#0756c8;border-radius:50%}
+.topbar .language-button{border-color:#9fc4ff;background:#ffffff16}
+.hero{
+  background:linear-gradient(125deg,#0645a8 0%,#0756c8 58%,#2585f5 100%);
+  box-shadow:0 16px 36px #0756c82b;
+}
+.hero .eyebrow{color:#d7e8ff}
+.subtitle{color:#e1edff}
+.main-nav{background:#e2edff;border-color:#d0e1ff}
+.nav-button{color:#31547e}
+.nav-button.active{color:#0645a8;background:#fff;box-shadow:0 4px 14px #0756c822}
+.nav-button:hover:not(.active){background:#cfe1ff;color:#0645a8}
+.demo-nav-button{color:#0645a8;background:#d2e4ff;border-color:#a9caff}
+.section-heading .eyebrow,.eyebrow{color:#4779bd}
+.count{color:#0756c8;background:#e2edff}
+.car-card{
+  color:#fff;
+  background:linear-gradient(145deg,#0756c8 0%,#0868df 58%,#2788f5 100%);
+  border:1px solid #4c98f2;
+  box-shadow:0 12px 26px #0756c82b;
+  padding:23px;
+}
+.car-card:hover{border-color:#9dcaff;box-shadow:0 17px 32px #0756c83a}
+.car-card h3{color:#fff;font-size:23px}
+.car-card .car-meta,.car-card .card-hint{color:#e1edff}
+.car-card .car-registration{color:#0645a8;background:#fff;border-radius:999px}
+.car-symbol{
+  width:76px;height:76px;border-radius:50%;
+  background:#ffffff20;border:1px solid #ffffff55;
+  color:#fff;font-size:42px;
+  box-shadow:inset 0 1px 8px #ffffff20;
+}
+.car-card .edit-button{background:#ffffff;color:#0756c8}
+.car-card .delete-button{color:#fff;background:#ffffff20}
+.add-button{
+  color:#0756c8;background:#e5efff;border-color:#8dbaff;
+}
+.add-button:hover{background:#d5e6ff;border-color:#4e96f2}
+.primary-button{
+  background:linear-gradient(135deg,#0756c8,#1677e8);
+  box-shadow:0 6px 16px #0756c82e;
+}
+.primary-button:hover{box-shadow:0 9px 20px #0756c83b}
+.secondary-button{
+  color:#0756c8;background:#e8f1ff;border-color:#9bc2fb;
+}
+.secondary-button:hover{background:#d8e8ff;border-color:#6ba6f5}
+.back-button{color:#0756c8}
+input:focus,select:focus{border-color:#3989f0;box-shadow:0 0 0 3px #3989f022}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline-color:#3989f0}
+.home-vehicle-card,.settings-card,.assistant-panel,.form-card{
+  border-color:#d9e7fb;box-shadow:0 8px 24px #0756c80d;
+}
+.home-stat,.consumption-box,.expense-total,.service-plan-summary{
+  background:linear-gradient(135deg,#e6f0ff,#f4f8ff);
+}
+.home-stat strong,.consumption-box strong,.expense-total strong{color:#0756c8}
+.assistant-panel-heading h3,.assistant-item-main strong,.settings-card strong{color:#17477f}
+.assistant-open{background:#e8f1ff;color:#0756c8}
+.detail-item{background:#eef4ff}
+.document-item{background:#f1f6ff;border-color:#dce9fc}
+.document-item h4{color:#17477f}
+footer{border-color:#dce7f6}
+.empty-state{border-color:#c5d9f5;background:#fff;color:#54708f}
+.form-card{border-color:#dce8f8}
+@media(max-width:700px){
+  .car-card{padding:22px}
+  .car-symbol{width:84px;height:84px;font-size:46px}
+}
+/* Round touch targets with a clear press-in zoom effect */
+.edit-button,.delete-button,.icon-button{
+  border-radius:50%;width:44px;height:44px;min-width:44px;min-height:44px;
+}
+button,.nav-button,.primary-button,.secondary-button,.add-button{
+  -webkit-tap-highlight-color:transparent;
+  transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .18s ease,background-color .18s ease;
+}
+button:active,.nav-button:active,.primary-button:active,.secondary-button:active,.add-button:active{
+  transform:scale(1.07);
+  box-shadow:0 8px 22px #0756c83b;
+}
+@media(prefers-reduced-motion:reduce){
+  button,.nav-button,.primary-button,.secondary-button,.add-button{transition:none}
+}
