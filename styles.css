@@ -379,3 +379,47 @@ button{transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}button:
   color:#0750bd;
   border:1px solid #9bd5ff;
 }
+
+
+/* Corrected palette: white page, blue buttons */
+html,body{background:#ffffff!important;color:#12345b}
+body{background:#ffffff!important}
+.container{background:#ffffff}
+.hero{background:linear-gradient(110deg,#0645b8,#0878ed)!important}
+.dashboard-section,.section-heading h2{color:#12345b}
+.section-heading .eyebrow{color:#3973b8}
+.home-vehicle-card{background:transparent}
+.home-car-tile{
+ background:linear-gradient(145deg,#0878ed,#0645b8)!important;
+ color:#fff!important;border:2px solid #65baff;
+}
+.round-shortcut{
+ background:linear-gradient(145deg,#1688f5,#0645bd)!important;
+ color:#fff!important;border:3px solid #8bd5ff;
+ box-shadow:0 8px 20px #0756c833,inset 0 2px 8px #ffffff40;
+}
+.round-shortcut .shortcut-icon{color:#fff!important;text-shadow:0 2px 6px #003b91}
+.home-add-round,.hero-settings{
+ background:#0870df!important;color:#fff!important;border:2px solid #8bd5ff;
+}
+.main-nav{
+ background:#fff!important;border:1px solid #c9def5;border-bottom:0;
+ box-shadow:0 -5px 18px #173d7018;
+}
+.nav-button{
+ background:#0870df!important;color:#fff!important;border:1px solid #69b8ff;
+}
+.nav-button.active{
+ background:#0348b7!important;color:#fff!important;border-color:#0348b7;
+}
+.primary-button,.secondary-button,.add-button,.back-button,
+.edit-button,.delete-button,.icon-button{
+ background:#0870df!important;color:#fff!important;border:1px solid #5baeff;
+}
+.assistant-panel,.settings-card,.form-card,.profile-card,.combined-history,
+.home-stat,.car-card,.detail-item,.document-item,.fuel-entry,.expense-entry,.service-plan-summary{
+ background:linear-gradient(145deg,#0874e8,#0645b8)!important;color:#fff!important;
+}
+input,select{background:#fff;color:#12345b;border-color:#9bbde6}
+label{color:#24476f}
+.home-note,footer{color:#58708f}
